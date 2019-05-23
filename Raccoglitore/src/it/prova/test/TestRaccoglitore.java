@@ -6,7 +6,7 @@ public class TestRaccoglitore {
 
 	public static void main(String[] args) {
 		
-		int numeroFogli = 3;
+		
 //		Foglio[] arrFogli = new Foglio[numeroFogli];
 		Foglio f1 = new Foglio("righe");
 		Foglio f2 = new Foglio("quadretti");
