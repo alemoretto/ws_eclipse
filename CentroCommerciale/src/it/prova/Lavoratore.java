@@ -38,6 +38,20 @@ public abstract class Lavoratore {
 		}
 		return null;
 	}
+	
+	public boolean lavoraQui(Negozio negozio) {
+		return negozio.getLavoratori().contains(this);
+	}
+	
+	public boolean equals(Object o) {
+		if(o == null || !(o instanceof Lavoratore))
+			return false;
+		Lavoratore lavoratore = (Lavoratore) o;
+		if(lavoratore.getMatricola() != matricola)
+			return false;
+		return true;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

@@ -13,6 +13,7 @@ public class TestCentroCommerciale {
 		List<Negozio> negozi = new ArrayList<>(Arrays.asList(new Negozio("Trony","11110005678"),
 											 new Negozio("Sapori","22220005678"))); 
 		Negozio trony = negozi.get(0);
+		Negozio sapori = negozi.get(1);
 		
 		// creo CENTROCOMMERCIALE
 		CentroCommerciale centro = new CentroCommerciale("Roma70 Shopping Center","Roma70 S.p.A.","01234567890",negozi);
@@ -27,6 +28,7 @@ public class TestCentroCommerciale {
 //													new PersonaleAmministrativo("Carlo", 002,trony),
 //													new Commesso("Paolo", 003,trony),
 //													new Commesso("Matteo", 004,trony));
+		
 		
 		// creo ITEMS
 		Item televisore = new Item("Televisore","TT 1111000789",trony);
@@ -60,6 +62,12 @@ public class TestCentroCommerciale {
 		
 		trony.removeFromItems(amministrativo, "Frigorifero");
 		centro.getNegozi().get(0).showItems();
+
+		Item dvdplayer = new Item("DVD Player", "DD 1111000789",trony);
+		Lavoratore commesso_3 = new Commesso("Enzo", 005, sapori);
+		trony.addToItems(commesso_3, dvdplayer);
+		centro.getNegozi().get(0).showItems();
+		
 	}
 
 }
