@@ -47,12 +47,11 @@ public class TestDB {
 		}
 		
 		personaDaoInstance.deleteByCognome("RoSsI");
-		System.out.println("STOP");
 		for (Persona persona : personaDaoInstance.findAllByNomeCheIniziaPer("mar")) {
 			System.out.println(persona);
 		}
 		//inseriamo una persona presa da input
-		//insertPersonaByJOptionPane(personaDaoInstance);
+//		insertPersonaByJOptionPane(personaDaoInstance);
 	}
 	
 	private static void insertPersonaByJOptionPane(PersonaDao personaDaoInstance) {
