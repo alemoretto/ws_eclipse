@@ -213,4 +213,52 @@ public class MotociclettaDao {
 		return result;
 	}
 
+	public List<Motocicletta> findByMarcaCheContiene(String marca) {
+
+		if (marca == null) {
+			return null;
+		}
+			
+		// =============================================== SELECT
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Motocicletta temp = null;
+		List<Motocicletta> result = new ArrayList<Motocicletta>();
+
+		try {
+
+			c = MyConnection.getConnection();
+
+			ps = c.prepareStatement("select * from motocicletta where marca LIKE ?;");
+			ps.setString(1, "%" + marca + "%");
+
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				temp = new Motocicletta();
+				temp.setId(rs.getLong("id"));
+				temp.setMarca(rs.getString("marca"));
+				temp.setModello(rs.getString("modello"));
+				temp.setCilindrata(rs.getInt("cilindrata"));
+				result.add(temp);
+
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+			try {
+				rs.close();
+				ps.close();
+				c.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }

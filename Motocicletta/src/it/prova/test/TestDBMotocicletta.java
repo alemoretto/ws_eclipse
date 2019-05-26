@@ -28,12 +28,23 @@ public class TestDBMotocicletta {
 
 		// prova findAllByCilindrataMaggioreDi
 		String cilindrataMinima = "1000";
-		List<Motocicletta> motoMaggioridi500 = motociclettaDaoInstance.findAllByCilindrataMaggioreDi(cilindrataMinima);
-		System.out.println(motoMaggioridi500.size() + " record trovati");
-		for (Motocicletta motocicletta : motoMaggioridi500) {
+		List<Motocicletta> motoMaggioridiX = motociclettaDaoInstance.findAllByCilindrataMaggioreDi(cilindrataMinima);
+		System.out.println(motoMaggioridiX.size() + " record trovati");
+		for (Motocicletta motocicletta : motoMaggioridiX) {
 			System.out.println(motocicletta);
 		}
 		
+		// cerca per Marca
+		String marca = "";
+		List<Motocicletta> motoDiUnaCertaMarca = motociclettaDaoInstance.findByMarcaCheContiene(marca);
+		System.out.println(motoDiUnaCertaMarca.size() + " record trovati");
+		for (Motocicletta motocicletta : motoDiUnaCertaMarca) {
+			System.out.println(motocicletta);
+		}
+		
+		
+		// prova INSERT con GUI
+//		insertMotociclettaByJOptionPane(motociclettaDaoInstance);
 	}
 
 	private static void insertMotociclettaByJOptionPane(MotociclettaDao motociclettaDaoInstance) {
