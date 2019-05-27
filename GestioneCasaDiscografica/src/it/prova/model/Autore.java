@@ -1,6 +1,7 @@
 package it.prova.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Autore {
 
@@ -8,18 +9,18 @@ public class Autore {
 	private String nome;
 	private String cognome;
 	private CasaDiscografica casaDiscografica;
-	private List<CD> listaCD = new ArrayList<>();
+	private List<Cd> listaCd = new ArrayList<>();
 
 	public Autore() {
 	}
 
-	public Autore(Long idAutore, String nome, String cognome, CasaDiscografica casaDiscografica, List<CD> listaCD) {
+	public Autore(Long idAutore, String nome, String cognome, CasaDiscografica casaDiscografica, List<Cd> listaCD) {
 		super();
 		this.idAutore = idAutore;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.casaDiscografica = casaDiscografica;
-		this.listaCD = listaCD;
+		this.listaCd = listaCD;
 	}
 
 	public Long getIdAutore() {
@@ -54,12 +55,12 @@ public class Autore {
 		this.casaDiscografica = casaDiscografica;
 	}
 
-	public List<CD> getListaCD() {
-		return listaCD;
+	public List<Cd> getListaCD() {
+		return listaCd;
 	}
 
-	public void setListaCD(List<CD> listaCD) {
-		this.listaCD = listaCD;
+	public void setListaCD(List<Cd> listaCd) {
+		this.listaCd = listaCd;
 	}
 
 }
