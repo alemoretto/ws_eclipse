@@ -60,4 +60,8 @@ public class Cd {
 		this.numeroTracce = numeroTracce;
 	}
 
+	@Override
+	public String toString() {
+		return "Cd [titolo=" + titolo + ", genere=" + genere + ", numTracce=" + numeroTracce + ", autore =" + autore + "]";
+	}
 }

@@ -63,4 +63,8 @@ public class Autore {
 		this.listaCd = listaCd;
 	}
 
+	@Override
+	public String toString() {
+		return "Autore [nome=" + nome + ", cognome=" + cognome + ", casaDiscografica=" + casaDiscografica + "]";
+	}
 }

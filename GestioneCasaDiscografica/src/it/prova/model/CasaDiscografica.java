@@ -53,4 +53,8 @@ public class CasaDiscografica {
 		this.autori = autori;
 	}
 
+	@Override
+	public String toString() {
+		return "CasaDiscografica [ragioneSociale=" + ragioneSociale + ", partitaIva=" + partitaIva + "]";
+	}
 }

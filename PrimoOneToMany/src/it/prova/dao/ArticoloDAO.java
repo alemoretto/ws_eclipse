@@ -160,7 +160,7 @@ public class ArticoloDAO {
 			return null;
 
 		Articolo temp = null;
-		List<Articolo> result = null;
+		List<Articolo> result = new ArrayList<Articolo>();
 
 		try (Connection c = MyConnection.getConnection()) {
 
