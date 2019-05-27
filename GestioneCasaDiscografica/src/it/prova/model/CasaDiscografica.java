@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class CasaDiscografica {
 
-	private Long idCasaDiscografica;
-	private String nome;
+	private Long id;
 	private String ragioneSociale;
 	private String partitaIva;
 	private List<Autore> autori = new ArrayList<>();
@@ -14,30 +13,20 @@ public class CasaDiscografica {
 	public CasaDiscografica() {
 	}
 
-	public CasaDiscografica(Long idCasaDiscografica, String nome, String ragioneSociale, String partitaIva,
-			List<Autore> autori) {
+	public CasaDiscografica(Long id, String ragioneSociale, String partitaIva, List<Autore> autori) {
 		super();
-		this.idCasaDiscografica = idCasaDiscografica;
-		this.nome = nome;
+		this.id = id;
 		this.ragioneSociale = ragioneSociale;
 		this.partitaIva = partitaIva;
 		this.autori = autori;
 	}
 
-	public Long getIdcasadiscografica() {
-		return idCasaDiscografica;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdcasadiscografica(Long idCasaDiscografica) {
-		this.idCasaDiscografica = idCasaDiscografica;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getRagioneSociale() {

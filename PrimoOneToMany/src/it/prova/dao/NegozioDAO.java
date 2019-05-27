@@ -21,7 +21,7 @@ public class NegozioDAO {
 		try (Connection c = MyConnection.getConnection()) {
 
 			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery("select * from negozio a ;");
+			ResultSet rs = s.executeQuery("select * from negozio ;");
 
 			while (rs.next()) {
 				negozioTemp = new Negozio();

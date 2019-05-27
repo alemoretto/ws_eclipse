@@ -2,7 +2,7 @@ package it.prova.model;
 
 public class Cd {
 
-	private Long idCd;
+	private Long id;
 	private String titolo;
 	private Autore autore;
 	private String genere;
@@ -11,21 +11,21 @@ public class Cd {
 	public Cd() {
 	}
 
-	public Cd(Long idCd, String titolo, Autore autore, String genere, int numeroTracce) {
+	public Cd(Long id, String titolo, Autore autore, String genere, int numeroTracce) {
 		super();
-		this.idCd = idCd;
+		this.id = id;
 		this.titolo = titolo;
 		this.autore = autore;
 		this.genere = genere;
 		this.numeroTracce = numeroTracce;
 	}
 
-	public Long getIdCd() {
-		return idCd;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdCd(Long idCd) {
-		this.idCd = idCd;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitolo() {

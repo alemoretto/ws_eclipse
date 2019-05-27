@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Autore {
 
-	private Long idAutore;
+	private Long id;
 	private String nome;
 	private String cognome;
 	private CasaDiscografica casaDiscografica;
@@ -14,21 +14,21 @@ public class Autore {
 	public Autore() {
 	}
 
-	public Autore(Long idAutore, String nome, String cognome, CasaDiscografica casaDiscografica, List<Cd> listaCD) {
+	public Autore(Long id, String nome, String cognome, CasaDiscografica casaDiscografica, List<Cd> listaCD) {
 		super();
-		this.idAutore = idAutore;
+		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.casaDiscografica = casaDiscografica;
 		this.listaCd = listaCD;
 	}
 
-	public Long getIdAutore() {
-		return idAutore;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdAutore(Long idAutore) {
-		this.idAutore = idAutore;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
