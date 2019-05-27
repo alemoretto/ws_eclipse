@@ -18,6 +18,14 @@ public class Abitante {
 		this.eta = eta;
 	}
 
+	public Abitante(String nome, String cognome, int eta, Indirizzo indirizzo) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.eta = eta;
+		this.indirizzo = indirizzo;
+	}
+	
 	public Long getId() {
 		return id;
 	}
