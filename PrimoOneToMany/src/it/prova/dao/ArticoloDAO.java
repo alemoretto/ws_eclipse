@@ -44,6 +44,45 @@ public class ArticoloDAO {
 		return result;
 	}
 
+	public int insertCompleto(Articolo articoloInput) {
+
+		if (articoloInput.getNegozio() == null || articoloInput.getNegozio().getId() < 1)
+			return -1;
+
+		int result = 0;
+
+		try (Connection c = MyConnection.getConnection()) {
+
+			PreparedStatement ps = c.prepareStatement("INSERT INTO negozio (nome, indirizzo) VALUES (?, ?);");
+			ps.setString(1, articoloInput.getNegozio().getNome());
+			ps.setString(2, articoloInput.getNegozio().getIndirizzo());
+			
+			int resInsertNegozio = ps.executeUpdate();
+
+			int last_id_negozio = -1;
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				last_id_negozio = rs.getInt(1);
+			}
+					
+			if(resInsertNegozio > 0) {
+			PreparedStatement ps2 = c.prepareStatement("INSERT INTO articolo (nome, matricola,negozio_id) VALUES (?, ?, ?);");
+			ps2.setString(1, articoloInput.getNome());
+			ps2.setString(2, articoloInput.getMatricola());
+			ps2.setLong(3, last_id_negozio);
+			
+			result = ps2.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return result;
+	}
+
 	public int insert(Articolo articoloInput) {
 
 		if (articoloInput.getNegozio() == null || articoloInput.getNegozio().getId() < 1)
@@ -112,8 +151,7 @@ public class ArticoloDAO {
 
 		try (Connection c = MyConnection.getConnection()) {
 
-			PreparedStatement ps = c
-					.prepareStatement("UPDATE articolo SET nome=?, matricola=?, negozio_id=? WHERE idarticolo=? ;");
+			PreparedStatement ps = c.prepareStatement("UPDATE articolo SET nome=?, matricola=?, negozio_id=? WHERE idarticolo=? ;");
 			ps.setString(1, articoloInput.getNome());
 			ps.setString(2, articoloInput.getMatricola());
 			ps.setLong(3, articoloInput.getNegozio().getId());

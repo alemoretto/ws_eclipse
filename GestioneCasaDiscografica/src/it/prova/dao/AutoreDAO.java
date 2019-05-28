@@ -19,7 +19,8 @@ public class AutoreDAO {
 
 		try (Connection c = MyConnection.getConnection()) {
 			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery("select * from autore a inner join casadiscografica c on a.casadiscografica_id=c.idcasadiscografica;");
+			ResultSet rs = s.executeQuery(
+					"select * from autore a LEFT OUTER join casadiscografica c on a.casadiscografica_id=c.idcasadiscografica;");
 
 			while (rs.next()) {
 				Autore autoreTemp = new Autore();
@@ -45,7 +46,7 @@ public class AutoreDAO {
 
 	public int insert(Autore autoreInput) {
 
-		if (autoreInput.getCasaDiscografica() == null || autoreInput.getCasaDiscografica().getId() < 1)
+		if (autoreInput.getCasaDiscografica() == null)
 			return -1;
 
 		int result = 0;
@@ -68,6 +69,46 @@ public class AutoreDAO {
 		return result;
 	}
 
+	public int insertCompleto(Autore autoreInput) {
+
+		if (autoreInput == null || autoreInput.getCasaDiscografica() == null)
+			return -1;
+
+		int result = 0;
+
+		try (Connection c = MyConnection.getConnection()) {
+
+			PreparedStatement ps = c.prepareStatement("INSERT INTO casadiscografica (ragione_sociale, partita_iva) VALUES (?, ?);",
+					Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, autoreInput.getCasaDiscografica().getRagioneSociale());
+			ps.setString(2, autoreInput.getCasaDiscografica().getPartitaIva());
+			
+			int resInsertCasaDiscografica = ps.executeUpdate();
+
+			int last_id_casadiscografica = -1;
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				last_id_casadiscografica = rs.getInt(1);
+			}
+					
+			if(resInsertCasaDiscografica > 0) {
+			PreparedStatement ps2 = c.prepareStatement("INSERT INTO autore (nome, cognome, casadiscografica_id) VALUES (?, ?, ?);");
+			ps2.setString(1, autoreInput.getNome());
+			ps2.setString(2, autoreInput.getCognome());
+			ps2.setLong(3, last_id_casadiscografica);
+			
+			result = ps2.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+		return result;
+	}
+	
 	public int update(Autore autoreInput) {
 		if (autoreInput == null || autoreInput.getId() < 1) {
 			return 0;
@@ -80,7 +121,10 @@ public class AutoreDAO {
 			PreparedStatement ps = c.prepareStatement("UPDATE autore SET nome=?, cognome=?, casadiscografica_id=? WHERE idautore=? ;");
 			ps.setString(1, autoreInput.getNome());
 			ps.setString(2, autoreInput.getCognome());
-			ps.setLong(3, autoreInput.getCasaDiscografica().getId());
+			if (autoreInput.getCasaDiscografica() != null)
+				ps.setLong(3,  autoreInput.getCasaDiscografica().getId());
+			else
+				ps.setNull(3,java.sql.Types.BIGINT);
 			ps.setLong(4, autoreInput.getId());
 
 			result = ps.executeUpdate();

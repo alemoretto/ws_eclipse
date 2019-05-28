@@ -3,6 +3,7 @@ package it.prova.test;
 import it.prova.dao.*;
 import it.prova.model.*;
 
+import java.util.List;
 public class TestGestioneCasaDiscografica {
 
 	public static void main(String[] args) {
@@ -11,12 +12,31 @@ public class TestGestioneCasaDiscografica {
 		CdDAO cdDAOInstance = new CdDAO();
 		
 		System.out.println("Case Discografiche sul db:");
-		for (CasaDiscografica casaItem : casaDAOInstance.list()) {
-			System.out.println(casaItem);
-		}
+		for (CasaDiscografica casaItem : casaDAOInstance.list()) System.out.println(casaItem);
+		for (Autore autoreItem : autoreDAOInstance.list()) System.out.println(autoreItem);
 		
-//		//provo una insert di negozio
-//		negozioDAOInstance.insert(new Negozio("Negozio1","via dei mille 14"));
+////		//insert di casadiscografica
+//		CasaDiscografica casa_nuova = new CasaDiscografica("MusicaRomana","4242"); 
+////		casaDAOInstance.insert(casa_nuova);
+//		for (Autore autoreItem : autoreDAOInstance.list()) System.out.println(autoreItem);
+//		for (CasaDiscografica casaItem : casaDAOInstance.list()) System.out.println(casaItem);
+		
+		// insert di autore
+//		autoreDAOInstance.insert(new Autore("Vasco", "Rossi", casaDAOInstance.selectByIdWithJoin(4L) ));
+//		autoreDAOInstance.insertCompleto(new Autore("Gabriella", "Ferri", casa_nuova ));
+//		for (CasaDiscografica casaItem : casaDAOInstance.list()) System.out.println(casaItem);
+//		Autore aut = new Autore("Deep","Purple",null);
+//		Cd cdExample = new Cd("Made in Japan",aut,"Rock",9);
+		
+		Cd cdExample = new Cd("Albachiara",null,"Rock",9);
+		System.out.println("............");
+		List<Cd> cds = cdDAOInstance.findByExample(cdExample);
+		for (Cd cd : cds) {
+			System.out.println(cd);
+		}
+//		public void  findByExample(cdExample);
+		// uodate
+//		autoreDAOInstance.update(new Autore("Vasco", "Rossi", casaDAOInstance.selectByIdWithJoin(4L) ));
 		
 //		System.out.println("cerco un negozio con id 1");
 //		Negozio negozioConIdCheDicoIo = negozioDAOInstance.selectById(1L);

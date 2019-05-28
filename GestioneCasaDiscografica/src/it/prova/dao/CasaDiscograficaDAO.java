@@ -23,7 +23,7 @@ public class CasaDiscograficaDAO {
 			while (rs.next()) {
 				CasaDiscografica casaDiscograficaTemp = new CasaDiscografica();
 				casaDiscograficaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
-				casaDiscograficaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
+				casaDiscograficaTemp.setPartitaIva(rs.getString("partita_iva"));
 
 				result.add(casaDiscograficaTemp);
 			}
@@ -36,9 +36,33 @@ public class CasaDiscograficaDAO {
 		return result;
 	}
 
+	public CasaDiscografica selectByIdWithJoin(Long idInput) {
+		CasaDiscografica result = null;
+
+		try (Connection c = MyConnection.getConnection()) {
+			PreparedStatement ps = c.prepareStatement(
+					"SELECT * FROM casadiscografica WHERE idcasadiscografica = ?;");
+			ps.setLong(1, idInput);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				result = new CasaDiscografica();
+				result.setRagioneSociale(rs.getString("ragione_sociale"));
+				result.setPartitaIva(rs.getString("partita_iva"));
+				result.setId(rs.getLong("idcasadiscografica"));
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return result;
+	}
+	
 	public int insert(CasaDiscografica casaDiscograficaInput) {
 
-		if (casaDiscograficaInput == null || casaDiscograficaInput.getId() < 1)
+		if (casaDiscograficaInput == null)
 			return -1;
 
 		int result = 0;

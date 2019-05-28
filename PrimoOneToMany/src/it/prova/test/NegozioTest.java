@@ -1,9 +1,9 @@
 package it.prova.test;
 
-import it.prova.dao.ArticoloDAO;
-import it.prova.dao.NegozioDAO;
-import it.prova.model.Articolo;
-import it.prova.model.Negozio;
+import javax.swing.JOptionPane;
+
+import it.prova.dao.*;
+import it.prova.model.*;
 
 public class NegozioTest {
 
@@ -11,12 +11,9 @@ public class NegozioTest {
 		NegozioDAO negozioDAOInstance = new NegozioDAO();
 		ArticoloDAO articoloDAOInstance = new ArticoloDAO();
 
-//		System.out.println("Articoli presenti sul db:");
-//		for (Articolo articoloItem : articoloDAOInstance.list()) System.out.println(articoloItem);
+//		System.out.println("Lista ARTICOLI presenti sul db:"); for (Articolo articoloItem : articoloDAOInstance.list()) System.out.println(articoloItem);
 
-//		System.out.println("Negozi presenti sul db:");
-//		for (Negozio negozioItem : negozioDAOInstance.list()) System.out.println(negozioItem);
-//		listaNegozi(negozioDAOInstance);
+//		System.out.println("Lista NEGOZI presenti sul db:"); for (Negozio negozioItem : negozioDAOInstance.list()) System.out.println(negozioItem);
 
 		// *************************************************************************
 
@@ -42,14 +39,14 @@ public class NegozioTest {
 //		for (Articolo articoloItem : articoloDAOInstance.findAllByIndirizzoNegozio("via taranto")) System.out.println(articoloItem);
 
 		
-		// populate
-		Negozio negozioDaPopolare = negozioDAOInstance.selectById(1L);
-		for (Articolo articoloItem : negozioDaPopolare.getArticoli())
-			System.out.println(negozioDaPopolare);		
-		System.out.println("...............");
-		negozioDAOInstance.populateArticoli(negozioDaPopolare);
-		for (Articolo articoloItem : negozioDaPopolare.getArticoli())
-			System.out.println(articoloItem);		
+//		// populate
+//		Negozio negozioDaPopolare = negozioDAOInstance.selectById(1L);
+//		for (Articolo articoloItem : negozioDaPopolare.getArticoli()) System.out.println(negozioDaPopolare);		
+//
+//		negozioDAOInstance.populateArticoli(negozioDaPopolare);
+//		for (Articolo articoloItem : negozioDaPopolare.getArticoli())	System.out.println(articoloItem);
+		
+		
 		/*
 		 * se io voglio caricare un negozio e contestualmente anche i suoi articoli
 		 * dovrò sfruttare il populateArticoli presente dentro negoziodao. Per esempio
@@ -61,17 +58,23 @@ public class NegozioTest {
 		 * size=0 LAZY FETCHING (poi ve lo spiego)
 		 */
 
+		// GUI insert
+		insertNegozioByJOptionPane(negozioDAOInstance);
 	}
 
-	private static void listaArticoli(ArticoloDAO articoloDAOInstance) {
-		System.out.println("ARTICOLI presenti sul db:");
-		for (Articolo articoloItem : articoloDAOInstance.list())
-			System.out.println(articoloItem);
+	private static void insertNegozioByJOptionPane(NegozioDAO negozioDAOInstance) {
+		Negozio negozioNuovoDaInput = buildNegozioFromJoptionPane();
+		if(negozioNuovoDaInput.getNome() != null && negozioNuovoDaInput.getIndirizzo()!=null ) {
+			negozioDAOInstance.insert(negozioNuovoDaInput);
+			JOptionPane.showMessageDialog(null,"Hai inserito:\\n"+negozioNuovoDaInput);
+		}
+	}
+	
+	private static Negozio buildNegozioFromJoptionPane() {
+		String nome = JOptionPane.showInputDialog("NOME negozio ?");
+		String indirizzo = JOptionPane.showInputDialog("INDIRIZZO negozio ?");
+		
+		return new Negozio(nome, indirizzo);
 	}
 
-	private static void listaNegozi(NegozioDAO negozioDAOInstance) {
-		System.out.println("NEGOZI presenti sul db:");
-		for (Negozio negozioItem : negozioDAOInstance.list())
-			System.out.println(negozioItem);
-	}
 }
