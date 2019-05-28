@@ -17,30 +17,6 @@ public class CasaDiscograficaDAOImpl extends AbstractMySQLDAO implements CasaDis
 	}
 
 	@Override
-	public int insert(CasaDiscografica casaDiscograficaInput) throws Exception {
-
-		if (isNotActive() || casaDiscograficaInput == null) {
-			return -1;
-		}
-
-		int result = 0;
-
-		try (PreparedStatement ps = connection
-				.prepareStatement("INSERT INTO casadiscografica (ragione_sociale, partita_iva) VALUES (?, ?);")) {
-			ps.setString(1, casaDiscograficaInput.getRagioneSociale());
-			ps.setString(2, casaDiscograficaInput.getPartitaIva());
-
-			result = ps.executeUpdate();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			throw e;
-
-		}
-		return result;
-	}
-
-	@Override
 	public List<CasaDiscografica> list() throws Exception {
 
 		if (isNotActive()) {
@@ -97,6 +73,30 @@ public class CasaDiscograficaDAOImpl extends AbstractMySQLDAO implements CasaDis
 		return result;
 	}
 
+	@Override
+	public int insert(CasaDiscografica casaDiscograficaInput) throws Exception {
+
+		if (isNotActive() || casaDiscograficaInput == null) {
+			return -1;
+		}
+
+		int result = 0;
+
+		try (PreparedStatement ps = connection
+				.prepareStatement("INSERT INTO casadiscografica (ragione_sociale, partita_iva) VALUES (?, ?);")) {
+			ps.setString(1, casaDiscograficaInput.getRagioneSociale());
+			ps.setString(2, casaDiscograficaInput.getPartitaIva());
+
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+	}
+	
 	@Override
 	public int update(CasaDiscografica casaDiscograficaInput) throws Exception {
 		if (isNotActive() || casaDiscograficaInput == null) {

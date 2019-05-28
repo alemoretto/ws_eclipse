@@ -1,10 +1,9 @@
 package it.prova.test;
 
-import java.util.Date;
-
-import it.prova.model.CasaDiscografica;
-import it.prova.service.MyServiceFactory;
+import it.prova.model.Autore;
+import it.prova.service.AutoreService;
 import it.prova.service.CasaDiscograficaService;
+import it.prova.service.MyServiceFactory;
 
 public class TestGestioneCasaDiscografica {
 
@@ -14,7 +13,8 @@ public class TestGestioneCasaDiscografica {
 
 		//parlo direttamente con il service
 		CasaDiscograficaService casaService = MyServiceFactory.getCasaDiscograficaServiceImpl();
-
+		AutoreService autoreService = MyServiceFactory.getAutoreServiceImpl();
+		
 		try {
 
 			//*************************************************************************************
@@ -61,7 +61,17 @@ public class TestGestioneCasaDiscografica {
 
 			//*************************************************************************************
 			//    TEST  AUTORE
+			
+			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
+			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
+			for (Autore autore : autoreService.listAllAutori()) {
+				System.out.println(autore);
+			}
 
+			System.out.println("#########  FIND BY ID AUTORE ##########");
+			System.out.println(autoreService.findAutoreById(3L));
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
