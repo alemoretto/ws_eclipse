@@ -14,12 +14,12 @@ public interface AutoreService {
 
 	public Autore findAutoreById(Long idInput) throws Exception;
 
-//	public int aggiornaCasaDiscografica(Autore input) throws Exception;
-//
-//	public int inserisciNuovaCasaDiscografica(Autore input) throws Exception;
-//
-//	public int rimuoviCasaDiscografica(Autore input) throws Exception;
-//
-//	public List<Autore> findByExample(Autore input) throws Exception;
+	public int aggiornaAutore(Autore input) throws Exception;
+
+	public int inserisciNuovoAutore(Autore input) throws Exception;
+
+	public int rimuoviAutore(Autore input) throws Exception;
+
+	public List<Autore> findByExample(Autore input) throws Exception;
 
 }

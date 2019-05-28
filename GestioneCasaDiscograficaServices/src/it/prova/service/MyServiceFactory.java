@@ -1,7 +1,9 @@
 package it.prova.service;
 
-import it.prova.dao.CasaDiscograficaDAOImpl;
 import it.prova.dao.AutoreDAOImpl;
+import it.prova.dao.CasaDiscograficaDAOImpl;
+import it.prova.dao.CdDAOImpl;
+
 
 public class MyServiceFactory {
 
@@ -17,6 +19,13 @@ public class MyServiceFactory {
 		AutoreService autoreService = new AutoreServiceImpl();
 		autoreService.setAutoreDAO(new AutoreDAOImpl());
 		return autoreService;
+	}
+
+	public static CdService getCdServiceImpl() {
+
+		CdService cdService = new CdServiceImpl();
+		cdService.setCdDAO(new CdDAOImpl());
+		return cdService;
 	}
 
 }

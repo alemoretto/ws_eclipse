@@ -5,28 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.prova.connection.MyConnection;
-import it.prova.dao.AutoreDAO;
+import it.prova.dao.CdDAO;
 import it.prova.dao.Constants;
-import it.prova.model.Autore;
+import it.prova.model.Cd;
 
-public class AutoreServiceImpl implements AutoreService {
+public class CdServiceImpl implements CdService {
 
-	private AutoreDAO autoreDao;
+	private CdDAO cdDao;
 
-	public void setAutoreDAO(AutoreDAO autoreDao) {
-		this.autoreDao = autoreDao;
+	public void setCdDAO(CdDAO cdDao) {
+		this.cdDao = cdDao;
 	}
 
 	@Override
-	public List<Autore> listAllAutori() throws Exception {
-		List<Autore> result = new ArrayList<>();
+	public List<Cd> listAllCd() throws Exception {
+		List<Cd> result = new ArrayList<>();
 		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
 
 			// inietto la connection nel dao
-			autoreDao.setConnection(connection);
+			cdDao.setConnection(connection);
 
 			// eseguo quello che realmente devo fare
-			result = autoreDao.list();
+			result = cdDao.list();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,15 +36,15 @@ public class AutoreServiceImpl implements AutoreService {
 	}
 
 	@Override
-	public Autore findAutoreById(Long idInput) throws Exception {
-		Autore result = null;
+	public Cd findCdById(Long idInput) throws Exception {
+		Cd result = null;
 		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
 
 			// inietto la connection nel dao
-			autoreDao.setConnection(connection);
+			cdDao.setConnection(connection);
 
 			// eseguo quello che realmente devo fare
-			result = autoreDao.get(idInput);
+			result = cdDao.get(idInput);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,15 +54,15 @@ public class AutoreServiceImpl implements AutoreService {
 	}
 
 	@Override
-	public int inserisciNuovoAutore(Autore autoreInput) throws Exception {
+	public int inserisciNuovoCd(Cd cdInput) throws Exception {
 		int result = 0;
 		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
 
 			// inietto la connection nel dao
-			autoreDao.setConnection(connection);
+			cdDao.setConnection(connection);
 
 			// eseguo quello che realmente devo fare
-			result = autoreDao.insert(autoreInput);
+			result = cdDao.insert(cdInput);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,34 +72,15 @@ public class AutoreServiceImpl implements AutoreService {
 	}
 	
 	@Override
-	public int aggiornaAutore(Autore autoreInput) throws Exception {
+	public int aggiornaCd(Cd cdInput) throws Exception {
 		int result = 0;
 		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
 
 			// inietto la connection nel dao
-			autoreDao.setConnection(connection);
+			cdDao.setConnection(connection);
 
 			// eseguo quello che realmente devo fare
-			result = autoreDao.update(autoreInput);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return result;
-
-	}
-	
-	@Override
-	public int rimuoviAutore(Autore autoreInput) throws Exception {
-		int result = 0;
-		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
-
-			// inietto la connection nel dao
-			autoreDao.setConnection(connection);
-
-			// eseguo quello che realmente devo fare
-			result = autoreDao.delete(autoreInput);
+			result = cdDao.update(cdInput);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -110,15 +91,34 @@ public class AutoreServiceImpl implements AutoreService {
 	}
 	
 	@Override
-	public List<Autore> findByExample(Autore autoreInput) throws Exception {
-		List<Autore> result = new ArrayList<>();
+	public int rimuoviCd(Cd cdInput) throws Exception {
+		int result = 0;
 		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
 
 			// inietto la connection nel dao
-			autoreDao.setConnection(connection);
+			cdDao.setConnection(connection);
 
 			// eseguo quello che realmente devo fare
-			result = autoreDao.findByExample(autoreInput);
+			result = cdDao.delete(cdInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+
+	}
+	
+	@Override
+	public List<Cd> findByExample(Cd cdInput) throws Exception {
+		List<Cd> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			cdDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = cdDao.findByExample(cdInput);
 
 		} catch (Exception e) {
 			e.printStackTrace();

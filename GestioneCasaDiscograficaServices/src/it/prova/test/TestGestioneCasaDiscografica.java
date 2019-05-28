@@ -1,8 +1,10 @@
 package it.prova.test;
 
 import it.prova.model.Autore;
+import it.prova.model.Cd;
 import it.prova.service.AutoreService;
 import it.prova.service.CasaDiscograficaService;
+import it.prova.service.CdService;
 import it.prova.service.MyServiceFactory;
 
 public class TestGestioneCasaDiscografica {
@@ -11,33 +13,34 @@ public class TestGestioneCasaDiscografica {
 //		CasaDiscografica newCasaInstance = new CasaDiscografica("mauro", "rossi");
 //		newCasaInstance.setDateCreated(new Date());
 
-		//parlo direttamente con il service
+		// parlo direttamente con il service
 		CasaDiscograficaService casaService = MyServiceFactory.getCasaDiscograficaServiceImpl();
 		AutoreService autoreService = MyServiceFactory.getAutoreServiceImpl();
+		CdService cdService = MyServiceFactory.getCdServiceImpl();
 		
 		try {
 
-			//*************************************************************************************
-			//    TEST  CASA DISCOGRAFICA
+			// *************************************************************************************
+			// TEST CASA DISCOGRAFICA
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
-			
+
 //			System.out.println("#########  LISTA TUTTE LE CASE DISCOGRAFICHE  ##########");
 //			System.out.println("In tabella ci sono " + casaService.listAllCaseDiscografiche().size() + " elementi.");
 //			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
 //				System.out.println(casa);
 //			}
-			
+
 //			System.out.println("#########  FIND BY ID CASA ##########");
 //			System.out.println(casaService.findCasaById(3L));
-			
+
 //			System.out.println("#########  INSERT CASA ##########");
 //			CasaDiscografica nuova_casa = new CasaDiscografica("pentagramma","48247");
 //			System.out.println(casaService.inserisciNuovaCasaDiscografica(nuova_casa));
 //			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
 //				System.out.println(casa);
 //			}
-			
+
 //			System.out.println("#########  UPDATE CASA ##########");
 //			CasaDiscografica casa_da_aggiornare = casaService.findCasaById(7L);
 //			casa_da_aggiornare.setRagioneSociale("nuova ragione");
@@ -45,7 +48,7 @@ public class TestGestioneCasaDiscografica {
 //			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
 //				System.out.println(casa);
 //			}
-			
+
 //			System.out.println("#########  DELETE CASA ##########");
 //			CasaDiscografica casa_da_cancellare = casaService.findCasaById(5L);
 //			System.out.println(casaService.rimuoviCasaDiscografica(casa_da_cancellare));
@@ -59,19 +62,88 @@ public class TestGestioneCasaDiscografica {
 //				System.out.println(casa);
 //			}
 
-			//*************************************************************************************
-			//    TEST  AUTORE
-			
-			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
-			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
-			for (Autore autore : autoreService.listAllAutori()) {
-				System.out.println(autore);
+			// *************************************************************************************
+			// TEST AUTORE
+//			
+//			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
+//			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
+//			for (Autore autore : autoreService.listAllAutori()) {
+//				System.out.println(autore);
+//			}
+
+//			System.out.println("#########  FIND BY ID AUTORE ##########");
+//			System.out.println(autoreService.findAutoreById(3L));
+
+//			System.out.println("#########  INSERT AUTORE ##########");
+//			CasaDiscografica casa_ref = new CasaDiscografica("pentagramma",null);
+//			Autore nuovo_autore = new Autore("Stefano","Rosso",casaService.findByExample(casa_ref).get(0));
+//			System.out.println(autoreService.inserisciNuovoAutore(nuovo_autore));
+//			for (Autore autore : autoreService.listAllAutori()) {
+//				System.out.println(autore);
+//			}
+
+//			System.out.println("#########  UPDATE AUTORE ##########");
+//			Autore autore_da_aggiornare = autoreService.findAutoreById(4L);
+//			autore_da_aggiornare.setCognome("rossini");
+//			System.out.println(autoreService.aggiornaAutore(autore_da_aggiornare));
+//			for (Autore autore : autoreService.listAllAutori()) {
+//				System.out.println(autore);
+//			}
+
+//			System.out.println("#########  DELETE AUTORE ##########");
+//			Autore autore_da_cancellare = autoreService.findAutoreById(2L);
+//			System.out.println(autoreService.rimuoviAutore(autore_da_cancellare));
+//			for (Autore autore : autoreService.listAllAutori()) {
+//				System.out.println(autore);
+//			}
+//			
+//			System.out.println("#########  FIND BY EXAMPLE ##########");  // la select va fatta con i join???
+//			Autore autore_example = new Autore(null,"Ferri",null);
+//			for (Autore autore : autoreService.findByExample(autore_example)) {
+//				System.out.println(autore);
+//			}
+
+			// *************************************************************************************
+			// TEST CD
+
+			System.out.println("#########  LISTA TUTTI I CD  ##########");
+			System.out.println("In tabella ci sono " + cdService.listAllCd().size() + " elementi.");
+			for (Cd cd : cdService.listAllCd()) {
+				System.out.println(cd);
 			}
 
-			System.out.println("#########  FIND BY ID AUTORE ##########");
-			System.out.println(autoreService.findAutoreById(3L));
+//			System.out.println("#########  FIND BY ID CD ##########");
+//			System.out.println(cdService.findCdById(2L));
 
-			
+//			System.out.println("#########  INSERT CD ##########");
+//			Autore ref_autore = new Autore("Led","Zeppelin",null);
+//			Cd cd_nuovo = new Cd("LedZeppelin I",autoreService.findAutoreById(5L),"rock",10);
+//			System.out.println(cdService.inserisciNuovoCd(cd_nuovo));
+//			for (Cd cd : cdService.listAllCd()) {
+//				System.out.println(cd);
+//			}
+
+//			System.out.println("#########  UPDATE CD ##########");
+//			Cd cd_da_aggiornare = cdService.findCdById(1L);
+//			cd_da_aggiornare.setGenere("pop");
+//			System.out.println(cdService.aggiornaCd(cd_da_aggiornare));
+//			for (Cd cd : cdService.listAllCd()) {
+//				System.out.println(cd);
+//			}
+
+//			System.out.println("#########  DELETE CD ##########");
+//			Cd cd_da_cancellare = cdService.findCdById(1L);
+//			System.out.println(cdService.rimuoviCd(cd_da_cancellare));
+//			for (Cd cd : cdService.listAllCd()) {
+//				System.out.println(cd);
+//			}
+//			
+			System.out.println("#########  FIND BY EXAMPLE ##########");  // la select va fatta con i join???
+			Cd cd_example = new Cd(null,null,"Rock",8);
+			for (Cd cd : cdService.findByExample(cd_example)) {
+				System.out.println(cd);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

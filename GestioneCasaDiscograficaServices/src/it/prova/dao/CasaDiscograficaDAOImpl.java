@@ -142,9 +142,9 @@ public class CasaDiscograficaDAOImpl extends AbstractMySQLDAO implements CasaDis
 	}
 
 	@Override
-	public List<CasaDiscografica> findByExample(CasaDiscografica casaDiscografica) throws Exception {
+	public List<CasaDiscografica> findByExample(CasaDiscografica casaDiscograficaInput) throws Exception {
 
-		if (isNotActive() || casaDiscografica == null) {
+		if (isNotActive() || casaDiscograficaInput == null) {
 			return null;
 		}
 
@@ -152,11 +152,11 @@ public class CasaDiscograficaDAOImpl extends AbstractMySQLDAO implements CasaDis
 		CasaDiscografica casaDiscograficaTemp = null;
 
 		String query = "select * from casadiscografica where 1=1 ";
-		if (casaDiscografica.getRagioneSociale() != null && !casaDiscografica.getRagioneSociale().equals("")) {
-			query += " and ragione_sociale='" + casaDiscografica.getRagioneSociale() + "' ";
+		if (casaDiscograficaInput.getRagioneSociale() != null && !casaDiscograficaInput.getRagioneSociale().equals("")) {
+			query += " and ragione_sociale='" + casaDiscograficaInput.getRagioneSociale() + "' ";
 		}
-		if (casaDiscografica.getPartitaIva() != null && !casaDiscografica.getPartitaIva().equals("")) {
-			query += " and partita_iva='" + casaDiscografica.getPartitaIva() + "' ";
+		if (casaDiscograficaInput.getPartitaIva() != null && !casaDiscograficaInput.getPartitaIva().equals("")) {
+			query += " and partita_iva='" + casaDiscograficaInput.getPartitaIva() + "' ";
 		}
 
 		try (Statement ps = connection.createStatement()) {

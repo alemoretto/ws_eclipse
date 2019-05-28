@@ -93,21 +93,115 @@ public class AutoreDAOImpl extends AbstractMySQLDAO implements AutoreDAO {
 
 	@Override
 	public int insert(Autore autoreInput) throws Exception {
-		return 0;
+
+		if (isNotActive() || autoreInput == null) {
+			return -1;
+		}
+
+		int result = 0;
+
+		try (PreparedStatement ps = connection
+				.prepareStatement("INSERT INTO autore (nome,cognome,casadiscografica_id) VALUES (?, ?, ?);")) {
+			ps.setString(1, autoreInput.getNome());
+			ps.setString(2, autoreInput.getCognome());
+			ps.setLong(3, autoreInput.getCasaDiscografica().getId());
+
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+
 	}
 
 	@Override
 	public int update(Autore autoreInput) throws Exception {
-		return 0;
+		if (isNotActive() || autoreInput == null) {
+			return -1;
+		}
+
+		int result = 0;
+
+		try (PreparedStatement ps = connection
+				.prepareStatement("UPDATE autore SET nome=?, cognome=?,casadiscografica_id=? WHERE idautore=?;")) {
+			ps.setString(1, autoreInput.getNome());
+			ps.setString(2, autoreInput.getCognome());
+			ps.setLong(3, autoreInput.getCasaDiscografica().getId());
+			ps.setLong(4, autoreInput.getId());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+
 	}
 
 	@Override
 	public List<Autore> findByExample(Autore autoreInput) throws Exception {
-		return null;
+		if (isNotActive() || autoreInput == null) {
+			return null;
+		}
+
+		ArrayList<Autore> result = new ArrayList<Autore>();
+
+		String query = "SELECT * FROM autore a LEFT OUTER JOIN casadiscografica c ON a.casadiscografica_id=c.idcasadiscografica WHERE 1=1 ";
+		if (autoreInput.getNome() != null && !autoreInput.getNome().equals("")) {
+			query += " and nome='" + autoreInput.getNome() + "' ";
+		}
+		if (autoreInput.getCognome() != null && !autoreInput.getCognome().equals("")) {
+			query += " and cognome='" + autoreInput.getCognome() + "' ";
+		}
+
+		try (Statement ps = connection.createStatement()) {
+			ResultSet rs = ps.executeQuery(query);
+
+			while (rs.next()) {
+				Autore autoreTemp = new Autore();
+				autoreTemp.setNome(rs.getString("nome"));
+				autoreTemp.setCognome(rs.getString("cognome"));
+				autoreTemp.setId(rs.getLong("idautore"));
+
+				CasaDiscografica casaTemp = new CasaDiscografica();
+				casaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
+				casaTemp.setPartitaIva(rs.getString("partita_iva"));
+				casaTemp.setId(rs.getLong("idcasadiscografica"));
+				
+				autoreTemp.setCasaDiscografica(casaTemp);
+				result.add(autoreTemp);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
 	}
 
 	@Override
 	public int delete(Autore autoreInput) throws Exception {
-		return 0;
+		if (isNotActive() || autoreInput == null) {
+			return -1;
+		}
+
+		int result = 0;
+
+		try (PreparedStatement ps = connection.prepareStatement("DELETE FROM autore WHERE idautore=?;")) {
+			ps.setLong(1, autoreInput.getId());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+
 	}
 }
