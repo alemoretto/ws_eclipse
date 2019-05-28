@@ -9,17 +9,17 @@ public interface CasaDiscograficaService {
 
 	// questo mi serve per injection
 	public void setCasaDiscograficaDAO(CasaDiscograficaDAO casaDiscograficaDao);
-//
+
 	public List<CasaDiscografica> listAllCaseDiscografiche() throws Exception;
 
-//	public CasaDiscografica findCasaById(Long idInput) throws Exception;
+	public CasaDiscografica findCasaById(Long idInput) throws Exception;
 
-//	public int aggiornaCasaDiscografica(CasaDiscografica input) throws Exception;
-//
-//	public int inserisciNuovaCasaDiscografica(CasaDiscografica input) throws Exception;
-//
-//	public int rimuoviCasaDiscografica(CasaDiscografica input) throws Exception;
-//
-//	public List<CasaDiscografica> findByExample(CasaDiscografica input) throws Exception;
+	public int aggiornaCasaDiscografica(CasaDiscografica input) throws Exception;
+
+	public int inserisciNuovaCasaDiscografica(CasaDiscografica input) throws Exception;
+
+	public int rimuoviCasaDiscografica(CasaDiscografica input) throws Exception;
+
+	public List<CasaDiscografica> findByExample(CasaDiscografica input) throws Exception;
 
 }
