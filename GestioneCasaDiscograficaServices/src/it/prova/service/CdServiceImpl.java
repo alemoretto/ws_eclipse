@@ -7,6 +7,7 @@ import java.util.List;
 import it.prova.connection.MyConnection;
 import it.prova.dao.CdDAO;
 import it.prova.dao.Constants;
+import it.prova.model.Autore;
 import it.prova.model.Cd;
 
 public class CdServiceImpl implements CdService {
@@ -128,6 +129,38 @@ public class CdServiceImpl implements CdService {
 
 	}
 	
+	public List<Cd> findAllByGenere(String genere) throws Exception {
+		List<Cd> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			cdDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = cdDao.findAllByGenere(genere);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}	
 	
-	
+	public List<Cd> findAllByAutoreWhereTitoloIniziaCon(Autore autoreInput, String iniziale) throws Exception{
+		List<Cd> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			cdDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = cdDao.findAllByAutoreWhereTitoloIniziaCon(autoreInput, iniziale);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
+
 }

@@ -204,4 +204,68 @@ public class AutoreDAOImpl extends AbstractMySQLDAO implements AutoreDAO {
 		return result;
 
 	}
+	
+	public List<Autore> findAllByCasaDiscografica(CasaDiscografica casaInput) throws Exception{
+		if (isNotActive() || casaInput == null) {
+			return null;
+		}
+
+		ArrayList<Autore> result = new ArrayList<Autore>();
+		
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT * FROM autore a INNER JOIN casadiscografica ca ON a.casadiscografica_id=ca.idcasadiscografica WHERE a.casadiscografica_id=?;")) {
+			ps.setLong(1, casaInput.getId());
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Autore autoreTemp = new Autore();
+				autoreTemp.setNome(rs.getString("nome"));
+				autoreTemp.setCognome(rs.getString("cognome"));
+				autoreTemp.setId(rs.getLong("idautore"));
+
+				CasaDiscografica casaTemp = new CasaDiscografica();
+				casaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
+				casaTemp.setPartitaIva(rs.getString("partita_iva"));
+				casaTemp.setId(rs.getLong("idcasadiscografica"));
+
+				autoreTemp.setCasaDiscografica(casaTemp);
+				result.add(autoreTemp);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+	}
+	
+	public List <Autore> findByCdWhereNTracceGreaterThan(int nTracceInput) throws Exception{
+		if (isNotActive()) {
+			return null;
+		}
+
+		ArrayList<Autore> result = new ArrayList<Autore>();
+		
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT * FROM autore a INNER JOIN cd  ON a.idautore=cd.autore_id WHERE cd.numero_tracce>?;")) {
+			ps.setInt(1, nTracceInput);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Autore autoreTemp = new Autore();
+				autoreTemp.setNome(rs.getString("nome"));
+				autoreTemp.setCognome(rs.getString("cognome"));
+				autoreTemp.setId(rs.getLong("idautore"));
+
+				result.add(autoreTemp);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+	}
 }

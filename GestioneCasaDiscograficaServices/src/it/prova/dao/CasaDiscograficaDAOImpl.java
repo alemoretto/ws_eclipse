@@ -205,6 +205,35 @@ public class CasaDiscograficaDAOImpl extends AbstractMySQLDAO implements CasaDis
 
 		}
 		return result;
+	}
+	
+	public List<CasaDiscografica> findAllByCdWhereGenereEqual(String genere)  throws Exception {
+		if (isNotActive() || genere == null) {
+			return null;
+		}
 		
+		ArrayList<CasaDiscografica> result = new ArrayList<CasaDiscografica>();
+		CasaDiscografica casaDiscograficaTemp = null;
+		
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT * FROM casadiscografica ca INNER JOIN autore a ON ca.idcasadiscografica = a.casadiscografica_id "
+				+ "INNER JOIN cd ON a.idautore=cd.autore_id WHERE cd.genere = ? GROUP BY ca.ragione_sociale;")) {
+			ps.setString(1, genere);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				casaDiscograficaTemp = new CasaDiscografica();
+				casaDiscograficaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
+				casaDiscograficaTemp.setPartitaIva(rs.getString("partita_iva"));
+				casaDiscograficaTemp.setId(rs.getLong("idcasadiscografica"));
+				result.add(casaDiscograficaTemp);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
 	}
 }

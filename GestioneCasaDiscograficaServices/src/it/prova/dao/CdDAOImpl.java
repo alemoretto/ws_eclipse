@@ -29,8 +29,7 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 
 		try (Statement ps = connection.createStatement()) {
 
-			ResultSet rs = ps.executeQuery(
-					"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore ");
+			ResultSet rs = ps.executeQuery("SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore ");
 
 			while (rs.next()) {
 				Cd cdTemp = new Cd();
@@ -83,7 +82,7 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 				autoreTemp.setId(rs.getLong("idautore"));
 
 				result.setAutore(autoreTemp);
-				
+
 			}
 
 		} catch (Exception e) {
@@ -110,7 +109,7 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 			ps.setString(2, cdInput.getGenere());
 			ps.setLong(3, cdInput.getNumeroTracce());
 			ps.setLong(4, cdInput.getAutore().getId());
-			
+
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 
@@ -167,7 +166,7 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 		if (cdInput.getNumeroTracce() > 0) {
 			query += " AND numero_tracce='" + cdInput.getNumeroTracce() + "' ";
 		}
-		
+
 		try (Statement ps = connection.createStatement()) {
 			ResultSet rs = ps.executeQuery(query);
 
@@ -216,16 +215,16 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 	}
 
 	public List<Cd> findByAutore(Autore autoreInput) throws Exception {
-		
+
 		if (isNotActive() || autoreInput == null) {
 			return null;
 		}
 
 		ArrayList<Cd> result = new ArrayList<Cd>();
 
-		try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM cd INNER JOIN autore a ON cd.autore_id=a.idautore WHERE a.idautore=?")) {
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT * FROM cd INNER JOIN autore a ON cd.autore_id=a.idautore WHERE a.idautore=?")) {
 			ps.setLong(1, autoreInput.getId());
-
 
 			ResultSet rs = ps.executeQuery();
 
@@ -248,4 +247,70 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 		}
 		return result;
 	}
+
+	public List<Cd> findAllByGenere(String genere) throws Exception {
+		if (isNotActive() || genere == null) {
+			return null;
+		}
+
+		ArrayList<Cd> result = new ArrayList<Cd>();
+
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT * FROM cd WHERE genere=?")) {
+			ps.setString(1, genere);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Cd cdTemp = new Cd();
+				cdTemp.setTitolo(rs.getString("titolo"));
+				cdTemp.setGenere(rs.getString("genere"));
+				cdTemp.setNumeroTracce(rs.getInt("numero_tracce"));
+				cdTemp.setId(rs.getLong("idcd"));
+
+				result.add(cdTemp);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+	}
+
+	public List<Cd> findAllByAutoreWhereTitoloIniziaCon(Autore autoreInput, String iniziale) throws Exception{
+		if (isNotActive()  || autoreInput == null || iniziale == null) {
+			return null;
+		}
+
+		ArrayList<Cd> result = new ArrayList<Cd>();
+
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT * FROM cd INNER JOIN autore a ON cd.autore_id=a.idautore WHERE a.idautore=? AND cd.titolo LIKE ?")) {
+			ps.setLong(1, autoreInput.getId());
+			ps.setString(2, iniziale + "%");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Cd cdTemp = new Cd();
+				cdTemp.setTitolo(rs.getString("titolo"));
+				cdTemp.setGenere(rs.getString("genere"));
+				cdTemp.setNumeroTracce(rs.getInt("numero_tracce"));
+				cdTemp.setId(rs.getLong("idcd"));
+
+				result.add(cdTemp);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
+	}
+	
 }

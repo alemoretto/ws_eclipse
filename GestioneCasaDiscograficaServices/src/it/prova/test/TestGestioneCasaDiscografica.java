@@ -59,11 +59,15 @@ public class TestGestioneCasaDiscografica {
 //			}
 
 			
-			System.out.println("#########  FIND BY EXAMPLE ##########");
+			System.out.println("#########  FIND BY COGNOME AUTORE ##########");
 			for (CasaDiscografica casa : casaService.findAllByAutoreWhereCognomeIniziaCon("s")) {
 				System.out.println(casa);
 			}
 			
+			System.out.println("#########  FIND BY GENERE CD ##########");
+			for (CasaDiscografica casa : casaService.findAllByCdWhereGenereEqual("rock")) {
+				System.out.println(casa);
+			}
 			
 			// *************************************************************************************
 			// TEST AUTORE
@@ -119,6 +123,19 @@ public class TestGestioneCasaDiscografica {
 //			Autore autore_da_cancellare = new Autore("ac","dc",null);
 //			autore_da_cancellare = autoreService.findByExample(autore_da_cancellare).get(0);
 //			autoreService.rimuoviAutoreBulk(autore_da_cancellare);
+			
+//			System.out.println("#########  FIND ALL AUTORI BY CASA  ##########");
+//			CasaDiscografica casaCriterio = casaService.findCasaById(4L);
+//			for (Autore autore : autoreService.findAllByCasaDiscografica(casaCriterio)) {
+//				System.out.println(autore);
+//			}
+//			
+//			System.out.println("#########  FIND ALL AUTORI BY CD WHERE N TRACCE GREATER THAN  ##########");
+//			for (Autore autore : autoreService.findByCdWhereNTracceGreaterThan(8)) {
+//				System.out.println(autore);
+//			}
+			
+			
 			// *************************************************************************************
 			// TEST CD
 
@@ -160,6 +177,16 @@ public class TestGestioneCasaDiscografica {
 //				System.out.println(cd);
 //			}
 
+//			System.out.println("#########  FIND ALL CD BY GENERE ##########");
+//			for (Cd cd : cdService.findAllByGenere("pop")) {
+//				System.out.println(cd);
+//			}
+//			
+//			System.out.println("#########  FIND ALL CD BY AUTORE AND TITOLO INIZIA PER ##########");
+//			for (Cd cd : cdService.findAllByAutoreWhereTitoloIniziaCon(autoreService.findAutoreById(5L), "l")) {
+//				System.out.println(cd);
+//			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

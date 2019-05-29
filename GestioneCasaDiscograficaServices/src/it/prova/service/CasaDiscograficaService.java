@@ -24,4 +24,6 @@ public interface CasaDiscograficaService {
 	public List<CasaDiscografica> findByExample(CasaDiscografica input) throws Exception;
 
 	public List<CasaDiscografica> findAllByAutoreWhereCognomeIniziaCon(String iniziale) throws Exception;
+	
+	public List<CasaDiscografica> findAllByCdWhereGenereEqual(String genere)  throws Exception;
 }

@@ -3,6 +3,7 @@ package it.prova.service;
 import java.util.List;
 
 import it.prova.dao.CdDAO;
+import it.prova.model.Autore;
 import it.prova.model.Cd;
 
 public interface CdService {
@@ -21,5 +22,9 @@ public interface CdService {
 	public int rimuoviCd(Cd input) throws Exception;
 
 	public List<Cd> findByExample(Cd input) throws Exception;
+	
+	public List<Cd> findAllByGenere(String genere) throws Exception;
+	
+	public List<Cd> findAllByAutoreWhereTitoloIniziaCon(Autore autoreInput, String iniziale) throws Exception;
 
 }

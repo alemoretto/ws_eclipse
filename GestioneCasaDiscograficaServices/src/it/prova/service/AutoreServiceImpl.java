@@ -6,10 +6,11 @@ import java.util.List;
 
 import it.prova.connection.MyConnection;
 import it.prova.dao.AutoreDAO;
+import it.prova.dao.CdDAO;
 import it.prova.dao.Constants;
 import it.prova.model.Autore;
+import it.prova.model.CasaDiscografica;
 import it.prova.model.Cd;
-import it.prova.dao.CdDAO;
 
 public class AutoreServiceImpl implements AutoreService {
 
@@ -149,7 +150,7 @@ public class AutoreServiceImpl implements AutoreService {
 				cdDao.delete(cd);
 			}
 			autoreDao.delete(autoreInput);
-			
+
 			result = autoreDao.delete(autoreInput);
 
 		} catch (Exception e) {
@@ -179,4 +180,37 @@ public class AutoreServiceImpl implements AutoreService {
 
 	}
 
+	public List<Autore> findAllByCasaDiscografica(CasaDiscografica casaInput) throws Exception {
+		List<Autore> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			autoreDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = autoreDao.findAllByCasaDiscografica(casaInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
+	
+	public List <Autore> findByCdWhereNTracceGreaterThan(int nTracceInput) throws Exception{
+		List<Autore> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			autoreDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = autoreDao.findByCdWhereNTracceGreaterThan(nTracceInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
 }

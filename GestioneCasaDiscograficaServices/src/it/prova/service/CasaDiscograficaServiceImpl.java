@@ -143,4 +143,22 @@ public class CasaDiscograficaServiceImpl implements CasaDiscograficaService {
 		}
 		return result;
 	}
+	
+	public List<CasaDiscografica> findAllByCdWhereGenereEqual(String genere)  throws Exception {
+		List<CasaDiscografica> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			casaDiscograficaDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = casaDiscograficaDao.findAllByCdWhereGenereEqual(genere);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
 }
+

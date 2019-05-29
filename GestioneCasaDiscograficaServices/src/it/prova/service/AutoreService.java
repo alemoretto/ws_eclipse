@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.prova.dao.AutoreDAO;
 import it.prova.model.Autore;
+import it.prova.model.CasaDiscografica;
 import it.prova.dao.CdDAO;
 
 public interface AutoreService {
@@ -28,5 +29,9 @@ public interface AutoreService {
 	public int rimuoviAutoreBulk(Autore input) throws Exception;
 
 	public List<Autore> findByExample(Autore input) throws Exception;
+	
+	public List<Autore> findAllByCasaDiscografica(CasaDiscografica casaInput) throws Exception;
+	
+	public List <Autore> findByCdWhereNTracceGreaterThan(int nTracceInput) throws Exception;
 
 }
