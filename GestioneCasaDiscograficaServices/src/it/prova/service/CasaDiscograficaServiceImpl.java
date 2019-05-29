@@ -7,6 +7,7 @@ import java.util.List;
 import it.prova.connection.MyConnection;
 import it.prova.dao.CasaDiscograficaDAO;
 import it.prova.dao.Constants;
+import it.prova.model.Autore;
 import it.prova.model.CasaDiscografica;
 
 public class CasaDiscograficaServiceImpl implements CasaDiscograficaService {
@@ -118,6 +119,23 @@ public class CasaDiscograficaServiceImpl implements CasaDiscograficaService {
 
 			// eseguo quello che realmente devo fare
 			result = casaDiscograficaDao.findByExample(casaDiscograficaInput);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
+
+	public List<CasaDiscografica> findAllByAutoreWhereCognomeIniziaCon(String iniziale) throws Exception{
+		List<CasaDiscografica> result = new ArrayList<>();
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			casaDiscograficaDao.setConnection(connection);
+
+			// eseguo quello che realmente devo fare
+			result = casaDiscograficaDao.findAllByAutoreWhereCognomeIniziaCon(iniziale);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -16,8 +16,11 @@ public class MyServiceFactory {
 
 	public static AutoreService getAutoreServiceImpl() {
 
+		
 		AutoreService autoreService = new AutoreServiceImpl();
+		
 		autoreService.setAutoreDAO(new AutoreDAOImpl());
+		autoreService.setCdDAO(new CdDAOImpl());
 		return autoreService;
 	}
 

@@ -3,6 +3,7 @@ package it.prova.service;
 import java.util.List;
 
 import it.prova.dao.CasaDiscograficaDAO;
+import it.prova.model.Autore;
 import it.prova.model.CasaDiscografica;;
 
 public interface CasaDiscograficaService {
@@ -22,4 +23,5 @@ public interface CasaDiscograficaService {
 
 	public List<CasaDiscografica> findByExample(CasaDiscografica input) throws Exception;
 
+	public List<CasaDiscografica> findAllByAutoreWhereCognomeIniziaCon(String iniziale) throws Exception;
 }

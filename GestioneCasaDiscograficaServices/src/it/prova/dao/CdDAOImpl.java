@@ -30,9 +30,7 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 		try (Statement ps = connection.createStatement()) {
 
 			ResultSet rs = ps.executeQuery(
-//					"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore ");
-		"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore LEFT OUTER JOIN casadiscografica ca ON a.casadiscografica_id=ca.idcasadiscografica");
-
+					"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore ");
 
 			while (rs.next()) {
 				Cd cdTemp = new Cd();
@@ -46,12 +44,6 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 				autoreTemp.setCognome(rs.getString("cognome"));
 				autoreTemp.setId(rs.getLong("idautore"));
 
-				CasaDiscografica casaTemp = new CasaDiscografica();
-				casaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
-				casaTemp.setPartitaIva(rs.getString("partita_iva"));
-				casaTemp.setId(rs.getLong("idcasadiscografica"));
-				
-				autoreTemp.setCasaDiscografica(casaTemp);
 				cdTemp.setAutore(autoreTemp);
 				result.add(cdTemp);
 			}
@@ -221,6 +213,39 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 
 		}
 		return result;
+	}
 
+	public List<Cd> findByAutore(Autore autoreInput) throws Exception {
+		
+		if (isNotActive() || autoreInput == null) {
+			return null;
+		}
+
+		ArrayList<Cd> result = new ArrayList<Cd>();
+
+		try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM cd INNER JOIN autore a ON cd.autore_id=a.idautore WHERE a.idautore=?")) {
+			ps.setLong(1, autoreInput.getId());
+
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Cd cdTemp = new Cd();
+				cdTemp.setTitolo(rs.getString("titolo"));
+				cdTemp.setGenere(rs.getString("genere"));
+				cdTemp.setNumeroTracce(rs.getInt("numero_tracce"));
+				cdTemp.setId(rs.getLong("idcd"));
+
+				cdTemp.setAutore(autoreInput);
+				result.add(cdTemp);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw e;
+
+		}
+		return result;
 	}
 }

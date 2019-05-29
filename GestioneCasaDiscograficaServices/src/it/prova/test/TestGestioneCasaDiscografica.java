@@ -21,11 +21,11 @@ public class TestGestioneCasaDiscografica {
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
 
-			System.out.println("#########  LISTA TUTTE LE CASE DISCOGRAFICHE  ##########");
-			System.out.println("In tabella ci sono " + casaService.listAllCaseDiscografiche().size() + " elementi.");
-			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
-				System.out.println(casa);
-			}
+//			System.out.println("#########  LISTA TUTTE LE CASE DISCOGRAFICHE  ##########");
+//			System.out.println("In tabella ci sono " + casaService.listAllCaseDiscografiche().size() + " elementi.");
+//			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
+//				System.out.println(casa);
+//			}
 
 //			System.out.println("#########  FIND BY ID CASA ##########");
 //			System.out.println(casaService.findCasaById(3L));
@@ -58,14 +58,21 @@ public class TestGestioneCasaDiscografica {
 //				System.out.println(casa);
 //			}
 
+			
+			System.out.println("#########  FIND BY EXAMPLE ##########");
+			for (CasaDiscografica casa : casaService.findAllByAutoreWhereCognomeIniziaCon("s")) {
+				System.out.println(casa);
+			}
+			
+			
 			// *************************************************************************************
 			// TEST AUTORE
 			
-			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
-			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
-			for (Autore autore : autoreService.listAllAutori()) {
-				System.out.println(autore);
-			}
+//			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
+//			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
+//			for (Autore autore : autoreService.listAllAutori()) {
+//				System.out.println(autore);
+//			}
 
 //			System.out.println("#########  FIND BY ID AUTORE ##########");
 //			System.out.println(autoreService.findAutoreById(3L));
@@ -99,14 +106,27 @@ public class TestGestioneCasaDiscografica {
 //				System.out.println(autore);
 //			}
 
+//			System.out.println("#########  POPULATE CD ##########");  // la select va fatta con i join???
+//			Autore autore_example = new Autore("Pink","Floyd",null);
+//			Autore autore_da_popolare = autoreService.findByExample(autore_example).get(0);
+//			System.out.println(autoreService.findByExample(autore_da_popolare));
+//			autoreService.populateAutore(autore_da_popolare);
+//			for (Cd cd : autore_da_popolare.getListaCD()) {
+//				System.out.println(cd);
+//			}
+			
+//			System.out.println("#########  DELETE BULK AUTORE ##########");  // la select va fatta con i join???
+//			Autore autore_da_cancellare = new Autore("ac","dc",null);
+//			autore_da_cancellare = autoreService.findByExample(autore_da_cancellare).get(0);
+//			autoreService.rimuoviAutoreBulk(autore_da_cancellare);
 			// *************************************************************************************
 			// TEST CD
 
-			System.out.println("#########  LISTA TUTTI I CD  ##########");
-			System.out.println("In tabella ci sono " + cdService.listAllCd().size() + " elementi.");
-			for (Cd cd : cdService.listAllCd()) {
-				System.out.println(cd);
-			}
+//			System.out.println("#########  LISTA TUTTI I CD  ##########");
+//			System.out.println("In tabella ci sono " + cdService.listAllCd().size() + " elementi.");
+//			for (Cd cd : cdService.listAllCd()) {
+//				System.out.println(cd);
+//			}
 
 //			System.out.println("#########  FIND BY ID CD ##########");
 //			System.out.println(cdService.findCdById(2L));
