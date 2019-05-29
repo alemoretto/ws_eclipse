@@ -59,15 +59,15 @@ public class TestGestioneCasaDiscografica {
 //			}
 
 			
-			System.out.println("#########  FIND BY COGNOME AUTORE ##########");
-			for (CasaDiscografica casa : casaService.findAllByAutoreWhereCognomeIniziaCon("s")) {
-				System.out.println(casa);
-			}
-			
-			System.out.println("#########  FIND BY GENERE CD ##########");
-			for (CasaDiscografica casa : casaService.findAllByCdWhereGenereEqual("rock")) {
-				System.out.println(casa);
-			}
+//			System.out.println("#########  FIND BY COGNOME AUTORE ##########");
+//			for (CasaDiscografica casa : casaService.findAllByAutoreWhereCognomeIniziaCon("s")) {
+//				System.out.println(casa);
+//			}
+//			
+//			System.out.println("#########  FIND BY GENERE CD ##########");
+//			for (CasaDiscografica casa : casaService.findAllByCdWhereGenereEqual("rock")) {
+//				System.out.println(casa);
+//			}
 			
 			// *************************************************************************************
 			// TEST AUTORE
@@ -150,20 +150,32 @@ public class TestGestioneCasaDiscografica {
 
 //			System.out.println("#########  INSERT CD ##########");
 //			Autore ref_autore = new Autore("Led","Zeppelin",null);
-//			Cd cd_nuovo = new Cd("LedZeppelin I",autoreService.findAutoreById(5L),"rock",10);
+//			Cd cd_nuovo = new Cd("dsad",autoreService.findAutoreById(5L),"d",10);
 //			System.out.println(cdService.inserisciNuovoCd(cd_nuovo));
 //			for (Cd cd : cdService.listAllCd()) {
 //				System.out.println(cd);
 //			}
 
 //			System.out.println("#########  UPDATE CD ##########");
-//			Cd cd_da_aggiornare = cdService.findCdById(1L);
-//			cd_da_aggiornare.setGenere("pop");
+//			Cd cd_da_aggiornare = cdService.findCdById(4L);
+//			cd_da_aggiornare.setTitolo("titolo ");
+//			cd_da_aggiornare.setGenere("genere prova");
 //			System.out.println(cdService.aggiornaCd(cd_da_aggiornare));
 //			for (Cd cd : cdService.listAllCd()) {
 //				System.out.println(cd);
 //			}
 
+			System.out.println("#########  AGGIORNA MALE CD ##########");
+			Cd input2 = cdService.findCdById(2L);
+			input2.setGenere("ccccc ");
+			Cd input3 = cdService.findCdById(3L);
+			input3.setGenere("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc ");
+
+			System.out.println(cdService.aggiornaMaleCd(input2,input3));
+			for (Cd cd : cdService.listAllCd()) {
+				System.out.println(cd);
+			}
+			
 //			System.out.println("#########  DELETE CD ##########");
 //			Cd cd_da_cancellare = cdService.findCdById(1L);
 //			System.out.println(cdService.rimuoviCd(cd_da_cancellare));

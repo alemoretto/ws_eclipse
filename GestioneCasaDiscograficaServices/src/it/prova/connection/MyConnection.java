@@ -11,7 +11,10 @@ public class MyConnection {
 		try {
 			Class.forName(driver_name);
 			c = DriverManager.getConnection(connect_str);
+			c.setAutoCommit(false);
+
 			return c;
+		
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw ex;

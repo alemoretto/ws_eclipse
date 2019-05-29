@@ -58,7 +58,7 @@ public class CdServiceImpl implements CdService {
 	public int inserisciNuovoCd(Cd cdInput) throws Exception {
 		int result = 0;
 		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
-
+//			connection.setAutoCommit(false);
 			// inietto la connection nel dao
 			cdDao.setConnection(connection);
 
@@ -163,4 +163,22 @@ public class CdServiceImpl implements CdService {
 		return result;
 	}
 
+	public int aggiornaMaleCd(Cd input2, Cd input3) throws Exception{
+		int result = 0;
+
+		try (Connection connection = MyConnection.getConnection(Constants.DRIVER_NAME, Constants.CONNECTION_URL)) {
+
+			// inietto la connection nel dao
+			cdDao.setConnection(connection);
+
+			result = cdDao.update(input2);
+			result = cdDao.update(input3);
+
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
 }

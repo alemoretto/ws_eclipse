@@ -27,4 +27,5 @@ public interface CdService {
 	
 	public List<Cd> findAllByAutoreWhereTitoloIniziaCon(Autore autoreInput, String iniziale) throws Exception;
 
+	public int aggiornaMaleCd(Cd input, Cd input2) throws Exception;
 }

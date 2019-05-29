@@ -3,7 +3,6 @@ package it.prova.service;
 import java.util.List;
 
 import it.prova.dao.CasaDiscograficaDAO;
-import it.prova.model.Autore;
 import it.prova.model.CasaDiscografica;;
 
 public interface CasaDiscograficaService {

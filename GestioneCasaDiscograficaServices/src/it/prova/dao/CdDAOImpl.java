@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.prova.model.Autore;
-import it.prova.model.CasaDiscografica;
 import it.prova.model.Cd;
 
 public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {

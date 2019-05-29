@@ -7,7 +7,6 @@ import java.util.List;
 import it.prova.connection.MyConnection;
 import it.prova.dao.CasaDiscograficaDAO;
 import it.prova.dao.Constants;
-import it.prova.model.Autore;
 import it.prova.model.CasaDiscografica;
 
 public class CasaDiscograficaServiceImpl implements CasaDiscograficaService {
