@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.prova.model.Autore;
+import it.prova.model.CasaDiscografica;
 import it.prova.model.Cd;
 
 public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
@@ -29,7 +30,9 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 		try (Statement ps = connection.createStatement()) {
 
 			ResultSet rs = ps.executeQuery(
-					"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore");
+//					"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore ");
+		"SELECT * FROM cd LEFT OUTER JOIN autore a ON cd.autore_id=a.idautore LEFT OUTER JOIN casadiscografica ca ON a.casadiscografica_id=ca.idcasadiscografica");
+
 
 			while (rs.next()) {
 				Cd cdTemp = new Cd();
@@ -43,6 +46,12 @@ public class CdDAOImpl extends AbstractMySQLDAO implements CdDAO {
 				autoreTemp.setCognome(rs.getString("cognome"));
 				autoreTemp.setId(rs.getLong("idautore"));
 
+				CasaDiscografica casaTemp = new CasaDiscografica();
+				casaTemp.setRagioneSociale(rs.getString("ragione_sociale"));
+				casaTemp.setPartitaIva(rs.getString("partita_iva"));
+				casaTemp.setId(rs.getLong("idcasadiscografica"));
+				
+				autoreTemp.setCasaDiscografica(casaTemp);
 				cdTemp.setAutore(autoreTemp);
 				result.add(cdTemp);
 			}

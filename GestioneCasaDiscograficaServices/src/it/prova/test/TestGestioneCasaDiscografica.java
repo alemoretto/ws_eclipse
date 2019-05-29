@@ -1,11 +1,7 @@
 package it.prova.test;
 
-import it.prova.model.Autore;
-import it.prova.model.Cd;
-import it.prova.service.AutoreService;
-import it.prova.service.CasaDiscograficaService;
-import it.prova.service.CdService;
-import it.prova.service.MyServiceFactory;
+import it.prova.model.*;
+import it.prova.service.*;
 
 public class TestGestioneCasaDiscografica {
 
@@ -25,11 +21,11 @@ public class TestGestioneCasaDiscografica {
 
 			// ora con il service posso fare tutte le invocazioni che mi servono
 
-//			System.out.println("#########  LISTA TUTTE LE CASE DISCOGRAFICHE  ##########");
-//			System.out.println("In tabella ci sono " + casaService.listAllCaseDiscografiche().size() + " elementi.");
-//			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
-//				System.out.println(casa);
-//			}
+			System.out.println("#########  LISTA TUTTE LE CASE DISCOGRAFICHE  ##########");
+			System.out.println("In tabella ci sono " + casaService.listAllCaseDiscografiche().size() + " elementi.");
+			for (CasaDiscografica casa : casaService.listAllCaseDiscografiche()) {
+				System.out.println(casa);
+			}
 
 //			System.out.println("#########  FIND BY ID CASA ##########");
 //			System.out.println(casaService.findCasaById(3L));
@@ -64,12 +60,12 @@ public class TestGestioneCasaDiscografica {
 
 			// *************************************************************************************
 			// TEST AUTORE
-//			
-//			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
-//			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
-//			for (Autore autore : autoreService.listAllAutori()) {
-//				System.out.println(autore);
-//			}
+			
+			System.out.println("#########  LISTA TUTTI GLI AUTORI  ##########");
+			System.out.println("In tabella ci sono " + autoreService.listAllAutori().size() + " elementi.");
+			for (Autore autore : autoreService.listAllAutori()) {
+				System.out.println(autore);
+			}
 
 //			System.out.println("#########  FIND BY ID AUTORE ##########");
 //			System.out.println(autoreService.findAutoreById(3L));
@@ -138,11 +134,11 @@ public class TestGestioneCasaDiscografica {
 //				System.out.println(cd);
 //			}
 //			
-			System.out.println("#########  FIND BY EXAMPLE ##########");  // la select va fatta con i join???
-			Cd cd_example = new Cd(null,null,"Rock",8);
-			for (Cd cd : cdService.findByExample(cd_example)) {
-				System.out.println(cd);
-			}
+//			System.out.println("#########  FIND BY EXAMPLE ##########");  // la select va fatta con i join???
+//			Cd cd_example = new Cd(null,null,"Rock",8);
+//			for (Cd cd : cdService.findByExample(cd_example)) {
+//				System.out.println(cd);
+//			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
