@@ -139,12 +139,13 @@ public class TestGestioneCasaDiscografica {
 			// *************************************************************************************
 			// TEST CD
 
-//			System.out.println("#########  LISTA TUTTI I CD  ##########");
-//			System.out.println("In tabella ci sono " + cdService.listAllCd().size() + " elementi.");
-//			for (Cd cd : cdService.listAllCd()) {
-//				System.out.println(cd);
-//			}
-
+			System.out.println("#########  LISTA TUTTI I CD  ##########");
+			System.out.println("In tabella ci sono " + cdService.listAllCd().size() + " elementi.");
+			for (Cd cd : cdService.listAllCd()) {
+				System.out.println(cd);
+			}
+//			cdService.listAllCd().forEach(cd -> System.out.println(cd));
+			
 //			System.out.println("#########  FIND BY ID CD ##########");
 //			System.out.println(cdService.findCdById(2L));
 
@@ -165,16 +166,16 @@ public class TestGestioneCasaDiscografica {
 //				System.out.println(cd);
 //			}
 
-			System.out.println("#########  AGGIORNA MALE CD ##########");
-			Cd input2 = cdService.findCdById(2L);
-			input2.setGenere("ccccc ");
-			Cd input3 = cdService.findCdById(3L);
-			input3.setGenere("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc ");
-
-			System.out.println(cdService.aggiornaMaleCd(input2,input3));
-			for (Cd cd : cdService.listAllCd()) {
-				System.out.println(cd);
-			}
+//			System.out.println("#########  AGGIORNA MALE CD ##########");
+//			Cd input2 = cdService.findCdById(2L);
+//			input2.setGenere("21020201201 ");
+//			Cd input3 = cdService.findCdById(3L);
+//			input3.setGenere("2102020120121020201201210202012012102020120121020201201");
+//			System.out.println(cdService.aggiornaMaleCd(input2,input3));
+//			for (Cd cd : cdService.listAllCd()) {
+//				System.out.println(cd);
+//			}
+			
 			
 //			System.out.println("#########  DELETE CD ##########");
 //			Cd cd_da_cancellare = cdService.findCdById(1L);
