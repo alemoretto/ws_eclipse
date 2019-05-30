@@ -1,9 +1,9 @@
 package it.negozioarticolijpa.dao;
 
-import it.municipioabitantejpa.dao.IBaseDAO;
-import it.municipioabitantejpa.model.Negozio;
+import it.negozioarticolijpa.dao.IBaseDAO;
+import it.negozioarticolijpa.model.Negozio;
 
-public class NegozioDAO extends IBaseDAO<Negozio> {
+public interface NegozioDAO extends IBaseDAO<Negozio> {
 
 }
 

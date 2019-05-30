@@ -27,39 +27,39 @@ public class NegozioDAOImpl implements NegozioDAO {
 		return entityManager.createQuery("from Negozio").getResultList();
 	}
 
-	@Override
-	public Negozio get(Long id) throws Exception {
-		Negozio result = (Negozio) entityManager.find(Negozio.class, id);
-		return result;
-	}
-
-	@Override
-	public void update(Negozio negozioInstance) throws Exception {
-		if (negozioInstance == null) {
-			throw new Exception("Problema valore in input");
-		}
-
-		negozioInstance = entityManager.merge(negozioInstance);
-	}
-
-	@Override
-	public void insert(Negozio negozioInstance) throws Exception {
-		if (negozioInstance == null) {
-			throw new Exception("Problema valore in input");
-		}
-
-		entityManager.persist(negozioInstance);
-	}
-
-	@Override
-	public void delete(Negozio negozioInstance) throws Exception {
-		if (negozioInstance == null) {
-			throw new Exception("Problema valore in input");
-		}
-
-		entityManager.remove(entityManager.merge(negozioInstance));
-	}
-
+//	@Override
+//	public Negozio get(Long id) throws Exception {
+//		Negozio result = (Negozio) entityManager.find(Negozio.class, id);
+//		return result;
+//	}
+//
+//	@Override
+//	public void update(Negozio negozioInstance) throws Exception {
+//		if (negozioInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		negozioInstance = entityManager.merge(negozioInstance);
+//	}
+//
+//	@Override
+//	public void insert(Negozio negozioInstance) throws Exception {
+//		if (negozioInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		entityManager.persist(negozioInstance);
+//	}
+//
+//	@Override
+//	public void delete(Negozio negozioInstance) throws Exception {
+//		if (negozioInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		entityManager.remove(entityManager.merge(negozioInstance));
+//	}
+//
 //	@SuppressWarnings("unchecked")
 //	@Override
 //	public List<Negozio> findByExample(Negozio negozioInstance) throws Exception {

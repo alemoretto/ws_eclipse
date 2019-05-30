@@ -27,39 +27,39 @@ public class ArticoloDAOImpl implements ArticoloDAO {
 		return entityManager.createQuery("from Articolo").getResultList();
 	}
 
-	@Override
-	public Articolo get(Long id) throws Exception {
-		Articolo result = (Articolo) entityManager.find(Articolo.class, id);
-		return result;
-	}
-
-	@Override
-	public void update(Articolo articoloInstance) throws Exception {
-		if (articoloInstance == null) {
-			throw new Exception("Problema valore in input");
-		}
-
-		articoloInstance = entityManager.merge(articoloInstance);
-	}
-
-	@Override
-	public void insert(Articolo articoloInstance) throws Exception {
-		if (articoloInstance == null) {
-			throw new Exception("Problema valore in input");
-		}
-
-		entityManager.persist(articoloInstance);
-	}
-
-	@Override
-	public void delete(Articolo articoloInstance) throws Exception {
-		if (articoloInstance == null) {
-			throw new Exception("Problema valore in input");
-		}
-
-		entityManager.remove(entityManager.merge(articoloInstance));
-	}
-
+//	@Override
+//	public Articolo get(Long id) throws Exception {
+//		Articolo result = (Articolo) entityManager.find(Articolo.class, id);
+//		return result;
+//	}
+//
+//	@Override
+//	public void update(Articolo articoloInstance) throws Exception {
+//		if (articoloInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		articoloInstance = entityManager.merge(articoloInstance);
+//	}
+//
+//	@Override
+//	public void insert(Articolo articoloInstance) throws Exception {
+//		if (articoloInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		entityManager.persist(articoloInstance);
+//	}
+//
+//	@Override
+//	public void delete(Articolo articoloInstance) throws Exception {
+//		if (articoloInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		entityManager.remove(entityManager.merge(articoloInstance));
+//	}
+//
 //	@SuppressWarnings("unchecked")
 //	@Override
 //	public List<Articolo> findByExample(Articolo articoloInstance) throws Exception {
@@ -83,14 +83,14 @@ public class ArticoloDAOImpl implements ArticoloDAO {
 //
 //		Criteria abitanteCriteria = session.createCriteria(Articolo.class);
 //		Example abitanteExample = Example.create(articoloInstance).setPropertySelector(ps);
-//		if (articoloInstance.getMunicipio() != null) {
-//			abitanteCriteria.createCriteria("municipio").add(Example.create(articoloInstance.getMunicipio()));
+//		if (articoloInstance.getNegozio() != null) {
+//			abitanteCriteria.createCriteria("municipio").add(Example.create(articoloInstance.getNegozio()));
 //		}
 //
 //		abitanteCriteria.add(abitanteExample);
 //		return abitanteCriteria.list();
 //
 //	}
-
+//
 
 }
