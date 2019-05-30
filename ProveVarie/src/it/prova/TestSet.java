@@ -28,12 +28,20 @@ public class TestSet {
 		System.out.println("HashSet");
 		hashSet.forEach(p -> System.out.println(p));
 		
-		Set<Punto> treeSet = new TreeSet<Punto>();
-		treeSet.addAll(list);
-		System.out.println("TreeSet");
-		treeSet.forEach(p -> System.out.println(p));	
+//		Set<Punto> treeSet = new TreeSet<Punto>();
+//		treeSet.addAll(list);
+//		System.out.println("TreeSet");
+//		treeSet.forEach(p -> System.out.println(p));	
 		
-	
+		int i1 = 1;
+		int i2 = 2;
+		int i3 = 2;
+		int i4 = 1;
+		int i5 = 2;
+		Set<Integer> hashSetI = new HashSet<Integer>();
+		List<Integer> listI = new ArrayList<Integer>(Arrays.asList(i1,i2,i3,i4,i5));
+		hashSetI.addAll(listI);
+		hashSetI.forEach(i -> System.out.println(i));
 	}
 	
 }

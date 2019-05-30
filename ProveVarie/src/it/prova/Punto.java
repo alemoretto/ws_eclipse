@@ -26,6 +26,10 @@ public class Punto implements Comparable<Punto> {
 		return (x == p.x && y == p.y) ? true:false;
 	}
 	
+	public int hashCode() {
+		return x*x + y*y;
+	}
+	
 	public int compareTo(Punto p) {
 		return (x*x + y*y) > (p.x*p.x + p.y*p.y) ? 1:-1; 
 //		return (x > p.x && y > p.y) ? 1:-1;
