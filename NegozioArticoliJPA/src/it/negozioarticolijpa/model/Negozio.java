@@ -81,7 +81,7 @@ public class Negozio implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Negozio [id=" + id + ", nome=" + nome + ", indirizzo=" + indirizzo + "]";
+		return "Negozio [id=" + id + ", nome=" + nome + ", indirizzo=" + indirizzo + ", Num_articoli=" + articoli.size() + "]";
 	}
 	
 	

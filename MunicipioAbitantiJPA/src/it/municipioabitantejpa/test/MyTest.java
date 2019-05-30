@@ -17,29 +17,29 @@ public class MyTest {
 
 		try {
 			
-			System.out.println("########### MUNICIPIO DESCRIZIONE INIZIA CON ########################");
-			List<Municipio> munIniziaCon = municipioService.findAllByDescrizioneIniziaCon("p");
-			for (Municipio m : munIniziaCon) {
-				System.out.println(m);
-			}
-			
-			System.out.println("########### MUNICIPIO FIND ALL BY ABITANTI MINORENNI  ########################");
-			List<Municipio> munMinorenni = municipioService.findAllByAbitantiMinorenni();
-			for (Municipio m : munMinorenni) {
-				System.out.println(m);
-			}
-			
-			System.out.println("########### ABITANTE FIND ALL BY COGNOME  ########################");
-			List<Abitante> abitCognome = abitanteService.findAllByCognome("bianchi");
-			for (Abitante a : abitCognome) {
-				System.out.println(a);
-			}
-			
-			System.out.println("########### ABITANTE FIND ALL BY CODICE MUNICIPIO INIZIA CON  ########################");
-			List<Abitante> abitCodiceMunicipio = abitanteService.findAllByCodiceMunicipioIniziaCon("I");
-			for (Abitante a : abitCodiceMunicipio) {
-				System.out.println(a);
-			}
+//			System.out.println("########### MUNICIPIO DESCRIZIONE INIZIA CON ########################");
+//			List<Municipio> munIniziaCon = municipioService.findAllByDescrizioneIniziaCon("p");
+//			for (Municipio m : munIniziaCon) {
+//				System.out.println(m);
+//			}
+//			
+//			System.out.println("########### MUNICIPIO FIND ALL BY ABITANTI MINORENNI  ########################");
+//			List<Municipio> munMinorenni = municipioService.findAllByAbitantiMinorenni();
+//			for (Municipio m : munMinorenni) {
+//				System.out.println(m);
+//			}
+//			
+//			System.out.println("########### ABITANTE FIND ALL BY COGNOME  ########################");
+//			List<Abitante> abitCognome = abitanteService.findAllByCognome("bianchi");
+//			for (Abitante a : abitCognome) {
+//				System.out.println(a);
+//			}
+//			
+//			System.out.println("########### ABITANTE FIND ALL BY CODICE MUNICIPIO INIZIA CON  ########################");
+//			List<Abitante> abitCodiceMunicipio = abitanteService.findAllByCodiceMunicipioIniziaCon("I");
+//			for (Abitante a : abitCodiceMunicipio) {
+//				System.out.println(a);
+//			}
 			
 //			// creo nuovo municipio
 //			Municipio nuovoMunicipio = new Municipio("Municipio VII", "VII", "Via dei fiori");
@@ -88,27 +88,33 @@ public class MyTest {
 //			}
 //			
 //			
-//			System.out.println("########### EXAMPLE ########################");
-//			// find by example: voglio ricercare i municipi con ubicazione 'Via
-//			// dei Grandi'
-//			Municipio municipioExample = new Municipio();
-//			municipioExample.setUbicazione("Via dei Grandi");
-//			for (Municipio municipioItem : municipioService.findByExample(municipioExample)) {
-//				System.out.println(municipioItem);
-//			}
+			System.out.println("########### EXAMPLE ########################");
+			// find by example: voglio ricercare i municipi con ubicazione 'Via
+			// dei Grandi'
+			Municipio municipioExample = new Municipio();
+			municipioExample.setUbicazione("");
+			for (Municipio municipioItem : municipioService.findByExample(municipioExample)) {
+				System.out.println(municipioItem);
+			}
 			
 //			System.out.println("########### EXAMPLE ########################");
 //			// find by example: voglio ricercare gli abitanti di un determinato municipio passando
 //			//dal bean abitante
 //			Abitante abitanteExample = new Abitante();
-//			abitanteExample.setMunicipio(municipioService.caricaSingoloMunicipio(22L));
+//			Municipio municipioExample = new Municipio();
+//			municipioExample.setCodice("");
+////			Municipio munIII = municipioService.findByExample(municipioExample).get(0);
+////			abitanteExample.setMunicipio(municipioService.caricaSingoloMunicipio(22L));
+//			abitanteExample.setNome("");
+//			abitanteExample.setMunicipio(municipioExample);
 //			List<Abitante> listaSuExample = abitanteService.findByExample(abitanteExample);
 //			System.out.println("Trovati................."+listaSuExample.size());
 //			System.out.println("....................................................");
 //			for (Abitante abitanteItem : listaSuExample) {
 //				System.out.println(abitanteItem);
 //			}
-//			System.out.println(municipioService.caricaSingoloMunicipio(22L));
+//			System.out.println("....................................................");
+
 			
 			/*
 			// carico un abitante e cambio eta
