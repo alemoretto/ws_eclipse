@@ -65,17 +65,18 @@ public class NegozioDAOImpl implements NegozioDAO {
 		}
 
 		Session session = (Session) entityManager.getDelegate();
-		Example negozioExample = Example.create(negozioInstance).  excludeZeroes();
+		Example negozioExample = Example.create(negozioInstance).excludeZeroes();
 		Criteria criteria = session.createCriteria(Negozio.class).add(negozioExample);
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Negozio> orderByNumeroArticoli() throws Exception {
 //		SELECT negozio.* , count(articolo.negozio_id) as c FROM negozio
 //		LEFT JOIN articolo ON articolo.negozio_id=negozio.id group by negozio.id;
 		return entityManager.createQuery(
-				" SELECT Negozio.*,count(Articolo.negozio) as c FROM negozio\r\n" + 
-				"//		LEFT JOIN articolo ON articolo.negozio_id=negozio.id group by negozio.id  ").getResultList();
+				" SELECT n, count(Articolo.negozio) as c FROM Negozio n" + 
+				"LEFT JOIN articolo ON articolo.negozio_id=negozio.id group by negozio.id  ").getResultList();
 	}
 	
 }

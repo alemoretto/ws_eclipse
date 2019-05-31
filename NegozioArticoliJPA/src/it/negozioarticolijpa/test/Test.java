@@ -1,7 +1,12 @@
 package it.negozioarticolijpa.test;
 
-import it.negozioarticolijpa.model.*;
-import it.negozioarticolijpa.service.*;
+import java.util.List;
+
+import it.negozioarticolijpa.model.Articolo;
+import it.negozioarticolijpa.model.Negozio;
+import it.negozioarticolijpa.service.ArticoloService;
+import it.negozioarticolijpa.service.MyServiceFactory;
+import it.negozioarticolijpa.service.NegozioService;
 
 public class Test {
 
@@ -13,7 +18,13 @@ public class Test {
 		try {
 //			System.out.println("############    LISTA  NEGOZI    #############");
 //			for (Negozio n : negozioService.listAllNegozi()) System.out.println(n);
-			
+			System.out.println("---------11111111------------");
+			Negozio negozio = negozioService.listAllNegozi().get(0);
+			System.out.println("---------22222222------------");
+			List<Articolo> art = negozio.getArticoli();
+			System.out.println("---------33333333------------");
+			for (Articolo a : art) System.out.println(a);
+			System.out.println("---------44444444------------");
 			
 //			System.out.println("############    CARICA  NEGOZIO    #############");
 //			System.out.println(negozioService.caricaSingoloNegozio(4L));	
@@ -33,10 +44,10 @@ public class Test {
 //			Negozio negDaRimuovere =  negozioService.caricaSingoloNegozio(1L);
 //			negozioService.rimuovi(negDaRimuovere);
 			
-			System.out.println("############    FIND BY EXAMPLE  NEGOZIO    #############");
-			Negozio negExample = new Negozio();
-			negExample.setNome("");
-			for (Negozio n : negozioService.findByExample(negExample)) System.out.println(n);
+//			System.out.println("############    FIND BY EXAMPLE  NEGOZIO    #############");
+//			Negozio negExample = new Negozio();
+//			negExample.setNome("");
+//			for (Negozio n : negozioService.findByExample(negExample)) System.out.println(n);
 
 			// ##############################################################################
 
