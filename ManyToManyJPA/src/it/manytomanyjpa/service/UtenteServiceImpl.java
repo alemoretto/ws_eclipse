@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import it.manytomanyjpa.dao.EntityManagerUtil;
 import it.manytomanyjpa.dao.UtenteDAO;
+import it.manytomanyjpa.model.Ruolo;
 import it.manytomanyjpa.model.Utente;
 
 public class UtenteServiceImpl implements UtenteService {
@@ -116,7 +117,6 @@ public class UtenteServiceImpl implements UtenteService {
 			e.printStackTrace();
 			throw e;
 		}
-
 	}
 
 	@Override
@@ -127,6 +127,20 @@ public class UtenteServiceImpl implements UtenteService {
 
 			// eseguo quello che realmente devo fare
 			return utenteDAO.findByExample(example);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	public List<Utente> findAllByRuolo(Ruolo ruoloInput) throws Exception{
+		try {
+			// uso l'injection per il dao
+			utenteDAO.setEntityManager(EntityManagerUtil.getEntityManager());
+
+			// eseguo quello che realmente devo fare
+			return utenteDAO.findAllByRuolo(ruoloInput);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -58,6 +58,19 @@ public class UtenteDAOImpl implements UtenteDAO {
 		entityManager.remove(entityManager.merge(utenteInstance));
 	}
 
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public List<Utente> findByExample(Utente utenteInstance) throws Exception {
+//		if (utenteInstance == null) {
+//			throw new Exception("Problema valore in input");
+//		}
+//
+//		Session session = (Session) entityManager.getDelegate();
+//		Example utenteExample = Example.create(utenteInstance).excludeZeroes();
+//		Criteria criteria = session.createCriteria(Utente.class).add(utenteExample);
+//		return criteria.list();
+//	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Utente> findByExample(Utente utenteInstance) throws Exception {
@@ -70,7 +83,6 @@ public class UtenteDAOImpl implements UtenteDAO {
 		Criteria criteria = session.createCriteria(Utente.class).add(utenteExample);
 		return criteria.list();
 	}
-
 	// questo metodo ci torna utile per capire se possiamo rimuovere un ruolo non
 	// essendo collegato ad un utente
 	@SuppressWarnings("unchecked")

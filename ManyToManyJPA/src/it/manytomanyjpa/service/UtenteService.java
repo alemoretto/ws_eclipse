@@ -3,6 +3,7 @@ package it.manytomanyjpa.service;
 import java.util.List;
 
 import it.manytomanyjpa.dao.UtenteDAO;
+import it.manytomanyjpa.model.Ruolo;
 import it.manytomanyjpa.model.Utente;
 
 public interface UtenteService  {
@@ -19,6 +20,8 @@ public interface UtenteService  {
 
 	public List<Utente> findByExample(Utente example) throws Exception;
 
+	public List<Utente> findAllByRuolo(Ruolo ruoloInput) throws Exception;
+	
 	//per injection
 	public void setUtenteDAO(UtenteDAO utenteDAO);
 

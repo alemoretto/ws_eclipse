@@ -64,8 +64,8 @@ public class RuoloDAOImpl implements RuoloDAO {
 		}
 
 		Session session = (Session) entityManager.getDelegate();
-		Example utenteExample = Example.create(o).excludeZeroes();
-		Criteria criteria = session.createCriteria(Utente.class).add(utenteExample);
+		Example ruoloExample = Example.create(o).excludeZeroes();
+		Criteria criteria = session.createCriteria(Utente.class).add(ruoloExample);
 		return criteria.list();
 	}
 
