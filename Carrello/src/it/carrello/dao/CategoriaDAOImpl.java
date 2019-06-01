@@ -99,4 +99,5 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		return query.getResultList();
 	}
 	
+	
 }

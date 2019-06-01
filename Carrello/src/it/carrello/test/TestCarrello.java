@@ -44,22 +44,19 @@ public class TestCarrello {
 		}
 	}
 
-	
 	public static void main(String[] args) {
 		OrdineService ordineServiceInstance = MyServiceFactory.getOrdineServiceInstance();
 		ArticoloService articoloServiceInstance = MyServiceFactory.getArticoloServiceInstance();
 		CategoriaService categoriaServiceInstance = MyServiceFactory.getCategoriaServiceInstance();
 
-		
 		// ora passo alle operazioni CRUD
 		try {
 
-			Ordine ord_carla = ordineServiceInstance.caricaSingoloElemento(1L);			
+			Ordine ord_carla = ordineServiceInstance.caricaSingoloElemento(1L);
 			Ordine ord_mario = ordineServiceInstance.caricaSingoloElemento(2L);
 			Ordine ord_ale = ordineServiceInstance.caricaSingoloElemento(3L);
 			Ordine ord_matteo = ordineServiceInstance.caricaSingoloElemento(4L);
-			
-			
+
 			Categoria cat_vestiti = categoriaServiceInstance.caricaSingoloElemento(1L);
 			Categoria cat_pantaloni = categoriaServiceInstance.caricaSingoloElemento(2L);
 			Categoria cat_uomo = categoriaServiceInstance.caricaSingoloElemento(3L);
@@ -72,7 +69,6 @@ public class TestCarrello {
 			Articolo art_nike_carla = articoloServiceInstance.caricaSingoloElemento(3L);
 			Articolo art_camic_carla = articoloServiceInstance.caricaSingoloElemento(4L);
 
-			
 //			System.out.println("###########  LISTA  ORDINI   ############");
 //			for (Ordine o : ordineServiceInstance.listAll()) {
 //				System.out.println(o);
@@ -124,13 +120,18 @@ public class TestCarrello {
 
 //			System.out.println("###########  CANCELLA  ARTICOLO   ############");			
 //			articoloServiceInstance.rimuovi(art_cell);
-			
+
 //			System.out.println("###########  FIND ALL BY CATEGORIA    ############");
-//			for (Articolo a : articoloServiceInstance.findAllByCategoria(cat_elettr)) {
+//			for (Articolo a : articoloServiceInstance.findAllByCategoria(cat_uomo)) {
 //				System.out.println(a);
 //			}
-			
-			
+
+			System.out.println("###########  SOMMA PREZZI BY CATEGORIA    ############");
+			Categoria catSomma = cat_calzature;
+			Long sommaPrezzi = articoloServiceInstance.sommaPrezziByCategoria(catSomma);
+			System.out.println(
+					"La spesa per la categoria \"" + catSomma.getDescrizione() + "\" vale " + sommaPrezzi + " euro");
+
 			// ##############################################################################
 
 //			System.out.println("###########  LISTA  CATEGORIE   ############");
@@ -141,29 +142,28 @@ public class TestCarrello {
 //			System.out.println("###########  INSERISCI  CATEGORIA   ############");
 //			Categoria cat = new Categoria("scarpe");
 //			categoriaServiceInstance.inserisciNuovo(cat);
-			
+
 //			System.out.println("###########  AGGIORNA  CATEGORIA   ############");
 //			cat_elettr.getArticoli().add(art_cell);
 //			cat_calzature.setDescrizione("calzature");
 //			categoriaServiceInstance.aggiorna(cat_calzature);
-			
-			
+
 //			System.out.println("###########  CANCELLA  CATEGORIA   ############");			
 //			categoriaServiceInstance.rimuovi(cat_elettr);
-			
-			System.out.println("###########  FIND ALL CATEGORIE BY ORDINE    ############");
-			for (Categoria c : categoriaServiceInstance.findAllByOrdine(ord_ale)) {
-				System.out.println(c);
-			}
-			
+
+//			System.out.println("###########  FIND ALL CATEGORIE BY ORDINE    ############");
+//			for (Categoria c : categoriaServiceInstance.findAllByOrdine(ord_carla)) {
+//				System.out.println(c);
+//			}
+
 //			liO();
 //			liA();
 //			liC();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	}
+}

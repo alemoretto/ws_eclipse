@@ -69,7 +69,7 @@ public class ArticoloServiceImpl implements ArticoloService {
 			throw e;
 		}
 	}
-	
+
 	public void inserisciNuovo(Articolo articoloInstance) throws Exception {
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -91,7 +91,7 @@ public class ArticoloServiceImpl implements ArticoloService {
 			throw e;
 		}
 	}
-	
+
 	public void rimuovi(Articolo articoloInstance) throws Exception {
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -113,7 +113,7 @@ public class ArticoloServiceImpl implements ArticoloService {
 			throw e;
 		}
 	}
-	
+
 //	@Override
 //	public Articolo findByExample(Articolo articoloInstance) throws Exception {
 //		try {
@@ -129,7 +129,7 @@ public class ArticoloServiceImpl implements ArticoloService {
 //		}
 //	}
 
-	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception{
+	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception {
 		try {
 			// uso l'injection per il dao
 			articoloDAO.setEntityManager(EntityManagerUtil.getEntityManager());
@@ -142,5 +142,19 @@ public class ArticoloServiceImpl implements ArticoloService {
 			throw e;
 		}
 	}
-}
 
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception {
+		try {
+			// uso l'injection per il dao
+			articoloDAO.setEntityManager(EntityManagerUtil.getEntityManager());
+
+			// eseguo quello che realmente devo fare
+			return articoloDAO.sommaPrezziByCategoria(categoriaInstance);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+}

@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 import it.carrello.dao.EntityManagerUtil;
 import it.carrello.dao.OrdineDAO;
-import it.carrello.model.Articolo;
 import it.carrello.model.Categoria;
 import it.carrello.model.Ordine;
 
@@ -70,7 +69,7 @@ public class OrdineServiceImpl implements OrdineService {
 			throw e;
 		}
 	}
-	
+
 	public void inserisciNuovo(Ordine ordineInstance) throws Exception {
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -92,7 +91,7 @@ public class OrdineServiceImpl implements OrdineService {
 			throw e;
 		}
 	}
-	
+
 	public void rimuovi(Ordine ordineInstance) throws Exception {
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -114,7 +113,7 @@ public class OrdineServiceImpl implements OrdineService {
 			throw e;
 		}
 	}
-	
+
 //	@Override
 //	public Ordine findByExample(Ordine ordineInstance) throws Exception {
 //		try {
@@ -129,8 +128,8 @@ public class OrdineServiceImpl implements OrdineService {
 //			throw e;
 //		}
 //	}
-	
-	public List<Ordine> findAllByCategoria(Categoria categoriaInstance) throws Exception{
+
+	public List<Ordine> findAllByCategoria(Categoria categoriaInstance) throws Exception {
 		try {
 			// uso l'injection per il dao
 			ordineDAO.setEntityManager(EntityManagerUtil.getEntityManager());
@@ -144,5 +143,4 @@ public class OrdineServiceImpl implements OrdineService {
 		}
 	}
 
-	
 }

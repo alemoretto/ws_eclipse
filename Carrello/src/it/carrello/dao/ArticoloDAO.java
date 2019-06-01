@@ -9,4 +9,5 @@ public interface ArticoloDAO extends IBaseDAO<Articolo> {
 
 	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception;
 
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception;
 }

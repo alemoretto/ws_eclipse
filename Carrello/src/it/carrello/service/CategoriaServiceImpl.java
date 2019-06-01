@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 import it.carrello.dao.CategoriaDAO;
 import it.carrello.dao.EntityManagerUtil;
-import it.carrello.model.Articolo;
 import it.carrello.model.Categoria;
 import it.carrello.model.Ordine;
 
@@ -70,7 +69,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 			throw e;
 		}
 	}
-	
+
 	public void inserisciNuovo(Categoria categoriaInstance) throws Exception {
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -92,7 +91,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 			throw e;
 		}
 	}
-	
+
 	public void rimuovi(Categoria categoriaInstance) throws Exception {
 		// questo è come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
@@ -114,7 +113,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 			throw e;
 		}
 	}
-	
+
 //	@Override
 //	public Categoria findByExample(Categoria categoriaInstance) throws Exception {
 //		try {
@@ -145,6 +144,4 @@ public class CategoriaServiceImpl implements CategoriaService {
 		}
 	}
 
-	
 }
-

@@ -8,11 +8,10 @@ import javax.persistence.Query;
 import it.carrello.model.Articolo;
 import it.carrello.model.Categoria;
 
-
 public class ArticoloDAOImpl implements ArticoloDAO {
 
 	private EntityManager entityManager;
-	
+
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
@@ -95,12 +94,20 @@ public class ArticoloDAOImpl implements ArticoloDAO {
 	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception {
 		// dopo la from bisogna specificare il nome dell'oggetto (lettera maiuscola) e
 		// non la tabella
-		Query query = entityManager.createQuery("SELECT a FROM Articolo a JOIN a.categorie c WHERE c=:cat");
-		query.setParameter("cat",categoriaInstance);
-		
+		Query query = entityManager.createQuery("SELECT a FROM Articolo a JOIN FETCH a.categorie c WHERE c=:categoria");
+		query.setParameter("categoria", categoriaInstance);
+
 		return query.getResultList();
-		
+
 	}
 
-	
+	@Override
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception {
+		Query query = entityManager
+				.createQuery("SELECT SUM(a.prezzoSingolo) FROM Articolo a JOIN a.categorie c WHERE c=:categoria");
+		query.setParameter("categoria", categoriaInstance);
+
+		return ((Long) query.getSingleResult());
+	}
+
 }

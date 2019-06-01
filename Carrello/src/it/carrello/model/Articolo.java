@@ -3,7 +3,6 @@ package it.carrello.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,15 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import it.carrello.model.Ordine;
 
 @Entity
 @Table(name = "articolo")
 public class Articolo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -35,7 +31,7 @@ public class Articolo {
 	@ManyToMany
 	@JoinTable(name = "articolo_categoria", joinColumns = @JoinColumn(name = "articolo_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
 	private Set<Categoria> categorie = new HashSet<>(0);
-	
+
 	public Articolo(Long id, String descrizione, Integer prezzoSingolo, Ordine ordine, Set<Categoria> categorie) {
 		super();
 		this.id = id;
@@ -56,8 +52,9 @@ public class Articolo {
 		this.descrizione = descrizione;
 		this.prezzoSingolo = prezzoSingolo;
 	}
-	
-	public Articolo() {}
+
+	public Articolo() {
+	}
 
 	public Long getId() {
 		return id;
@@ -98,15 +95,14 @@ public class Articolo {
 	public void setCategorie(Set<Categoria> categorie) {
 		this.categorie = categorie;
 	}
-	
+
 	public String toString() {
 		String stringaCategorie = "";
 		for (Categoria categoria : categorie) {
 			stringaCategorie += categoria.getDescrizione() + " ";
 		}
-		return "ARTICOLO [id=" + id + ", descrizione=" + descrizione  + ", prezzo=" + prezzoSingolo  + " (" + stringaCategorie + ")" + 
-				"] || " + ordine; 
+		return "ARTICOLO [id=" + id + ", descrizione=" + descrizione + ", prezzo=" + prezzoSingolo + " ("
+				+ stringaCategorie + ")" + "] || " + ordine;
 	}
-	
-	
+
 }
