@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import it.carrello.dao.ArticoloDAO;
 import it.carrello.dao.EntityManagerUtil;
 import it.carrello.model.Articolo;
+import it.carrello.model.Categoria;
 
 public class ArticoloServiceImpl implements ArticoloService {
 
@@ -127,6 +128,19 @@ public class ArticoloServiceImpl implements ArticoloService {
 //			throw e;
 //		}
 //	}
-	
+
+	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception{
+		try {
+			// uso l'injection per il dao
+			articoloDAO.setEntityManager(EntityManagerUtil.getEntityManager());
+
+			// eseguo quello che realmente devo fare
+			return articoloDAO.findAllByCategoria(categoriaInstance);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 }
 

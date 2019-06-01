@@ -3,8 +3,10 @@ package it.carrello.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import it.carrello.model.Articolo;
+import it.carrello.model.Categoria;
 
 
 public class ArticoloDAOImpl implements ArticoloDAO {
@@ -88,6 +90,17 @@ public class ArticoloDAOImpl implements ArticoloDAO {
 //
 //	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception {
+		// dopo la from bisogna specificare il nome dell'oggetto (lettera maiuscola) e
+		// non la tabella
+		Query query = entityManager.createQuery("SELECT a FROM Articolo a JOIN a.categorie c WHERE c=:cat");
+		query.setParameter("cat",categoriaInstance);
+		
+		return query.getResultList();
+		
+	}
 
 	
 }

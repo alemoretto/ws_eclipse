@@ -3,8 +3,10 @@ package it.carrello.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import it.carrello.model.Categoria;
+import it.carrello.model.Ordine;
 
 
 public class CategoriaDAOImpl implements CategoriaDAO {
@@ -88,6 +90,13 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 //
 //	}
 
-
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Categoria> findAllByOrdine(Ordine ordineInstance) throws Exception{
+		Query query = entityManager.createQuery("SELECT c FROM Categoria c JOIN FETCH c.articoli a JOIN FETCH a.ordine o WHERE o=:ordine GROUP BY c");
+		query.setParameter("ordine",ordineInstance);
+		
+		return query.getResultList();
+	}
 	
 }

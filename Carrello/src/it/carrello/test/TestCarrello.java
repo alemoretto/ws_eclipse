@@ -54,18 +54,24 @@ public class TestCarrello {
 		// ora passo alle operazioni CRUD
 		try {
 
-			Ordine ord_mario = ordineServiceInstance.caricaSingoloElemento(1L);
+			Ordine ord_carla = ordineServiceInstance.caricaSingoloElemento(1L);			
+			Ordine ord_mario = ordineServiceInstance.caricaSingoloElemento(2L);
 			Ordine ord_ale = ordineServiceInstance.caricaSingoloElemento(3L);
+			Ordine ord_matteo = ordineServiceInstance.caricaSingoloElemento(4L);
 			
-			Categoria cat_elettr = categoriaServiceInstance.caricaSingoloElemento(1L);
-			Categoria cat_arred = categoriaServiceInstance.caricaSingoloElemento(4L);
 			
-			Articolo art_mouse = articoloServiceInstance.caricaSingoloElemento(1L);
-			Articolo art_cell = articoloServiceInstance.caricaSingoloElemento(2L);
-			Articolo art_monitor = articoloServiceInstance.caricaSingoloElemento(3L);
-			
-			Articolo art_tavolo = articoloServiceInstance.caricaSingoloElemento(4L);
-			
+			Categoria cat_vestiti = categoriaServiceInstance.caricaSingoloElemento(1L);
+			Categoria cat_pantaloni = categoriaServiceInstance.caricaSingoloElemento(2L);
+			Categoria cat_uomo = categoriaServiceInstance.caricaSingoloElemento(3L);
+			Categoria cat_donna = categoriaServiceInstance.caricaSingoloElemento(4L);
+			Categoria cat_camicie = categoriaServiceInstance.caricaSingoloElemento(5L);
+			Categoria cat_calzature = categoriaServiceInstance.caricaSingoloElemento(6L);
+
+			Articolo art_jeans_ale = articoloServiceInstance.caricaSingoloElemento(1L);
+			Articolo art_nike_ale = articoloServiceInstance.caricaSingoloElemento(2L);
+			Articolo art_nike_carla = articoloServiceInstance.caricaSingoloElemento(3L);
+			Articolo art_camic_carla = articoloServiceInstance.caricaSingoloElemento(4L);
+
 			
 //			System.out.println("###########  LISTA  ORDINI   ############");
 //			for (Ordine o : ordineServiceInstance.listAll()) {
@@ -73,22 +79,27 @@ public class TestCarrello {
 //			}
 
 //			System.out.println("###########  INSERISCI  ORDINE   ############");
-//			Ordine ord = new Ordine("alex","via prenestina");
+//			Ordine ord = new Ordine("matteo","via parigi");
+////			ord.getArticoli().add(art_cell);
+////			ord.getArticoli().add(art_mouse);
 //			ordineServiceInstance.inserisciNuovo(ord);
 
 //			System.out.println("###########  CARICA  ORDINE   ############");
 //			System.out.println(ordineServiceInstance.caricaSingoloElemento(2L));
 
 //			System.out.println("###########  AGGIORNA  ORDINE   ############");			
-//			Ordine o = ordineServiceInstance.caricaSingoloElemento(2L);
-//			o.setIndirizzoSpedizione("via mosca");
-//			ordineServiceInstance.aggiorna(o);
+//			ord_carla.setNomeDestinatario("carla");
+//			ordineServiceInstance.aggiorna(ord_carla);
 
 //			System.out.println("###########  CANCELLA  ORDINE   ############");			
 //			Ordine o = ordineServiceInstance.caricaSingoloElemento(2L);
 //			ordineServiceInstance.rimuovi(o);
 //			ordineServiceInstance.rimuovi(ord_ale);
 
+//			System.out.println("###########  FIND ALL ORDINI BY CATEGORIA    ############");
+//			for (Ordine o : ordineServiceInstance.findAllByCategoria(cat_donna)) {
+//				System.out.println(o);
+//			}
 			// ##############################################################################
 
 //			System.out.println("###########  LISTA  ARTICOLI   ############");
@@ -97,10 +108,14 @@ public class TestCarrello {
 //			}
 
 //			System.out.println("###########  INSERISCI  ARTICOLO   ############");
-//			Articolo art = new Articolo("tavolo2",560);
+//			Articolo art = new Articolo("camicetta",20);
 //			// un nuovo articolo non può avere l'ordine a null !!
-//			art.setOrdine(ord_ale); 
-//			art.getCategorie().add(cat_arred);
+//			art.setOrdine(ord_carla); 
+//			art.getCategorie().add(cat_vestiti);
+////			art.getCategorie().add(cat_pantaloni);
+//			art.getCategorie().add(cat_donna);
+////			art.getCategorie().add(cat_calzature);
+//			art.getCategorie().add(cat_camicie);
 //			articoloServiceInstance.inserisciNuovo(art);
 
 //			System.out.println("###########  AGGIORNA  ARTICOLO   ############");
@@ -108,8 +123,13 @@ public class TestCarrello {
 //			articoloServiceInstance.aggiorna(art_tavolo);
 
 //			System.out.println("###########  CANCELLA  ARTICOLO   ############");			
-//			Articolo a = articoloServiceInstance.caricaSingoloElemento(2L);
-//			articoloServiceInstance.rimuovi(a);
+//			articoloServiceInstance.rimuovi(art_cell);
+			
+//			System.out.println("###########  FIND ALL BY CATEGORIA    ############");
+//			for (Articolo a : articoloServiceInstance.findAllByCategoria(cat_elettr)) {
+//				System.out.println(a);
+//			}
+			
 			
 			// ##############################################################################
 
@@ -119,23 +139,26 @@ public class TestCarrello {
 //			}
 
 //			System.out.println("###########  INSERISCI  CATEGORIA   ############");
-//			Categoria cat = new Categoria("arredamento");
-//			cat.getArticoli().add(art_tavolo);
+//			Categoria cat = new Categoria("scarpe");
 //			categoriaServiceInstance.inserisciNuovo(cat);
 			
 //			System.out.println("###########  AGGIORNA  CATEGORIA   ############");
 //			cat_elettr.getArticoli().add(art_cell);
-//			categoriaServiceInstance.aggiorna(cat_elettr);
+//			cat_calzature.setDescrizione("calzature");
+//			categoriaServiceInstance.aggiorna(cat_calzature);
 			
 			
 //			System.out.println("###########  CANCELLA  CATEGORIA   ############");			
-//			Categoria c = categoriaServiceInstance.caricaSingoloElemento(3L);
-//			categoriaServiceInstance.rimuovi(c);
+//			categoriaServiceInstance.rimuovi(cat_elettr);
 			
+			System.out.println("###########  FIND ALL CATEGORIE BY ORDINE    ############");
+			for (Categoria c : categoriaServiceInstance.findAllByOrdine(ord_ale)) {
+				System.out.println(c);
+			}
 			
-			liO();
-			liA();
-			liC();
+//			liO();
+//			liA();
+//			liC();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

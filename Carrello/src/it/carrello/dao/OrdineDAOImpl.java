@@ -3,7 +3,9 @@ package it.carrello.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import it.carrello.model.Categoria;
 import it.carrello.model.Ordine;
 
 
@@ -88,5 +90,13 @@ public class OrdineDAOImpl implements OrdineDAO {
 //
 //	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Ordine> findAllByCategoria(Categoria categoriaInstance) throws Exception{
+		Query query = entityManager.createQuery("SELECT o FROM Ordine o JOIN FETCH o.articoli a JOIN FETCH a.categorie c WHERE c=:categoria");
+		query.setParameter("categoria",categoriaInstance);
+		
+		return query.getResultList();
+	}
 	
 }

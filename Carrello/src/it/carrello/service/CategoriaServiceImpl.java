@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 
 import it.carrello.dao.CategoriaDAO;
 import it.carrello.dao.EntityManagerUtil;
+import it.carrello.model.Articolo;
 import it.carrello.model.Categoria;
+import it.carrello.model.Ordine;
 
 public class CategoriaServiceImpl implements CategoriaService {
 
@@ -127,6 +129,21 @@ public class CategoriaServiceImpl implements CategoriaService {
 //			throw e;
 //		}
 //	}
+
+	@Override
+	public List<Categoria> findAllByOrdine(Ordine ordineInstance) throws Exception {
+		try {
+			// uso l'injection per il dao
+			categoriaDAO.setEntityManager(EntityManagerUtil.getEntityManager());
+
+			// eseguo quello che realmente devo fare
+			return categoriaDAO.findAllByOrdine(ordineInstance);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
 	
 }

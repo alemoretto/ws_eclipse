@@ -4,7 +4,9 @@ package it.carrello.service;
 import java.util.List;
 
 import it.carrello.dao.CategoriaDAO;
+import it.carrello.model.Articolo;
 import it.carrello.model.Categoria;
+import it.carrello.model.Ordine;
 
 public interface CategoriaService {
 
@@ -20,6 +22,8 @@ public interface CategoriaService {
 
 //		public List<Categoria> findByExample(Categoria example) throws Exception;
 
+		public List<Categoria> findAllByOrdine(Ordine ordineInstance) throws Exception;
+		
 		//per injection
 		public void setCategoriaDAO(CategoriaDAO categoriaDAO);
 

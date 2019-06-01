@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 
 import it.carrello.dao.EntityManagerUtil;
 import it.carrello.dao.OrdineDAO;
+import it.carrello.model.Articolo;
+import it.carrello.model.Categoria;
 import it.carrello.model.Ordine;
 
 public class OrdineServiceImpl implements OrdineService {
@@ -127,5 +129,20 @@ public class OrdineServiceImpl implements OrdineService {
 //			throw e;
 //		}
 //	}
+	
+	public List<Ordine> findAllByCategoria(Categoria categoriaInstance) throws Exception{
+		try {
+			// uso l'injection per il dao
+			ordineDAO.setEntityManager(EntityManagerUtil.getEntityManager());
+
+			// eseguo quello che realmente devo fare
+			return ordineDAO.findAllByCategoria(categoriaInstance);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 	
 }
