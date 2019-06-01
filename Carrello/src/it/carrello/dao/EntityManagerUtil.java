@@ -1,4 +1,4 @@
-package it.ecommerce.dao;
+package it.carrello.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

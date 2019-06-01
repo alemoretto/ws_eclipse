@@ -1,4 +1,4 @@
-package it.ecommerce.model;
+package it.carrello.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,6 +40,12 @@ public class Ordine {
 		this.nomeDestinatario = nomeDestinatario;
 		this.indirizzoSpedizione = indirizzoSpedizione;
 		this.articoli = articoli;
+	}
+	
+	public Ordine(String nomeDestinatario, String indirizzoSpedizione) {
+		super();
+		this.nomeDestinatario = nomeDestinatario;
+		this.indirizzoSpedizione = indirizzoSpedizione;
 	}
 	
 	public Ordine() {

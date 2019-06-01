@@ -1,20 +1,14 @@
-package it.ecommerce.model;
+package it.carrello.model;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -25,18 +19,27 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private long id;
+	private Long id;
 	private String descrizione;
 	@ManyToMany(mappedBy = "categorie")	
 	private Set<Articolo> articoli = new HashSet<Articolo>();
 	
-	public Categoria(long id, String descrizione, Set<Articolo> articoli) {
+	public Categoria(Long id, String descrizione, Set<Articolo> articoli) {
 		super();
 		this.id = id;
 		this.descrizione = descrizione;
 		this.articoli = articoli;
 	}
 
+	public Categoria(String descrizione) {
+		super();
+		this.descrizione = descrizione;
+	}
+	
+	public Categoria() {
+		
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -61,6 +64,18 @@ public class Categoria {
 		this.articoli = articoli;
 	}
 	
+	public void addArticolo(Articolo art) {
+		art.getCategorie().add(this);
+		this.getArticoli().add(art);
+	}
 	
+	public String toString() {
+		String stringaArticoli = "";
+		for (Articolo articolo : articoli) {
+			stringaArticoli += articolo.getDescrizione() + " ";
+		}
+		
+		return "DESCRIZIONE [id=" + id + ", descrizione=" + descrizione + ": " + stringaArticoli + "]"; 
+	}
 
 }

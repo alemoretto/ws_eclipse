@@ -1,6 +1,6 @@
-package it.ecommerce.service;
+package it.carrello.service;
 
-import it.ecommerce.dao.*;
+import it.carrello.dao.*;
 
 public class MyServiceFactory {
 

@@ -1,4 +1,4 @@
-package it.ecommerce.model;
+package it.carrello.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import it.ecommerce.model.Ordine;
+import it.carrello.model.Ordine;
 
 @Entity
 @Table(name = "articolo")
@@ -30,10 +30,10 @@ public class Articolo {
 	private String descrizione;
 	private Integer prezzoSingolo;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id", nullable = false)
+	@JoinColumn(nullable = false)
 	private Ordine ordine;
 	@ManyToMany
-	@JoinTable(name = "ordine_categoria", joinColumns = @JoinColumn(name = "ordine_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
+	@JoinTable(name = "articolo_categoria", joinColumns = @JoinColumn(name = "articolo_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
 	private Set<Categoria> categorie = new HashSet<>(0);
 	
 	public Articolo(Long id, String descrizione, Integer prezzoSingolo, Ordine ordine, Set<Categoria> categorie) {
@@ -45,6 +45,18 @@ public class Articolo {
 		this.categorie = categorie;
 	}
 
+	public Articolo(String descrizione, Integer prezzoSingolo, Ordine ordine) {
+		super();
+		this.descrizione = descrizione;
+		this.prezzoSingolo = prezzoSingolo;
+	}
+
+	public Articolo(String descrizione, Integer prezzoSingolo) {
+		super();
+		this.descrizione = descrizione;
+		this.prezzoSingolo = prezzoSingolo;
+	}
+	
 	public Articolo() {}
 
 	public Long getId() {
@@ -87,6 +99,14 @@ public class Articolo {
 		this.categorie = categorie;
 	}
 	
+	public String toString() {
+		String stringaCategorie = "";
+		for (Categoria categoria : categorie) {
+			stringaCategorie += categoria.getDescrizione() + " ";
+		}
+		return "ARTICOLO [id=" + id + ", descrizione=" + descrizione  + ", prezzo=" + prezzoSingolo  + " (" + stringaCategorie + ")" + 
+				"] || " + ordine; 
+	}
 	
 	
 }
