@@ -22,6 +22,8 @@ public interface CategoriaService {
 
 	public List<Categoria> findAllByOrdine(Ordine ordineInstance) throws Exception;
 
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception;
+	
 	// per injection
 	public void setCategoriaDAO(CategoriaDAO categoriaDAO);
 

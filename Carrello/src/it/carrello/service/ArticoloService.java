@@ -24,6 +24,8 @@ public interface ArticoloService {
 
 	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception;
 
+	public List<Categoria> sommaPrezziByCategoria() throws Exception;
+	
 	// per injection
 	public void setArticoloDAO(ArticoloDAO articoloDAO);
 

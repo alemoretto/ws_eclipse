@@ -9,4 +9,6 @@ public interface CategoriaDAO extends IBaseDAO<Categoria> {
 
 	public List<Categoria> findAllByOrdine(Ordine ordineInstance) throws Exception;
 	
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception;
+	
 }

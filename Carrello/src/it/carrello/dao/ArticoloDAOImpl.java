@@ -109,5 +109,14 @@ public class ArticoloDAOImpl implements ArticoloDAO {
 
 		return ((Long) query.getSingleResult());
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Categoria> sommaPrezziByCategoria() throws Exception {
+		Query query = entityManager
+				.createQuery("SELECT SUM(a.prezzoSingolo) FROM Articolo a JOIN a.categorie c WHERE c=:categoria");
+
+		return query.getResultList();
+	}
 
 }

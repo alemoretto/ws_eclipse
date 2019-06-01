@@ -144,4 +144,18 @@ public class CategoriaServiceImpl implements CategoriaService {
 		}
 	}
 
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception {
+		try {
+			// uso l'injection per il dao
+			categoriaDAO.setEntityManager(EntityManagerUtil.getEntityManager());
+
+			// eseguo quello che realmente devo fare
+			return categoriaDAO.sommaPrezziByCategoria(categoriaInstance);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 }

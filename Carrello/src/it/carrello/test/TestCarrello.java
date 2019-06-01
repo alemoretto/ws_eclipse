@@ -53,31 +53,37 @@ public class TestCarrello {
 		try {
 
 			Ordine ord_carla = ordineServiceInstance.caricaSingoloElemento(1L);
-			Ordine ord_mario = ordineServiceInstance.caricaSingoloElemento(2L);
-			Ordine ord_ale = ordineServiceInstance.caricaSingoloElemento(3L);
-			Ordine ord_matteo = ordineServiceInstance.caricaSingoloElemento(4L);
-
-			Categoria cat_vestiti = categoriaServiceInstance.caricaSingoloElemento(1L);
-			Categoria cat_pantaloni = categoriaServiceInstance.caricaSingoloElemento(2L);
-			Categoria cat_uomo = categoriaServiceInstance.caricaSingoloElemento(3L);
-			Categoria cat_donna = categoriaServiceInstance.caricaSingoloElemento(4L);
-			Categoria cat_camicie = categoriaServiceInstance.caricaSingoloElemento(5L);
-			Categoria cat_calzature = categoriaServiceInstance.caricaSingoloElemento(6L);
-
-			Articolo art_jeans_ale = articoloServiceInstance.caricaSingoloElemento(1L);
-			Articolo art_nike_ale = articoloServiceInstance.caricaSingoloElemento(2L);
-			Articolo art_nike_carla = articoloServiceInstance.caricaSingoloElemento(3L);
-			Articolo art_camic_carla = articoloServiceInstance.caricaSingoloElemento(4L);
-
+//			Ordine ord_mario = ordineServiceInstance.caricaSingoloElemento(2L);
+//			Ordine ord_ale = ordineServiceInstance.caricaSingoloElemento(3L);
+//			Ordine ord_matteo = ordineServiceInstance.caricaSingoloElemento(4L);
+//
+//			Categoria cat_vestiti = categoriaServiceInstance.caricaSingoloElemento(1L);
+//			Categoria cat_pantaloni = categoriaServiceInstance.caricaSingoloElemento(2L);
+//			Categoria cat_uomo = categoriaServiceInstance.caricaSingoloElemento(3L);
+			Categoria cat_donna = categoriaServiceInstance.caricaSingoloElemento(2L);
+//			Categoria cat_camicie = categoriaServiceInstance.caricaSingoloElemento(5L);
+//			Categoria cat_calzature = categoriaServiceInstance.caricaSingoloElemento(6L);
+			Categoria cat_inverno = categoriaServiceInstance.caricaSingoloElemento(1L);
+			Categoria cat_casual = categoriaServiceInstance.caricaSingoloElemento(3L);
+			
+//			Articolo art_jeans_ale = articoloServiceInstance.caricaSingoloElemento(1L);
+//			Articolo art_nike_ale = articoloServiceInstance.caricaSingoloElemento(2L);
+//			Articolo art_nike_carla = articoloServiceInstance.caricaSingoloElemento(3L);
+//			Articolo art_camic_carla = articoloServiceInstance.caricaSingoloElemento(4L);
+			Articolo art_guanti_carla = articoloServiceInstance.caricaSingoloElemento(3L);
+//			Articolo art_sciarpa_carla = articoloServiceInstance.caricaSingoloElemento(1L);
+			Articolo art_gonna_carla = articoloServiceInstance.caricaSingoloElemento(5L);
+			Articolo art_foulard_carla = articoloServiceInstance.caricaSingoloElemento(6L);
+			
 //			System.out.println("###########  LISTA  ORDINI   ############");
 //			for (Ordine o : ordineServiceInstance.listAll()) {
 //				System.out.println(o);
 //			}
 
 //			System.out.println("###########  INSERISCI  ORDINE   ############");
-//			Ordine ord = new Ordine("matteo","via parigi");
-////			ord.getArticoli().add(art_cell);
-////			ord.getArticoli().add(art_mouse);
+//			Ordine ord = new Ordine("carla","via parigi");
+//			ord.getArticoli().add(art_cell);
+//			ord.getArticoli().add(art_mouse);
 //			ordineServiceInstance.inserisciNuovo(ord);
 
 //			System.out.println("###########  CARICA  ORDINE   ############");
@@ -102,21 +108,21 @@ public class TestCarrello {
 //			for (Articoli a : articoloServiceInstance.listAll()) {
 //				System.out.println(a);
 //			}
-
+//
 //			System.out.println("###########  INSERISCI  ARTICOLO   ############");
-//			Articolo art = new Articolo("camicetta",20);
+//			Articolo art = new Articolo("foulard",25);
 //			// un nuovo articolo non può avere l'ordine a null !!
 //			art.setOrdine(ord_carla); 
-//			art.getCategorie().add(cat_vestiti);
-////			art.getCategorie().add(cat_pantaloni);
-//			art.getCategorie().add(cat_donna);
-////			art.getCategorie().add(cat_calzature);
-//			art.getCategorie().add(cat_camicie);
+////			art.getCategorie().add(cat_inverno);
+//////			art.getCategorie().add(cat_pantaloni);
+////			art.getCategorie().add(cat_donna);
+//////			art.getCategorie().add(cat_calzature);
+////			art.getCategorie().add(cat_camicie);
 //			articoloServiceInstance.inserisciNuovo(art);
 
-//			System.out.println("###########  AGGIORNA  ARTICOLO   ############");
-//			art_tavolo.getCategorie().add(cat_arred);
-//			articoloServiceInstance.aggiorna(art_tavolo);
+			System.out.println("###########  AGGIORNA  ARTICOLO   ############");
+			art_foulard_carla.getCategorie().add(cat_casual);
+			articoloServiceInstance.aggiorna(art_foulard_carla);
 
 //			System.out.println("###########  CANCELLA  ARTICOLO   ############");			
 //			articoloServiceInstance.rimuovi(art_cell);
@@ -126,12 +132,17 @@ public class TestCarrello {
 //				System.out.println(a);
 //			}
 
-			System.out.println("###########  SOMMA PREZZI BY CATEGORIA    ############");
-			Categoria catSomma = cat_calzature;
-			Long sommaPrezzi = articoloServiceInstance.sommaPrezziByCategoria(catSomma);
-			System.out.println(
-					"La spesa per la categoria \"" + catSomma.getDescrizione() + "\" vale " + sommaPrezzi + " euro");
+//			System.out.println("###########  SOMMA PREZZI BY CATEGORIA    ############");
+//			Categoria catSomma = cat_calzature;
+//			Long sommaPrezzi = articoloServiceInstance.sommaPrezziByCategoria(catSomma);
+//			System.out.println(
+//					"La spesa per la categoria \"" + catSomma.getDescrizione() + "\" vale " + sommaPrezzi + " euro");
 
+//			System.out.println("###########  SOMMA PREZZI BY CATEGORIA  PER TUTTE LE CATGORIE   ############");
+//			for (Categoria c : MyServiceFactory.getArticoloServiceInstance().sommaPrezziByCategoria()) {
+//				System.out.println(c.getDescrizione() + ": " );
+//			}
+			
 			// ##############################################################################
 
 //			System.out.println("###########  LISTA  CATEGORIE   ############");
@@ -140,25 +151,32 @@ public class TestCarrello {
 //			}
 
 //			System.out.println("###########  INSERISCI  CATEGORIA   ############");
-//			Categoria cat = new Categoria("scarpe");
+//			Categoria cat = new Categoria("casual");
+////			cat.getArticoli().add(art_gonna_carla);
 //			categoriaServiceInstance.inserisciNuovo(cat);
 
 //			System.out.println("###########  AGGIORNA  CATEGORIA   ############");
-//			cat_elettr.getArticoli().add(art_cell);
-//			cat_calzature.setDescrizione("calzature");
-//			categoriaServiceInstance.aggiorna(cat_calzature);
+//			cat_donna.getArticoli().add(art_guanti_carla);
+//			categoriaServiceInstance.aggiorna(cat_donna);
 
 //			System.out.println("###########  CANCELLA  CATEGORIA   ############");			
-//			categoriaServiceInstance.rimuovi(cat_elettr);
+//			categoriaServiceInstance.rimuovi(categoriaServiceInstance.caricaSingoloElemento(7L));
 
 //			System.out.println("###########  FIND ALL CATEGORIE BY ORDINE    ############");
 //			for (Categoria c : categoriaServiceInstance.findAllByOrdine(ord_carla)) {
 //				System.out.println(c);
 //			}
 
+//			System.out.println("###########  SOMMA PREZZI BY CATEGORIA    ############");
+//			Categoria catSomma = cat_calzature;
+//			Long sommaPrezzi = categoriaServiceInstance.sommaPrezziByCategoria(catSomma);
+//			System.out.println(
+//					"La spesa per la categoria \"" + catSomma.getDescrizione() + "\" vale " + sommaPrezzi + " euro");
+			
+			
 //			liO();
-//			liA();
-//			liC();
+			liA();
+			liC();
 
 		} catch (Exception e) {
 			e.printStackTrace();

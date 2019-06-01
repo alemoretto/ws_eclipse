@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -21,7 +23,9 @@ public class Categoria {
 	@Column(name = "id")
 	private Long id;
 	private String descrizione;
-	@ManyToMany(mappedBy = "categorie")	
+//	@ManyToMany(mappedBy = "categorie")
+	@ManyToMany
+	@JoinTable(name = "articolo_categoria", joinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "articolo_id", referencedColumnName = "ID"))
 	private Set<Articolo> articoli = new HashSet<Articolo>();
 	
 	public Categoria(Long id, String descrizione, Set<Articolo> articoli) {

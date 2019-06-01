@@ -99,5 +99,14 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		return query.getResultList();
 	}
 	
+	@Override
+	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception {
+		Query query = entityManager
+				.createQuery("SELECT SUM(a.prezzoSingolo) FROM Articolo a JOIN a.categorie c WHERE c=:categoria");
+		query.setParameter("categoria", categoriaInstance);
+
+		return ((Long) query.getSingleResult());
+	}
+
 	
 }
