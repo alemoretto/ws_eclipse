@@ -68,9 +68,9 @@ public class Categoria {
 		this.articoli = articoli;
 	}
 	
-	public void addArticolo(Articolo art) {
-		art.getCategorie().add(this);
-		this.getArticoli().add(art);
+	public void addArticolo(Articolo articolo) {
+		articoli.add(articolo);
+		articolo.getCategorie().add(this);
 	}
 	
 	public String toString() {

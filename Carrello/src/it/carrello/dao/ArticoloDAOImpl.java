@@ -53,7 +53,6 @@ public class ArticoloDAOImpl implements ArticoloDAO {
 		if (articoloInstance == null) {
 			throw new Exception("Problema valore in input");
 		}
-
 		entityManager.remove(entityManager.merge(articoloInstance));
 	}
 

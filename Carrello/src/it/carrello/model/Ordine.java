@@ -85,6 +85,11 @@ public class Ordine {
 		this.articoli = articoli;
 	}
 
+	public void addArticolo(Articolo articolo) {
+		articoli.add(articolo);
+		articolo.setOrdine(this);
+	}
+	
 	public String toString() {
 		return "ORDINE [id=" + id + ", destinatario=" + nomeDestinatario + ", indirizzo=" + indirizzoSpedizione + " || ARTICOLI: " + articoli.size();
 	}

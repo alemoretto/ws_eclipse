@@ -114,6 +114,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 		}
 	}
 
+	
 //	@Override
 //	public Categoria findByExample(Categoria categoriaInstance) throws Exception {
 //		try {
@@ -158,4 +159,6 @@ public class CategoriaServiceImpl implements CategoriaService {
 		}
 	}
 
+
+	
 }

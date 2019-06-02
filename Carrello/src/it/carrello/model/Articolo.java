@@ -96,6 +96,11 @@ public class Articolo {
 		this.categorie = categorie;
 	}
 
+	public void addCategoria(Categoria categoria) {
+		categorie.add(categoria);
+		categoria.addArticolo(this);
+	}
+	
 	public String toString() {
 		String stringaCategorie = "";
 		for (Categoria categoria : categorie) {
