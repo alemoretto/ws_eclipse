@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+	<bean id="CheckUpService" class="it.prova.service.CheckUpServiceImpl" scope="prototype">
+		<property name="ematologoService" ref="EmatologoService" />
+		<property name="cardiologoService" ref="CardiologoService" />
+		<property name="ortopedicoService" ref="OrtopedicoService" />
+		<property name="medicoGenericoService" ref="MedicoGenericoService" />
+	</bean>
+	
+	<bean id="EmatologoService" class="it.prova.service.EmatologoServiceImpl">
+	</bean>
+	
+	<bean id="CardiologoService" class="it.prova.service.CardiologoServiceImpl">
+	</bean>
+	
+	<bean id="RadiologoService" class="it.prova.service.RadiologoServiceImpl">
+	</bean>
+	
+	<bean id="OrtopedicoService" class="it.prova.service.OrtopedicoServiceImpl" scope="prototype" >
+			<property name="radiologoService" ref="RadiologoService"/>
+			<!-- <property name="nome" value="nome_iniziale" /> -->
+	</bean>
+	
+	<bean id="MedicoGenericoService" class="it.prova.service.MedicoGenericoServiceImpl">
+	</bean>
+ 
+</beans>

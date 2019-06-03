@@ -28,8 +28,8 @@ public class Articolo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false)
 	private Ordine ordine;
-	@ManyToMany
-	@JoinTable(name = "articolo_categoria", joinColumns = @JoinColumn(name = "articolo_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
+	@ManyToMany(mappedBy = "articoli")
+//	@JoinTable(name = "articolo_categoria", joinColumns = @JoinColumn(name = "articolo_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "ID"))
 	private Set<Categoria> categorie = new HashSet<>(0);
 
 	public Articolo(Long id, String descrizione, Integer prezzoSingolo, Ordine ordine, Set<Categoria> categorie) {

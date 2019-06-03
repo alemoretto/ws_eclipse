@@ -157,18 +157,5 @@ public class ArticoloServiceImpl implements ArticoloService {
 		}
 	}
 
-	public List<Categoria> sommaPrezziByCategoria() throws Exception {
-		try {
-			// uso l'injection per il dao
-			articoloDAO.setEntityManager(EntityManagerUtil.getEntityManager());
-
-			// eseguo quello che realmente devo fare
-			return articoloDAO.sommaPrezziByCategoria();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
 
 }

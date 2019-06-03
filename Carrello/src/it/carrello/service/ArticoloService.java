@@ -18,14 +18,12 @@ public interface ArticoloService {
 
 	public void rimuovi(Articolo articoloInstance) throws Exception;
 
-//		public List<Articolo> findByExample(Articolo example) throws Exception;
+//	public List<Articolo> findByExample(Articolo example) throws Exception;
 
 	public List<Articolo> findAllByCategoria(Categoria categoriaInstance) throws Exception;
 
 	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception;
 
-	public List<Categoria> sommaPrezziByCategoria() throws Exception;
-	
 	// per injection
 	public void setArticoloDAO(ArticoloDAO articoloDAO);
 

@@ -11,5 +11,4 @@ public interface ArticoloDAO extends IBaseDAO<Articolo> {
 
 	public Long sommaPrezziByCategoria(Categoria categoriaInstance) throws Exception;
 	
-	public List<Categoria> sommaPrezziByCategoria() throws Exception;
 }
