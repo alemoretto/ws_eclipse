@@ -4,7 +4,8 @@ import it.prova.model.MateriaPrima;
 
 public interface MateriaPrimaService {
 
-	MateriaPrima caricaMateriaPrima(int id);
-	
-	void avviaProcesso(MateriaPrima materiaPrima);
+	public MateriaPrima caricaMateriaPrima(int id);
+
+	public void avviaProcesso(MateriaPrima materiaPrima);
+
 }

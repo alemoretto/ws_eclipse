@@ -4,23 +4,25 @@ public class MateriaPrima {
 
 	private int id;
 	private String descrizione;
-//	private StatoMateria stato;
+	private StatoLavorazione stato;
 	
 	public MateriaPrima() {
-		
 	}
-	
-//	public MateriaPrima(int id, String descrizione, StatoMateria stato) {
-//		this.id = id;
-//		this.descrizione = descrizione;
-//		this.stato = stato;
-//	}
 
-	public MateriaPrima(int id, String descrizione) {
+	public MateriaPrima(int id, String descrizione,StatoLavorazione stato) {
+		super();
 		this.id = id;
 		this.descrizione = descrizione;
+		this.stato = stato;
 	}
 
+	public MateriaPrima(int id, String descrizione) {
+		super();
+		this.id = id;
+		this.descrizione = descrizione;
+		this.stato = StatoLavorazione.IN_INSERIMENTO;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -37,16 +39,17 @@ public class MateriaPrima {
 		this.descrizione = descrizione;
 	}
 
-//	public StatoMateria getStato() {
-//		return stato;
-//	}
-//
-//	public void setStato(StatoMateria stato) {
-//		this.stato = stato;
-//	}
+	
+	public StatoLavorazione getStato() {
+		return stato;
+	}
+
+	public void setStato(StatoLavorazione stato) {
+		this.stato = stato;
+	}
 
 	public String toString() {
-		return "id=" + id + " : " + descrizione + "("; //+ stato.toString();
+		return "id=" + id + " : " + descrizione + " - " + stato.toString() + "";
 	}
-	
+
 }

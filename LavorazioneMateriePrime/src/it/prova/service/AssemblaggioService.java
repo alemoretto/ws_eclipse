@@ -1,5 +1,9 @@
-//package it.prova.service;
-//
-//public interface AssemblaggioService {
-//
-//}
+package it.prova.service;
+
+import it.prova.model.MateriaPrima;
+
+public interface AssemblaggioService {
+
+	public void eseguiAssemblaggio(MateriaPrima materiaPrima);
+
+}

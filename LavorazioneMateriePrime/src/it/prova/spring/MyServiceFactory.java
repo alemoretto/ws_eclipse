@@ -11,13 +11,13 @@ public class MyServiceFactory {
 
 	static {
 		try {
-			ctx  = new AnnotationConfigApplicationContext(AppConfig.class);
+			ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static MateriaPrimaService getMateriaPrimaService() {
-		return  ctx.getBean(MateriaPrimaService.class);
+		return ctx.getBean(MateriaPrimaService.class);
 	}
 }
