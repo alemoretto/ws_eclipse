@@ -19,13 +19,9 @@ public class Municipio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private Long id;
-	@Column(name = "descrizione")
 	private String descrizione;
-	@Column(name = "codice")
 	private String codice;
-	@Column(name = "ubicazione")
 	private String ubicazione;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "municipio", orphanRemoval = true)
 	private Set<Abitante> abitanti = new HashSet<>();

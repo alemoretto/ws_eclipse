@@ -30,6 +30,11 @@ public class MunicipioServiceImpl implements MunicipioService {
 		return municipioDAO.findEagerFetch(idMunicipio);
 	}
 
+	@Transactional(readOnly = true)
+	public Municipio caricaSingoloMunicipioLazyAbitanti(Long idMunicipio) {
+		return municipioDAO.findLazyFetch(idMunicipio);
+	}
+	
 	@Transactional
 	public void aggiorna(Municipio municipioInstance) {
 		municipioDAO.update(municipioInstance);

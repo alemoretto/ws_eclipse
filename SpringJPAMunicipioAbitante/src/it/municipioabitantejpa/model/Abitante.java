@@ -16,15 +16,10 @@ public class Abitante {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private Long id;
-	@Column(name = "nome")
 	private String nome;
-	@Column(name = "cognome")
 	private String cognome;
-	@Column(name = "eta")
 	private int eta;
-	@Column(name = "residenza")
 	private String residenza;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "municipio_id", nullable = false)

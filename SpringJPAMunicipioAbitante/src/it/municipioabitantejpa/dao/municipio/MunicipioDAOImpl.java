@@ -41,6 +41,13 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 	}
 
 	@Override
+	public Municipio findLazyFetch(long idMunicipio) {
+		Query q = entityManager.createQuery("SELECT m FROM Municipio m JOIN m.abitanti a WHERE m.id = :id");
+		q.setParameter("id", idMunicipio);
+		return (Municipio) q.getSingleResult();
+	}
+	
+	@Override
 	public void update(Municipio municipioInstance) {
 		municipioInstance = entityManager.merge(municipioInstance);
 	}
@@ -77,5 +84,7 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 		Object result =  q.getSingleResult();
 		return (Long)result;
 	}
+	
+	
 	
 }

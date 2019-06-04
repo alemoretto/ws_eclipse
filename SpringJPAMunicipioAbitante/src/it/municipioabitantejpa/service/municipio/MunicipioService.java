@@ -11,6 +11,7 @@ public interface MunicipioService {
 	public Municipio caricaSingoloMunicipio(Long id);
 
 	public Municipio caricaSingoloMunicipioEagerAbitanti(Long idMunicipio);
+	public Municipio caricaSingoloMunicipioLazyAbitanti(Long idMunicipio) ;
 
 	public void aggiorna(Municipio municipioInstance);
 

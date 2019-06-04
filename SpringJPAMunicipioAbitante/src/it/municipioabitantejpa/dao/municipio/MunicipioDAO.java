@@ -5,5 +5,8 @@ import it.municipioabitantejpa.model.Municipio;
 
 public interface MunicipioDAO extends IBaseDAO<Municipio> {
 	public Municipio findEagerFetch(long idMunicipio);
+	public Municipio findLazyFetch(long idMunicipio);
 	public Long countByAbitantiMinorenni();
+	
+	
 }
