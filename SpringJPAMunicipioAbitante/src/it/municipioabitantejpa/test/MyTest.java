@@ -12,7 +12,7 @@ public class MyTest {
 
 		// DA VALORIZZARE SECONDO I CASI ESPOSTI NELLE COSTANTI SOPRA
 		// ##########################################################
-		String casoDaTestare = BatteriaDiTestService.CARICA_MUNICIPIO_LAZY;
+		String casoDaTestare = BatteriaDiTestService.RIMUOVI_MUNICIPIO_E_ABITANTI;
 		// ##########################################################
 
 		System.out.println("################ START   #################");

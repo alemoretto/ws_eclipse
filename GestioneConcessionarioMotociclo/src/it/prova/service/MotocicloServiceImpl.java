@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.dao.MotocicloDAO;
-import it.prova.model.Concessionario;
 import it.prova.model.Motociclo;
 
 @Component
@@ -25,7 +24,7 @@ public class MotocicloServiceImpl implements MotocicloService {
 	public Motociclo caricaSingoloMotociclo(Long id) {
 		return motocicloDAO.get(id);
 	}
-	
+	@Transactional
 	public void aggiorna(Motociclo motocicloInstance){
 		motocicloDAO.update(motocicloInstance);
 	}
@@ -40,7 +39,6 @@ public class MotocicloServiceImpl implements MotocicloService {
 		motocicloDAO.delete(motocicloInstance);
 	}
 	
-
 	@Transactional//(readOnly = true) ??? PERCHE' readonly??
 	public void refresh(Motociclo motocicloInstance) {
 		motocicloDAO.refresh(motocicloInstance);

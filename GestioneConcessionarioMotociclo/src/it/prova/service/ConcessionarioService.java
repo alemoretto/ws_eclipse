@@ -8,7 +8,9 @@ public interface ConcessionarioService {
 
 	public List<Concessionario> listAllConcessionari();
 
-	public Concessionario caricaSingoloConcessionarioLazy(Long id);
+	public Concessionario caricaSingoloConcessionarioLazy(Long id);	
+	
+	public Concessionario caricaSingoloConcessionarioEager(Long id);
 	
 	public void aggiorna(Concessionario concessionarioInstance);
 	

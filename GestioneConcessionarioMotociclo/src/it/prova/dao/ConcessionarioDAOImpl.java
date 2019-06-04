@@ -25,8 +25,17 @@ public class ConcessionarioDAOImpl implements ConcessionarioDAO {
 		return entityManager.createQuery("from Concessionario").getResultList();
 	}
 	
+	@Override
 	public Concessionario get(Long id) {
 		return entityManager.find(Concessionario.class, id);
+	}
+	
+	@Override
+	public Concessionario getEager(Long id) {
+		Query q = entityManager.createQuery(
+				"SELECT c FROM Concessionario c JOIN FETCH c.motocicli m WHERE c.id= :id");
+		q.setParameter("id", id);
+		return (Concessionario) q.getSingleResult();
 	}
 	
 	@Override

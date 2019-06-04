@@ -61,7 +61,7 @@ public class BatteriaDiTestService {
 
 			case RIMUOVI_MUNICIPIO_E_ABITANTI:
 				// per cancellare tutto il municipio
-				municipioService.rimuovi(municipioService.caricaSingoloMunicipio(24L));
+				municipioService.rimuovi(municipioService.caricaSingoloMunicipio(2L));
 				break;
 
 			case ELENCA_TUTTI_I_MUNICIPI:

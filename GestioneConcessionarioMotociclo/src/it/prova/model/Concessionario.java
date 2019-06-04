@@ -86,7 +86,10 @@ public class Concessionario {
 	}
 	
 	public String toString() {
-		return denominazione + " (" + citta + " " + partitaIva + ") : ";// + motocicli; 
+		return denominazione + ", " + citta + " (" + partitaIva + ")"; 
 	}
 
+	public String toStringEager() {
+		return toString() + " : " + motocicli; 
+	}
 }

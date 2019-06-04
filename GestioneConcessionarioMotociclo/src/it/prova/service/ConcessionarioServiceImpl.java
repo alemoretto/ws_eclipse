@@ -25,6 +25,11 @@ public class ConcessionarioServiceImpl implements ConcessionarioService {
 		return concessionarioDAO.get(id);
 	}
 	
+	@Transactional(readOnly = true)
+	public Concessionario caricaSingoloConcessionarioEager(Long id) {
+		return concessionarioDAO.getEager(id);
+	}
+	
 	public void aggiorna(Concessionario concessionarioInstance){
 		concessionarioDAO.update(concessionarioInstance);
 	}
@@ -50,11 +55,12 @@ public class ConcessionarioServiceImpl implements ConcessionarioService {
 		return concessionarioDAO.findByExample(concessionarioInstance);
 	}
 	
-	
+	@Transactional(readOnly = true)
 	public List<Concessionario> findAllConcessionariConMotociclo1200(){
 		return concessionarioDAO.findAllConcessionariConMotociclo1200();
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Concessionario> findAllConcessionariMilanoConHondaBetween2012And2016(){
 		return concessionarioDAO.findAllConcessionariMilanoConHondaBetween2012And2016();
 	}

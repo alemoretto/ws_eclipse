@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import it.prova.model.Motociclo;
@@ -22,7 +23,10 @@ public class MotocicloDAOImpl implements MotocicloDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Motociclo> list() {
-		return entityManager.createQuery("from Motociclo").getResultList();
+//		return entityManager.createQuery("from Motociclo").getResultList();
+		Query q = entityManager.createQuery(
+				"SELECT m FROM Motociclo m JOIN FETCH m.concessionario ");
+		return (List<Motociclo>) q.getResultList();
 	}
 	
 	@Override
@@ -55,7 +59,7 @@ public class MotocicloDAOImpl implements MotocicloDAO {
 	public List<Motociclo> findByExample(Motociclo motocicloInstance) {
 		Session session = (Session) entityManager.getDelegate();
 		Example motocicloExample = Example.create(motocicloInstance)
-				.excludeZeroes();
+				.excludeZeroes().enableLike(MatchMode.ANYWHERE);
 		Criteria criteria = session.createCriteria(Motociclo.class).add(
 				motocicloExample);
 		return criteria.list();

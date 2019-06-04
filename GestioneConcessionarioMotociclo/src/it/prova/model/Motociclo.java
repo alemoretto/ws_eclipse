@@ -108,10 +108,11 @@ public class Motociclo {
 	}
 	
 	public String toString() {
-		return marca + " " + modello + " " + cilindrata + " " + immatricolazione; 
-//				+ " (" + concessionario + ")";
+		return marca + " " + modello + " " + cilindrata + " " + immatricolazione;				
 	}
 	
-	
+	public String toStringEager() {
+		return toString() + " (" + concessionario.getDenominazione() + ", " + concessionario.getCitta() + ")";
+	}
 	
 }
