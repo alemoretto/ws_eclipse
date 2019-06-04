@@ -51,6 +51,14 @@ public class Motociclo {
 		this.concessionario = concessionario;
 	}
 
+	public Motociclo(String marca, String modello, int cilindrata, int immatricolazione) {
+		super();
+		this.marca = marca;
+		this.modello = modello;
+		this.cilindrata = cilindrata;
+		this.immatricolazione = immatricolazione;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,7 +107,10 @@ public class Motociclo {
 		this.concessionario = concessionario;
 	}
 	
-	
+	public String toString() {
+		return marca + " " + modello + " " + cilindrata + " " + immatricolazione; 
+//				+ " (" + concessionario + ")";
+	}
 	
 	
 	
