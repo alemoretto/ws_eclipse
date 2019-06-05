@@ -8,15 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-Siamo nel dettaglio<br>
 <%	
 Abitante abitanteDettagliato = (Abitante)request.getAttribute("abitanteDaInviareAPaginaDettalio");
 %>
-Nome: <%= abitanteDettagliato.getNome() %><br>
-Cognome: <%= abitanteDettagliato.getCognome() %><br>
-CodiceFiscale: <%= abitanteDettagliato.getCodiceFiscale() %><br>
-Eta: <%= abitanteDettagliato.getEta() %><br>
-Motto di vita: <%= abitanteDettagliato.getMottoDiVita() %><br>
+<h3><strong>Informazioni su:</strong></h3> 
+<h4><%= abitanteDettagliato.getNome() %> <%= abitanteDettagliato.getCognome() %></h4><br>
+
+Nome:   <%= abitanteDettagliato.getNome() %><br>
+Cognome:   <%= abitanteDettagliato.getCognome() %><br>
+CodiceFiscale:   <%= abitanteDettagliato.getCodiceFiscale() %><br>
+Eta:   <%= abitanteDettagliato.getEta() %><br>
+Motto di vita:   <%= abitanteDettagliato.getMottoDiVita() %><br>
 
 
 </body>

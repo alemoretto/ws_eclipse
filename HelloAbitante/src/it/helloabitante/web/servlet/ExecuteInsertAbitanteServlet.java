@@ -15,53 +15,59 @@ import it.helloabitante.service.MyServiceFactory;
 @WebServlet("/ExecuteInsertAbitanteServlet")
 public class ExecuteInsertAbitanteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ExecuteInsertAbitanteServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String nomeDaInserire = request.getParameter("nomeInput");
-//		String cognomeDaInserire = request.getParameter("cognomeInput");
-//		String codiceFiscaleDaInserire = request.getParameter("codiceFiscaleInput");
-//		String etaDaInserire = request.getParameter("etaInput");
-//		String mottoDiVitaDaInserire = request.getParameter("mottoDiVitaInput");
-//		
-//		Abitante abitanteNuovo = new Abitante(nomeDaInserire,cognomeDaInserire,codiceFiscaleDaInserire,Integer.parseInt(etaDaInserire),mottoDiVitaDaInserire);
-//		
-//		try {
-////			request.setAttribute("inserisciAbitanteAttribute",
-//					MyServiceFactory.getAbitanteServiceInstance().inserisciAbitante(abitanteNuovo);//);
-//			request.setAttribute("listAbitantiAttributeName",
-//					MyServiceFactory.getAbitanteServiceInstance().listaTuttiGliAbitanti());
-//			RequestDispatcher rd = request.getRequestDispatcher("results.jsp");
-//			rd.forward(request, response);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	public ExecuteInsertAbitanteServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomeDaInserire = request.getParameter("nomeInput");
-		String cognomeDaInserire = request.getParameter("cognomeInput");
-		String codiceFiscaleDaInserire = request.getParameter("codiceFiscaleInput");
-		String etaDaInserire = request.getParameter("etaInput");
-		String mottoDiVitaDaInserire = request.getParameter("mottoDiVitaInput");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		
-		Abitante abitanteNuovo = new Abitante(nomeDaInserire,cognomeDaInserire,codiceFiscaleDaInserire,Integer.parseInt(etaDaInserire),mottoDiVitaDaInserire);
+		String paginaDestinazione = "results.jsp";
+		boolean datiCorretti = true;
+		String messaggioDiErrore = "";
 		
 		try {
-//			request.setAttribute("inserisciAbitanteAttribute",
-					MyServiceFactory.getAbitanteServiceInstance().inserisciAbitante(abitanteNuovo);//);
-			request.setAttribute("listAbitantiAttributeName",
-					MyServiceFactory.getAbitanteServiceInstance().listaTuttiGliAbitanti());
-			RequestDispatcher rd = request.getRequestDispatcher("results.jsp");
-			rd.forward(request, response);
-			
+			Integer.parseInt(request.getParameter("etaInput"));
 		} catch (Exception e) {
-			e.printStackTrace();
+			datiCorretti = false;
+			messaggioDiErrore = "Attenzione! L'età dev'essere un intero";
 		}
+		
+		if (request.getParameter("nomeInput").equals("") 			|| 
+			request.getParameter("cognomeInput").equals("")			|| 
+			request.getParameter("codiceFiscaleInput").equals("")	|| 
+			request.getParameter("etaInput").equals("")) {
+			datiCorretti = false;
+			messaggioDiErrore = "Attenzione! I campi Nome, Cognome, Codice Fiscale ed Età sono obbligatori";
+		}
+
+		if (datiCorretti) {
+			String nomeDaInserire = request.getParameter("nomeInput");
+			String cognomeDaInserire = request.getParameter("cognomeInput");
+			String codiceFiscaleDaInserire = request.getParameter("codiceFiscaleInput");
+			String etaDaInserire = request.getParameter("etaInput");
+			String mottoDiVitaDaInserire = request.getParameter("mottoDiVitaInput");
+
+			Abitante abitanteNuovo = new Abitante(nomeDaInserire, cognomeDaInserire, codiceFiscaleDaInserire,
+					Integer.parseInt(etaDaInserire), mottoDiVitaDaInserire);
+
+			try {
+				MyServiceFactory.getAbitanteServiceInstance().inserisciAbitante(abitanteNuovo);// );
+				request.setAttribute("listAbitantiAttributeName",
+				MyServiceFactory.getAbitanteServiceInstance().listaTuttiGliAbitanti());
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+			request.setAttribute("messaggioDiErrore", messaggioDiErrore);
+			paginaDestinazione = "nuovoAbitante.jsp";
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
+		rd.forward(request, response);
 	}
 
 }

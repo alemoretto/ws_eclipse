@@ -132,17 +132,17 @@ public class AbitanteDAOImpl  implements AbitanteDAO {
 		String query = "select * from abitante where 1=1 ";
 		
 		if (abitanteExample.getNome() != null && !abitanteExample.getNome().equals("")) {
-			query += " and nome='" + abitanteExample.getNome() + "' ";
+			query += " and nome LIKE '" + abitanteExample.getNome() + "%' ";
 		}
 		
 		if (abitanteExample.getCognome() != null && !abitanteExample.getCognome().equals("")) {
-			query += " and cognome='" + abitanteExample.getCognome() + "' ";
+			query += " and cognome LIKE'" + abitanteExample.getCognome() + "%' ";
 		}
 
-		if (abitanteExample.getCodiceFiscale() != null && !abitanteExample.getCodiceFiscale().equals("")) {
-			query += " and codiceFiscale='" + abitanteExample.getCodiceFiscale() + "' ";
-		}
-		
+//		if (abitanteExample.getCodiceFiscale() != null && !abitanteExample.getCodiceFiscale().equals("")) {
+//			query += " and codiceFiscale LIKE'" + abitanteExample.getCodiceFiscale() + "%' ";
+//		}
+//		
 //		if (input.getLogin() != null && !input.getLogin().equals("")) {
 //			query += " and login='" + input.getLogin() + "' ";
 //		}
