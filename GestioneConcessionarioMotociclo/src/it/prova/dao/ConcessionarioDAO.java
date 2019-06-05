@@ -6,6 +6,8 @@ import it.prova.model.Concessionario;
 
 public interface ConcessionarioDAO extends IBaseDAO<Concessionario> {
 
+	public List<Concessionario> listEager();
+	
 	public Concessionario getEager(Long id); 
 	
 	public List<Concessionario> findAllConcessionariConMotociclo1200();

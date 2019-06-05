@@ -21,6 +21,11 @@ public class ConcessionarioServiceImpl implements ConcessionarioService {
 	}
 
 	@Transactional(readOnly = true)
+	public List<Concessionario> listAllConcessionariEager() {
+		return concessionarioDAO.listEager();
+	}
+	
+	@Transactional(readOnly = true)
 	public Concessionario caricaSingoloConcessionarioLazy(Long id) {
 		return concessionarioDAO.get(id);
 	}

@@ -1,26 +1,27 @@
 package it.prova.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CheckUpServiceImpl implements CheckUpService {
 
-//	@Autowired
-//	private EmatologoService ematologoService;
-//	@Autowired
-//	private CardiologoService cardiologoService;
-//	@Autowired
-//	private OrtopedicoService ortopedicoService;
-//	@Autowired
-//	private MedicoGenericoService medicoGenericoService;
+	@Autowired
+	private EmatologoService ematologoService;
+	@Autowired
+	private CardiologoService cardiologoService;
+	@Autowired
+	private OrtopedicoService ortopedicoService;
+	@Autowired
+	private MedicoGenericoService medicoGenericoService;
 	
 	@Override
 	public void iniziaCheckUpCompleto() {
 		System.out.println("Inizia il controllo medico...");
-//		ematologoService.analizzaAnalisiDelSangue();
-//		cardiologoService.controllaElettrocardiogramma();
-//		ortopedicoService.osservaLeLastre();
-//		medicoGenericoService.daiIlResponso();
+		ematologoService.analizzaAnalisiDelSangue();
+		cardiologoService.controllaElettrocardiogramma();
+		ortopedicoService.osservaLeLastre();
+		medicoGenericoService.daiIlResponso();
 		System.out.println("Il controllo medico è finito");
 		
 	}

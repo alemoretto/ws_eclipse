@@ -8,6 +8,8 @@ public interface ConcessionarioService {
 
 	public List<Concessionario> listAllConcessionari();
 
+	public List<Concessionario> listAllConcessionariEager();
+	
 	public Concessionario caricaSingoloConcessionarioLazy(Long id);	
 	
 	public Concessionario caricaSingoloConcessionarioEager(Long id);

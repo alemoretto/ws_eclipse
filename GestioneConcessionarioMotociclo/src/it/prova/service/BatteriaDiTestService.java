@@ -17,6 +17,7 @@ public class BatteriaDiTestService {
 
 	// casi di test (usare valorizzando la variabile casoDaTestare nel main)
 	public static final String ELENCA_TUTTI_I_CONCESSIONARI_LAZY = "ELENCA_TUTTI_I_CONCESSIONARI_LAZY";
+	public static final String ELENCA_TUTTI_I_CONCESSIONARI_EAGER = "ELENCA_TUTTI_I_CONCESSIONARI_EAGER";
 	public static final String CARICA_CONCESSIONARIO_EAGER = "CARICA_CONCESSIONARIO_EAGER";
 	public static final String INSERISCI_NUOVO_CONCESSIONARIO = "INSERISCI_NUOVO_CONCESSIONARIO";
 	public static final String AGGIORNA_CONCESSIONARIO = "AGGIORNA_CONCESSIONARIO";
@@ -24,22 +25,30 @@ public class BatteriaDiTestService {
 	public static final String FINDBYEXAMPLE_CONCESSIONARIO = "FINDBYEXAMPLE_CONCESSIONARIO";
 	public static final String ELENCA_CONCESSIONARI_MOTO1200 = "ELENCA_CONCESSIONARI_MOTO1200";
 	public static final String ELENCA_CONCESSIONARI_MILANO_HONDA_2012_2016 = "ELENCA_CONCESSIONARI_MILANO_HONDA_2012_2016";
-	
+
 	public static final String ELENCA_TUTTI_I_MOTOCICLI_EAGER = "ELENCA_TUTTI_I_MOTOCICLI";
 	public static final String INSERISCI_NUOVO_MOTOCICLO_DATO_CONCESSIONARIO = "INSERISCI_NUOVO_MOTOCICLO_DATO_CONCESSIONARIO";
 	public static final String AGGIORNA_MOTOCICLO = "AGGIORNA_MOTOCICLO";
 	public static final String RIMUOVI_MOTOCICLO = "RIMUOVI_MOTOCICLO";
 	public static final String FINDBYEXAMPLE_MOTOCICLO = "FINDBYEXAMPLE_MOTOCICLO";
 	public static final String NUMERO_MOTO_TORINO_PRECEDENTI_2010 = "NUMERO_MOTO_TORINO_PRECEDENTI_2010";
+
+	public static final String CUSTOM = "CUSTOM";
 	
 	public void eseguiBatteriaDiTest(String casoDaTestare) {
 		try {
 			switch (casoDaTestare) {
 			case ELENCA_TUTTI_I_CONCESSIONARI_LAZY:
-				// elencare i municipi
 				System.out.println("Elenco i concessionari:");
 				for (Concessionario concessionarioItem : concessionarioService.listAllConcessionari()) {
 					System.out.println(concessionarioItem);
+				}
+				break;
+
+			case ELENCA_TUTTI_I_CONCESSIONARI_EAGER:
+				System.out.println("Elenco i concessionari con i motocicli:");
+				for (Concessionario concessionarioItem : concessionarioService.listAllConcessionariEager()) {
+					System.out.println(concessionarioItem.toStringEager());
 				}
 				break;
 
@@ -47,7 +56,7 @@ public class BatteriaDiTestService {
 				System.out.println("Carico il concessionario con i suoi motocicli:");
 				System.out.println(concessionarioService.caricaSingoloConcessionarioEager(3L).toStringEager());
 				break;
-				
+
 			case INSERISCI_NUOVO_CONCESSIONARIO:
 				Concessionario nuovoConcessionario = new Concessionario("Moto Piemonte", "Roma", "84150710112");
 				concessionarioService.inserisciNuovo(nuovoConcessionario);
@@ -60,12 +69,12 @@ public class BatteriaDiTestService {
 				concessionarioService.aggiorna(concAgg);
 				System.out.println("Concessionario aggiornato: " + concAgg);
 				break;
-				
+
 			case RIMUOVI_CONCESSIONARIO:
 				Concessionario concRim = concessionarioService.caricaSingoloConcessionarioLazy(2L);
 				concessionarioService.rimuovi(concRim);
 				break;
-				
+
 			case FINDBYEXAMPLE_CONCESSIONARIO:
 				Concessionario concExample = new Concessionario();
 				concExample.setCitta("Tor");
@@ -74,23 +83,25 @@ public class BatteriaDiTestService {
 					System.out.println(concItem);
 				}
 				break;
-				
+
 			case ELENCA_CONCESSIONARI_MOTO1200:
 				System.out.println("Elenco i concessionari che hanno almeno 1 moto con cilindrata=1200:");
 				for (Concessionario concessionarioItem : concessionarioService.findAllConcessionariConMotociclo1200()) {
 					System.out.println(concessionarioItem);
 				}
 				break;
-				
+
 			case ELENCA_CONCESSIONARI_MILANO_HONDA_2012_2016:
-				System.out.println("Elenco i concessionari di Milano che hanno Honda immatricolate tra il 2012 e il 2016:");
-				for (Concessionario concessionarioItem : concessionarioService.findAllConcessionariMilanoConHondaBetween2012And2016()) {
+				System.out.println(
+						"Elenco i concessionari di Milano che hanno Honda immatricolate tra il 2012 e il 2016:");
+				for (Concessionario concessionarioItem : concessionarioService
+						.findAllConcessionariMilanoConHondaBetween2012And2016()) {
 					System.out.println(concessionarioItem);
 				}
-				break;	
-				
-				
-				
+				break;
+
+			// ##############################################################################
+
 			case ELENCA_TUTTI_I_MOTOCICLI_EAGER:
 				System.out.println("Elenco i motocicli:");
 				for (Motociclo motocicloItem : motocicloService.listAllMotocicli()) {
@@ -98,27 +109,39 @@ public class BatteriaDiTestService {
 				}
 				break;
 
+			case CUSTOM:
+				Motociclo motoCustom = new Motociclo("MOTOCUSTOM", "veloce", 250, 2015);
+				Concessionario concCustom = new Concessionario("CONCUSTOM", "NAPOLI", "429021491");
+				
+				
+				concessionarioService.inserisciNuovo(concCustom);
+				System.out.println("ID conc" + concCustom.getId());
+				motoCustom.setConcessionario(concCustom);
+				motocicloService.refresh(motoCustom);
+				System.out.println("ID moto" + concCustom.getId());
+				
+				System.out.println("Motociclo appena inserito: " + motoCustom);
+				break;
+
 			case INSERISCI_NUOVO_MOTOCICLO_DATO_CONCESSIONARIO:
-				// elencare i municipi
-				Motociclo nuovoMotociclo = new Motociclo("Triumph", "SH", 600, 2015);
+				Motociclo nuovoMotociclo = new Motociclo("Motorello", "veloce", 250, 2015);
 				nuovoMotociclo.setConcessionario(concessionarioService.caricaSingoloConcessionarioLazy(3L));
-				// salvo
 				motocicloService.inserisciNuovo(nuovoMotociclo);
 				System.out.println("Motociclo appena inserito: " + nuovoMotociclo);
 				break;
-				
+
 			case AGGIORNA_MOTOCICLO:
 				Motociclo motoAgg = motocicloService.caricaSingoloMotociclo(12L);
 				motoAgg.setCilindrata(650);
 				motocicloService.aggiorna(motoAgg);
 				System.out.println("Motociclo aggiornato: " + motoAgg);
 				break;
-				
+
 			case RIMUOVI_MOTOCICLO:
 				Motociclo motoRim = motocicloService.caricaSingoloMotociclo(13L);
 				motocicloService.rimuovi(motoRim);
 				break;
-				
+
 			case FINDBYEXAMPLE_MOTOCICLO:
 				Motociclo motoExample = new Motociclo();
 				motoExample.setMarca("u");
@@ -127,13 +150,14 @@ public class BatteriaDiTestService {
 					System.out.println(motoItem);
 				}
 				break;
-				
+
 			case NUMERO_MOTO_TORINO_PRECEDENTI_2010:
-			System.out.println("Numero totale di motocicli dei concessionari di Torino immatricolati prima del 2010 :");
-				System.out.println( motocicloService.numeroMotoTorinoPrecedenti2010());
-			break;
+				System.out.println(
+						"Numero totale di motocicli dei concessionari di Torino immatricolati prima del 2010 :");
+				System.out.println(motocicloService.numeroMotoTorinoPrecedenti2010());
+				break;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
