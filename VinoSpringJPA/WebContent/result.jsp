@@ -9,13 +9,13 @@
 <title>risultati</title>
 </head>
 <body>
-
+<%	List<Vino> listaVini = (List<Vino>)request.getAttribute("listaViniAttributeName"); %>
 	<div class="container">
 
   	<%@ include file="header.jsp" %>
   	
   	<div class="page-header">
-	  <h3>Pagina dei Risultati</h3>
+	  <h3>La ricerca ha prodotto <%= listaVini.size() %> risultati: </h3>
 	</div>
   	
 	<table class="table table-striped">
@@ -27,7 +27,6 @@
 			</tr>
 		</thead>
 		<%
-			List<Vino> listaVini = (List<Vino>)request.getAttribute("listaViniAttributeName"); 
 			for(Vino vinoItem:listaVini){
 		%>
 			<tr>

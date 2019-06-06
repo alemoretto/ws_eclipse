@@ -20,6 +20,7 @@
 		<div class="page-header">
 			<h3>Pagina di Rimozione</h3>
 		</div>
+		
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
@@ -42,9 +43,11 @@
 				<dd class="col-sm-9"><%=vinoInPagina.getLocalita()%></dd>
 			</dl>
 		</div>
-
+		<br>
+		<a href="ExecuteEliminaVinoServlet?idVino=<%=vinoInPagina.getId()%>"
+			class="btn-danger" style="padding:10px;margin-left: 210px">Conferma eliminazione</a>
 	</div>
-<a href="ExecuteEliminaVinoServlet?idVino=<%=vinoInPagina.getId() %>" class="btn btn-info">Conferma eliminazione</a>
-<!-- <a href="result.jsp" class="btn btn-info">Annulla eliminazione</a> -->
+
+	<!-- <a href="result.jsp" class="btn btn-info">Annulla eliminazione</a> -->
 </body>
 </html>
