@@ -1,6 +1,8 @@
 package it.helloabitante.web.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,35 +25,19 @@ public class ExecuteInsertAbitanteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String paginaDestinazione = "results.jsp";
-		boolean datiCorretti = true;
-		String messaggioDiErrore = "";
+		String paginaDestinazione = null;
 		
-		try {
-			Integer.parseInt(request.getParameter("etaInput"));
-		} catch (Exception e) {
-			datiCorretti = false;
-			messaggioDiErrore = "Attenzione! L'età dev'essere un intero";
-		}
-		
-		if (request.getParameter("nomeInput").equals("") 			|| 
-			request.getParameter("cognomeInput").equals("")			|| 
-			request.getParameter("codiceFiscaleInput").equals("")	|| 
-			request.getParameter("etaInput").equals("")) {
-			datiCorretti = false;
-			messaggioDiErrore = "Attenzione! I campi Nome, Cognome, Codice Fiscale ed Età sono obbligatori";
-		}
-
-		if (datiCorretti) {
+		if (!checkInput(request).containsKey(false)) {
 			String nomeDaInserire = request.getParameter("nomeInput");
 			String cognomeDaInserire = request.getParameter("cognomeInput");
 			String codiceFiscaleDaInserire = request.getParameter("codiceFiscaleInput");
-			String etaDaInserire = request.getParameter("etaInput");
+			int etaDaInserire = Integer.parseInt(request.getParameter("etaInput"));
 			String mottoDiVitaDaInserire = request.getParameter("mottoDiVitaInput");
 
 			Abitante abitanteNuovo = new Abitante(nomeDaInserire, cognomeDaInserire, codiceFiscaleDaInserire,
-					Integer.parseInt(etaDaInserire), mottoDiVitaDaInserire);
+					etaDaInserire, mottoDiVitaDaInserire);
 
+			paginaDestinazione = "results.jsp";
 			try {
 				MyServiceFactory.getAbitanteServiceInstance().inserisciAbitante(abitanteNuovo);// );
 				request.setAttribute("listAbitantiAttributeName",
@@ -62,12 +48,40 @@ public class ExecuteInsertAbitanteServlet extends HttpServlet {
 			}
 			
 		} else {
-			request.setAttribute("messaggioDiErrore", messaggioDiErrore);
+			request.setAttribute("messaggioDiErrore", checkInput(request).get(false));
 			paginaDestinazione = "nuovoAbitante.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
 		rd.forward(request, response);
 	}
+	
+	
+	private Map<Boolean, String> checkInput(HttpServletRequest request) {
+		Map<Boolean, String> checkResults = new HashMap<Boolean, String>();
+		
+		if (request.getParameter("nomeInput").equals("") 			|| 
+				request.getParameter("cognomeInput").equals("")			|| 
+				request.getParameter("codiceFiscaleInput").equals("")) {
+				checkResults.put(false,"Attenzione! I campi Nome, Cognome, Codice Fiscale ed Età sono obbligatori");
+				return checkResults;
+		}
+		
+		try {
+			int etaDaInserire = Integer.parseInt(request.getParameter("etaInput"));
+			if(etaDaInserire < 0) {
+				checkResults.put(false,"Attenzione! L'età non può essere minore di zero");
+				return checkResults;
+			}
 
+		} catch (Exception e) {
+			checkResults.put(false,"Attenzione! L'età dev'essere un intero");
+			return checkResults;
+		}
+		
+		return checkResults;	
+	}
+	
 }
+
+
