@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Ricerca</title>
+<style>button{background-color:red}</style>
 </head>
 <body>
 
@@ -55,7 +56,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary btn-md">Cerca</button>
+					<button style={background-color:red} type="submit" class="btn btn-primary btn-md">Cerca</button>
 				</div>
 			</div>
 		</form>
