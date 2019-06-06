@@ -12,11 +12,12 @@ public class Vino {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nome;
-	private String uva; // cognome
-	private String cantina; // cf
-	private String localita; // indirizzo
-	private Integer annata; // annata
-
+	private String uva; 
+	private String cantina; 
+	private String localita;
+	private Integer annata; 
+	private String immagine;
+	
 	public Vino() {
 	}
 
@@ -93,6 +94,14 @@ public class Vino {
 
 	public void setAnnata(Integer annata) {
 		this.annata = annata;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 	
 	

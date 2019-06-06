@@ -55,12 +55,12 @@
 <!-- 			</th> -->
 <!-- <th> -->
 <div class="col-sm-3">
-		<img src="images/pirrovarone.jpg" alt="pirrovarone" width="144" height="350" class="float-left"></div>
+		<img src="images/<%=vinoInPagina.getImmagine() %>" alt="immagineDelVino" width="144" height="300" class="float-left"></div>
 		</div>
 <!-- 	</th>	 -->
 <!-- </thead> -->
 <!-- </table> -->
-	</div>
+<!-- 	</div> -->
 
 </body>
 </html>
