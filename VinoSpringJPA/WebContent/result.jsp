@@ -34,9 +34,9 @@
 				<td><%=vinoItem.getNome() %></td>
 				<td><%=vinoItem.getUva() %></td>
 				<td>
-					<a href="VisualizzaDettaglioVinoServlet?idPersona=<%=vinoItem.getId() %>" class="btn btn-info">Dettaglio</a>
-					<a href="PreparaModificaVinoServlet?idPersona=<%=vinoItem.getId() %>" class="btn btn-info">Modifica</a>
-					<a href="PreparaEliminaVinoServlet?idPersona=<%=vinoItem.getId() %>" class="btn btn-info">Elimina</a>
+					<a href="VisualizzaDettaglioVinoServlet?idVino=<%=vinoItem.getId() %>" class="btn btn-info">Dettaglio</a>
+					<a href="PreparaModificaVinoServlet?idVino=<%=vinoItem.getId() %>" class="btn btn-info">Modifica</a>
+					<a href="PreparaEliminaVinoServlet?idVino=<%=vinoItem.getId() %>" class="btn btn-info">Elimina</a>
 				</td>
 			</tr>
 				

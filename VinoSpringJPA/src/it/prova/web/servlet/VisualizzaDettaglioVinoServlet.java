@@ -35,7 +35,7 @@ public class VisualizzaDettaglioVinoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idVinoDaPagina = request.getParameter("idVino");
 		
-		request.setAttribute("vinoSingolaAttributeName", vinoService.caricaSingoloVino(Long.parseLong(idVinoDaPagina)));
+		request.setAttribute("vinoSingoloAttributeName", vinoService.caricaSingoloVino(Long.parseLong(idVinoDaPagina)));
 
 		RequestDispatcher rd = request.getRequestDispatcher("dettaglioVino.jsp");
 		rd.forward(request, response);

@@ -44,7 +44,7 @@
 		</div>
 
 	</div>
-<a href="ExecuteEliminaVinoServlet?idPersona=<%=vinoInPagina.getId() %>" class="btn btn-info">Conferma eliminazione</a>
+<a href="ExecuteEliminaVinoServlet?idVino=<%=vinoInPagina.getId() %>" class="btn btn-info">Conferma eliminazione</a>
 <!-- <a href="result.jsp" class="btn btn-info">Annulla eliminazione</a> -->
 </body>
 </html>

@@ -35,7 +35,7 @@ public class PreparaModificaVinoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idVinoDaPagina = request.getParameter("idVino");
 
-		request.setAttribute("personaDaModificareAttributeName", vinoService.caricaSingoloVino(Long.parseLong(idVinoDaPagina)));
+		request.setAttribute("vinoDaModificareAttributeName", vinoService.caricaSingoloVino(Long.parseLong(idVinoDaPagina)));
 		RequestDispatcher rd = request.getRequestDispatcher("modifica.jsp");
 		rd.forward(request, response);
 		

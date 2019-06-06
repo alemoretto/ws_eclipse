@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class VinoDAOImpl implements VinoDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Vino> list() {
-		return em.createQuery("from Persona ").getResultList();
+		return em.createQuery("from Vino ").getResultList();
 	}
 
 	@Override
@@ -68,7 +69,7 @@ public class VinoDAOImpl implements VinoDAO {
 			}
 		};
 		
-		Example vinoExample = Example.create(input).setPropertySelector(ps);
+		Example vinoExample = Example.create(input).setPropertySelector(ps).enableLike(MatchMode.START);
 		Criteria criteria = session.createCriteria(Vino.class).add(vinoExample);
 		return criteria.list();
 	}
