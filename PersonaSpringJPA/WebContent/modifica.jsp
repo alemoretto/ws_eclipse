@@ -11,11 +11,15 @@
 <title>Ricerca</title>
 </head>
 <body>
-<%if(request.getAttribute("messaggioDiErrore") != null){ %>
-		<h3 style="color:red"><%=request.getAttribute("messaggioDiErrore") %> </h3><br>
-	<% } %>
 <%
-Persona personaInPagina = (Persona) request.getAttribute("personaDaModificareAttributeName");
+	if(request.getAttribute("messaggioDiErrore") != null){
+%>
+		<h3 style="color:red"><%=request.getAttribute("messaggioDiErrore")%> </h3><br>
+	<%
+		}
+	%>
+<%
+	Persona personaInPagina = (Persona) request.getAttribute("personaDaModificareAttributeName");
 %>
 	<div class="container">
 

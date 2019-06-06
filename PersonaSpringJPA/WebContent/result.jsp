@@ -26,8 +26,10 @@
 				<th>Action</th>
 			</tr>
 		</thead>
-		<% List<Persona> listaPersone = (List<Persona>)request.getAttribute("listaPersoneAttributeName"); 
-			for(Persona personaItem:listaPersone){ %>
+		<%
+			List<Persona> listaPersone = (List<Persona>)request.getAttribute("listaPersoneAttributeName"); 
+			for(Persona personaItem:listaPersone){
+		%>
 			<tr>
 				<td><%=personaItem.getNome() %></td>
 				<td><%=personaItem.getCognome() %></td>
