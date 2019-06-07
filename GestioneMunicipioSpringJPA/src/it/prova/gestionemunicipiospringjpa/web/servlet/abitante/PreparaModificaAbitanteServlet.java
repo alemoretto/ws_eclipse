@@ -14,13 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionemunicipiospringjpa.service.abitante.AbitanteService;
+import it.prova.gestionemunicipiospringjpa.service.municipio.MunicipioService;
 
-@WebServlet("/VisualizzaDettaglioAbitanteServlet")
-public class VisualizzaDettaglioAbitanteServlet extends HttpServlet {
+@WebServlet("/PreparaModificaAbitanteServlet")
+public class PreparaModificaAbitanteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+      
 	@Autowired
 	private AbitanteService abitanteService;
+	
+	@Autowired
+	private MunicipioService municipioService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -28,17 +32,15 @@ public class VisualizzaDettaglioAbitanteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 	
-    public VisualizzaDettaglioAbitanteServlet() {
+    public PreparaModificaAbitanteServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idAbitanteDaPagina = request.getParameter("idAbitante");
-
-		request.setAttribute("abitanteSingoloAttributeName",
-				abitanteService.caricaSingoloAbitanteEager(Long.parseLong(idAbitanteDaPagina)));
-
-		RequestDispatcher rd = request.getRequestDispatcher("/abitante/dettaglio.jsp");
+		Long idAbitanteDaPagina = Long.parseLong(request.getParameter("idAbitante"));
+		request.setAttribute("abitanteDaModificareAttributeName",abitanteService.caricaSingoloAbitante(idAbitanteDaPagina));		
+		request.setAttribute("listaMunicipiAttributeName", municipioService.listAllMunicipi());
+		RequestDispatcher rd = request.getRequestDispatcher("/abitante/modifica.jsp");
 		rd.forward(request, response);
 	}
 

@@ -59,7 +59,7 @@ public class ExecuteInsertVinoServlet extends HttpServlet {
 		}
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("result.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
 		rd.forward(request, response);
 	}
 

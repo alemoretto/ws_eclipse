@@ -15,10 +15,10 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionemunicipiospringjpa.service.abitante.AbitanteService;
 
-@WebServlet("/VisualizzaDettaglioAbitanteServlet")
-public class VisualizzaDettaglioAbitanteServlet extends HttpServlet {
+@WebServlet("/PreparaEliminaAbitanteServlet")
+public class PreparaEliminaAbitanteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+     
 	@Autowired
 	private AbitanteService abitanteService;
 
@@ -27,8 +27,8 @@ public class VisualizzaDettaglioAbitanteServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-    public VisualizzaDettaglioAbitanteServlet() {
+
+    public PreparaEliminaAbitanteServlet() {
         super();
     }
 
@@ -36,9 +36,9 @@ public class VisualizzaDettaglioAbitanteServlet extends HttpServlet {
 		String idAbitanteDaPagina = request.getParameter("idAbitante");
 
 		request.setAttribute("abitanteSingoloAttributeName",
-				abitanteService.caricaSingoloAbitanteEager(Long.parseLong(idAbitanteDaPagina)));
+				abitanteService.caricaSingoloAbitante(Long.parseLong(idAbitanteDaPagina)));
 
-		RequestDispatcher rd = request.getRequestDispatcher("/abitante/dettaglio.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/abitante/rimozione.jsp");
 		rd.forward(request, response);
 	}
 

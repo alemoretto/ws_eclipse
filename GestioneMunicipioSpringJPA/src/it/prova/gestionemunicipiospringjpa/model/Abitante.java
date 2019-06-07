@@ -18,7 +18,7 @@ public class Abitante {
 	private String cognome;
 	private int eta;
 	private String residenza;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "municipio_id", nullable = false)
 	private Municipio municipio;
 
@@ -26,6 +26,16 @@ public class Abitante {
 
 	}
 
+	public Abitante(Long id, String nome, String cognome, int eta, String residenza, Municipio municipio) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.eta = eta;
+		this.residenza = residenza;
+		this.municipio = municipio;
+	}
+	
 	public Abitante(String nome, String cognome, int eta, String residenza, Municipio municipio) {
 		super();
 		this.nome = nome;

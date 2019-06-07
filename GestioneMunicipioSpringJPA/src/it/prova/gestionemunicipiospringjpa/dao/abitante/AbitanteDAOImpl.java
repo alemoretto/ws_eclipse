@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -34,6 +35,13 @@ public class AbitanteDAOImpl implements AbitanteDAO {
 		return result;
 	}
 
+	@Override
+	public Abitante getEager(long id) {
+		Query q = entityManager.createQuery("SELECT a from Abitante a JOIN FETCH a.Municipio m WHERE a.id= :id");
+		q.setParameter("id", id);
+		return (Abitante) q.getSingleResult();
+	}
+	
 	@Override
 	public void update(Abitante abitanteInstance) {
 		abitanteInstance = entityManager.merge(abitanteInstance);

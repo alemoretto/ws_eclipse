@@ -19,10 +19,10 @@ import it.prova.gestionemunicipiospringjpa.service.abitante.AbitanteService;
 import it.prova.gestionemunicipiospringjpa.service.municipio.MunicipioService;
 import it.prova.gestionemunicipiospringjpa.utility.Utility;
 
-@WebServlet("/ExecuteInsertAbitanteServlet")
-public class ExecuteInsertAbitanteServlet extends HttpServlet {
+@WebServlet("/ExecuteModificaAbitanteServlet")
+public class ExecuteModificaAbitanteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
+       
 	@Autowired
 	private AbitanteService abitanteService;
 	
@@ -35,19 +35,16 @@ public class ExecuteInsertAbitanteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 	
-    public ExecuteInsertAbitanteServlet() {
+    public ExecuteModificaAbitanteServlet() {
         super();
     }
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-		
 		String paginaDestinazione = "/abitante/result.jsp";
 
 		if (!Utility.checkInputAbitante(request).getEsito()) {
@@ -59,10 +56,11 @@ public class ExecuteInsertAbitanteServlet extends HttpServlet {
 			String cognomeInput = request.getParameter("cognomeInput");
 			String residenzaInput = request.getParameter("residenzaInput");
 			int etaInput = Integer.parseInt(request.getParameter("etaInput"));
+			Long idInput = Long.parseLong(request.getParameter("idInput"));
 			Municipio municipioInput = new Municipio(Long.parseLong(request.getParameter("municipioInput"))); 
 					
-			Abitante abitanteDaInserire = new Abitante(nomeInput, cognomeInput, etaInput, residenzaInput, municipioInput);
-			abitanteService.inserisciNuovo(abitanteDaInserire);
+			Abitante abitanteDaInserire = new Abitante(idInput, nomeInput, cognomeInput, etaInput, residenzaInput, municipioInput);
+			abitanteService.aggiorna(abitanteDaInserire);
 
 			request.setAttribute("listaAbitantiAttributeName", abitanteService.listAllAbitanti());
 		}
@@ -71,5 +69,5 @@ public class ExecuteInsertAbitanteServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
 		rd.forward(request, response);
 	}
+	}
 
-}

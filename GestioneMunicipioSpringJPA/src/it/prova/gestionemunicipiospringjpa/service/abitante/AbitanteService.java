@@ -2,7 +2,6 @@ package it.prova.gestionemunicipiospringjpa.service.abitante;
 
 import java.util.List;
 
-import it.prova.gestionemunicipiospringjpa.dao.abitante.AbitanteDAO;
 import it.prova.gestionemunicipiospringjpa.model.Abitante;
 
 public interface AbitanteService {
@@ -11,6 +10,8 @@ public interface AbitanteService {
 
 	public Abitante caricaSingoloAbitante(Long id);
 
+	public Abitante caricaSingoloAbitanteEager(Long id);
+	
 	public void aggiorna(Abitante abitanteInstance);
 
 	public void inserisciNuovo(Abitante abitanteInstance);

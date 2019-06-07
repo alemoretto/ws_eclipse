@@ -23,11 +23,14 @@ public class AbitanteServiceImpl implements AbitanteService {
 
 	@Transactional(readOnly = true)
 	public Abitante caricaSingoloAbitante(Long id) {
-
 		return abitanteDAO.get(id);
-
 	}
 
+	@Transactional(readOnly = true)
+	public Abitante caricaSingoloAbitanteEager(Long id) {
+		return abitanteDAO.getEager(id);
+	}
+	
 	@Transactional
 	public void aggiorna(Abitante abitanteInstance) {
 		abitanteDAO.update(abitanteInstance);
