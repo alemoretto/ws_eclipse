@@ -15,6 +15,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionemunicipiospringjpa.model.Municipio;
 import it.prova.gestionemunicipiospringjpa.service.municipio.MunicipioService;
+import it.prova.gestionemunicipiospringjpa.utility.Utility;
 
 @WebServlet("/ExecuteInsertMunicipioServlet")
 public class ExecuteInsertMunicipioServlet extends HttpServlet {
@@ -34,18 +35,16 @@ public class ExecuteInsertMunicipioServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		response.getWriter().append("sssssssssssssssssss at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String paginaDestinazione = "/municipio/result.jsp";
 
-//		if (!Utility.checkInputVino(request).getEsito()) {
-//			request.setAttribute("messaggioDiErrore", Utility.checkInputVino(request).getMessaggio());
-//			
-//			paginaDestinazione = "nuovoVino.jsp";
-//		} else {
+		if (!Utility.checkInputMunicipio(request).getEsito()) {
+			request.setAttribute("messaggioDiErrore", Utility.checkInputMunicipio(request).getMessaggio());
+			
+			paginaDestinazione = "/municipio/insert.jsp";
+		} else {
 			String descrizioneInput = request.getParameter("descrizioneInput");
 			String codiceInput = request.getParameter("codiceInput");
 			String ubicazioneInput = request.getParameter("ubicazioneInput");
@@ -54,7 +53,7 @@ public class ExecuteInsertMunicipioServlet extends HttpServlet {
 			municipioService.inserisciNuovo(municipioDaInserire);
 
 			request.setAttribute("listaMunicipiAttributeName", municipioService.listAllMunicipi());
-//		}
+		}
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
