@@ -58,8 +58,10 @@ public class ExecuteInsertVinoServlet extends HttpServlet {
 			request.setAttribute("listaViniAttributeName", vinoService.listaCompleta());
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("result.jsp");
 		rd.forward(request, response);
 	}
 
+	
 }

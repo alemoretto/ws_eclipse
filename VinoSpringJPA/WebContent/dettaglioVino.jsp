@@ -14,7 +14,6 @@
 	%>
 
 	<div class="container">
-
 		<%@ include file="header.jsp"%>
 
 		<div class="page-header">
