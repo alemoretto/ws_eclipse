@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
@@ -72,7 +73,7 @@ public class MunicipioDAOImpl implements MunicipioDAO {
 			}
 		};
 
-		Example municipioExample = Example.create(municipioInstance).setPropertySelector(ps);
+		Example municipioExample = Example.create(municipioInstance).setPropertySelector(ps).enableLike(MatchMode.START);
 		Criteria criteria = session.createCriteria(Municipio.class).add(municipioExample);
 		return criteria.list();
 	}

@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
@@ -70,7 +71,7 @@ public class AbitanteDAOImpl implements AbitanteDAO {
 		};
 
 		Criteria abitanteCriteria = session.createCriteria(Abitante.class);
-		Example abitanteExample = Example.create(abitanteInstance).setPropertySelector(ps);
+		Example abitanteExample = Example.create(abitanteInstance).setPropertySelector(ps).enableLike(MatchMode.START);
 		if (abitanteInstance.getMunicipio() != null) {
 			abitanteCriteria.createCriteria("municipio").add(Example.create(abitanteInstance.getMunicipio()));
 		}
