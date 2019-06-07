@@ -1,4 +1,4 @@
-package it.prova.web.servlet;
+package it.prova.gestionemunicipiospringjpa.web.servlet.municipio;
 
 import java.io.IOException;
 
@@ -13,37 +13,34 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.service.VinoService;
+import it.prova.gestionemunicipiospringjpa.service.municipio.MunicipioService;
 
-@WebServlet("/ExecuteEliminaVinoServlet")
-public class ExecuteEliminaVinoServlet extends HttpServlet {
+@WebServlet("/PreparaModificaMunicipioServlet")
+public class PreparaModificaMunicipioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+      
 	@Autowired
-	private VinoService vinoService;
+	private MunicipioService municipioService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-
-	public ExecuteEliminaVinoServlet() {
-		super();
-	}
+	
+    public PreparaModificaMunicipioServlet() {
+        super();
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String idVinoDaPagina = request.getParameter("idVino");
+		String idMunicipioDaPagina = request.getParameter("idMunicipio");
 
-			vinoService.rimuoviVino(vinoService.caricaSingoloVino(Long.parseLong(idVinoDaPagina)));
-
-			request.setAttribute("listaViniAttributeName", vinoService.listaCompleta());
-			RequestDispatcher rd = request.getRequestDispatcher("result.jsp");
-			rd.forward(request, response);
+		request.setAttribute("municipioDaModificareAttributeName", municipioService.caricaSingoloMunicipio(Long.parseLong(idMunicipioDaPagina)));
+		RequestDispatcher rd = request.getRequestDispatcher("/municipio/modifica.jsp");
+		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

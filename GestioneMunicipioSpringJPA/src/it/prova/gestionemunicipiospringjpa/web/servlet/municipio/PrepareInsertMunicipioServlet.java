@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class PrepareInsertMunicipioServlet
- */
 @WebServlet("/PrepareInsertMunicipioServlet")
 public class PrepareInsertMunicipioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
