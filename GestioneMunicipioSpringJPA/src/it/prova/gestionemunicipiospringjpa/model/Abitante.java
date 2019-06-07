@@ -26,6 +26,15 @@ public class Abitante {
 
 	}
 
+	public Abitante(String nome, String cognome, int eta, String residenza, Municipio municipio) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.eta = eta;
+		this.residenza = residenza;
+		this.municipio = municipio;
+	}
+	
 	public Abitante(String nome, String cognome, int eta, String residenza) {
 		super();
 		this.nome = nome;

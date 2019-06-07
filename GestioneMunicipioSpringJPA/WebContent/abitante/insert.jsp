@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="it.prova.gestionemunicipiospringjpa.model.Municipio"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,7 +16,15 @@
 </style>
 </head>
 <body>
-
+<%
+	if(request.getAttribute("messaggioDiErrore") != null){
+%>
+	<h3 style="color: red"><%=request.getAttribute("messaggioDiErrore")%>
+	</h3>
+	<br>
+	<%
+		}
+	%>
 	<div class="container">
 
 		<%@ include file="../header.jsp"%>
@@ -54,13 +64,19 @@
 						name="residenzaInput">
 				</div>
 			</div>
-
+<% List<Municipio> listaMunicipi = (List<Municipio>)request.getAttribute("listaMunicipiAttributeName"); %>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="municipioInputId">Municipio:</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" id="municipioInputId"
-						name="municipioInput">
-					<input type="hidden" name="municipioId" id="municipioId">
+				<label class="control-label col-sm-6" for="municipioInputId">Municipio:</label>
+				<div class="col-sm-6">
+				<select name="municipioInput"  class="control-label col-sm-6"  id="municipioInputId">
+				<option value="-1">Seleziona un Municipio</option>
+				
+				<%	for(Municipio municipioItem:listaMunicipi){	%>
+    			<option value="<%= municipioItem.getId()%>"> <%=municipioItem.getDescrizione()%></option>
+    <%} %>
+  </select>
+<!-- 					<input class="form-control" type="text" id="municipioInputId" -->
+<!-- 						name="municipioInput"> -->
 				</div>
 			</div>
 
@@ -70,44 +86,7 @@
 					<button type="submit" class="btn btn-primary btn-md">Effetua
 						Inserimento</button>
 				</div>
-			</div>
-			
-			<%-- FUNZIONE JQUERY UI CON AJAX PER AUTOCOMPLETE --%>
-			<script>
-				$( "#municipioInputId" ).autocomplete({
-					 source: function(request, response) {
-					        $.ajax({
-					            url: "../SearchMunicipioAjaxServlet",
-					            datatype: "json",
-					            data: {
-					                term: request.term,   
-					            },
-					            success: function(data) {
-					                response($.map(data, function(item) {
-					                    return {
-						                    label: item.label,
-						                    value: item.value
-					                    }
-					                }))
-					            }
-					        })
-					    },
-					//quando seleziono la voce nel campo deve valorizzarsi la descrizione
-				    focus: function(event, ui) {
-				        $("#municipioInputId").val(ui.item.label)
-				        return false
-				    },
-				    minLength: 2,
-				    //quando seleziono la voce nel campo hidden deve valorizzarsi l'id
-				    select: function( event, ui ) {
-				    	$('#municipioId').val(ui.item.value);
-				    	console.log($('#municipioId').val())
-				        return false;
-				    },
-				});
-			</script>
-			
-			
+			</div>			
 		</form>
 
 	</div>

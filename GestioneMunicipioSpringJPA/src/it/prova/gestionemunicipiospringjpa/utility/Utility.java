@@ -39,4 +39,32 @@ public class Utility {
 
 		return validazione;
 	}
+	
+	public static Validazione checkInputAbitante(HttpServletRequest request) {
+
+		Validazione validazione = new Validazione(true, "");
+
+		if (request.getParameter("nomeInput").equals("") || 
+			request.getParameter("cognomeInput").equals("")  || 
+			request.getParameter("residenzaInput").equals("") ||
+			request.getParameter("etaInput").equals("")) {
+			validazione.setEsito(false);
+			validazione.setMessaggio("Attenzione! Bisogna valorizzare tutti i campi");
+			return validazione;
+		}
+		
+		if (integerParsed(request.getParameter("etaInput")) == null
+				|| integerParsed(request.getParameter("etaInput")) <= 0) {
+			validazione.setEsito(false);
+			validazione.setMessaggio("Attenzione! Il valore inserito nel campo età non è valido");
+			return validazione;
+		}
+		
+		if (longParsed(request.getParameter("municipioInput")) == -1L) {
+			validazione.setEsito(false);
+			validazione.setMessaggio("Attenzione! Non hai selezionato nessun Municipio");
+			return validazione;
+		}
+		return validazione;
+	}
 }
