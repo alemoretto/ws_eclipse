@@ -11,7 +11,7 @@
 <body>
 
 	<%
-	Abitante abitanteInPagina = (Abitante) request.getAttribute("abitanteSingoloAttributeName");
+		Abitante abitanteInPagina = (Abitante) request.getAttribute("abitanteSingoloAttributeName");
 	%>
 
 	<div class="container">
@@ -20,13 +20,9 @@
 		<div class="page-header">
 			<h3>Pagina di Dettaglio di <%=abitanteInPagina.getNome()%> <%=abitanteInPagina.getCognome()%></h3>
 		</div>
-		
-<!-- 		<table class="table table-striped"> -->
-<!-- 		<thead> -->
-<!-- 		<th> -->
-<div class="col-sm-3">
+
 		<div class="container-fluid">
-		<dl class="row">
+			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
 				<dd class="col-sm-9"><%=abitanteInPagina.getId()%></dd>
 			</dl>
@@ -53,7 +49,6 @@
 		</div>
 		</div>
 		<a href="<%= request.getContextPath()%>/home.jsp" class="btn btn-primary btn-md">Nuova ricerca</a>
-</div>
 
 </body>
 </html>

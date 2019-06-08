@@ -33,10 +33,16 @@ public class PreparaEliminaAbitanteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("userInfo") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
 		String idAbitanteDaPagina = request.getParameter("idAbitante");
 
 		request.setAttribute("abitanteSingoloAttributeName",
-				abitanteService.caricaSingoloAbitante(Long.parseLong(idAbitanteDaPagina)));
+				abitanteService.caricaSingoloAbitanteEager(Long.parseLong(idAbitanteDaPagina)));
 
 		RequestDispatcher rd = request.getRequestDispatcher("/abitante/rimozione.jsp");
 		rd.forward(request, response);

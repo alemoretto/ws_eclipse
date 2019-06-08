@@ -46,10 +46,10 @@
 				<dt class="col-sm-3 text-right">Residenza</dt>
 				<dd class="col-sm-9"><%=abitanteInPagina.getResidenza()%></dd>
 			</dl>
-<!-- 			<dl class="row"> -->
-<!-- 				<dt class="col-sm-3 text-right">Municipio</dt> -->
-<%-- 				<dd class="col-sm-9"><%=abitanteInPagina.getMunicipio().getDescrizione()%></dd> --%>
-<!-- 			</dl> -->
+			<dl class="row">
+				<dt class="col-sm-3 text-right">Municipio</dt>
+				<dd class="col-sm-9"><%=abitanteInPagina.getMunicipio().getDescrizione()%></dd>
+			</dl>
 		</div>
 		</div>
 <a href="ExecuteEliminaAbitanteServlet?idAbitante=<%=abitanteInPagina.getId()%>" class="btn btn-primary btn-md">Conferma rimozione</a></div>

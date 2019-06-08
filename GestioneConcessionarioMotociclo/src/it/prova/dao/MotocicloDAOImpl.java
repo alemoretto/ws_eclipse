@@ -23,7 +23,11 @@ public class MotocicloDAOImpl implements MotocicloDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Motociclo> list() {
-//		return entityManager.createQuery("from Motociclo").getResultList();
+		return entityManager.createQuery("from Motociclo").getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Motociclo> listEager() {
 		Query q = entityManager.createQuery(
 				"SELECT m FROM Motociclo m JOIN FETCH m.concessionario ");
 		return (List<Motociclo>) q.getResultList();
@@ -34,6 +38,14 @@ public class MotocicloDAOImpl implements MotocicloDAO {
 		return entityManager.find(Motociclo.class, id);
 	}
 		
+	@Override
+	public Motociclo getEager(Long id) {
+		Query q = entityManager.createQuery(
+				"SELECT m FROM Motociclo m JOIN FETCH m.concessionario c WHERE m.id=:id");
+		q.setParameter("id", id);
+		return (Motociclo) q.getSingleResult();
+	}
+
 	@Override
 	public void update(Motociclo motocicloInstance) {
 		entityManager.merge(motocicloInstance);

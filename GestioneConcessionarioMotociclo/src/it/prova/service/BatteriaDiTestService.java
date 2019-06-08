@@ -26,7 +26,10 @@ public class BatteriaDiTestService {
 	public static final String ELENCA_CONCESSIONARI_MOTO1200 = "ELENCA_CONCESSIONARI_MOTO1200";
 	public static final String ELENCA_CONCESSIONARI_MILANO_HONDA_2012_2016 = "ELENCA_CONCESSIONARI_MILANO_HONDA_2012_2016";
 
-	public static final String ELENCA_TUTTI_I_MOTOCICLI_EAGER = "ELENCA_TUTTI_I_MOTOCICLI";
+	public static final String ELENCA_TUTTI_I_MOTOCICLI_LAZY = "ELENCA_TUTTI_I_MOTOCICLI_LAZY";
+	public static final String ELENCA_TUTTI_I_MOTOCICLI_EAGER = "ELENCA_TUTTI_I_MOTOCICLI_EAGER";
+	public static final String CARICA_MOTOCICLO_LAZY = "CARICA_MOTOCICLO_LAZY";
+	public static final String CARICA_MOTOCICLO_EAGER = "CARICA_MOTOCICLO_EAGER";
 	public static final String INSERISCI_NUOVO_MOTOCICLO_DATO_CONCESSIONARIO = "INSERISCI_NUOVO_MOTOCICLO_DATO_CONCESSIONARIO";
 	public static final String AGGIORNA_MOTOCICLO = "AGGIORNA_MOTOCICLO";
 	public static final String RIMUOVI_MOTOCICLO = "RIMUOVI_MOTOCICLO";
@@ -102,13 +105,30 @@ public class BatteriaDiTestService {
 
 			// ##############################################################################
 
-			case ELENCA_TUTTI_I_MOTOCICLI_EAGER:
+			case ELENCA_TUTTI_I_MOTOCICLI_LAZY:
 				System.out.println("Elenco i motocicli:");
 				for (Motociclo motocicloItem : motocicloService.listAllMotocicli()) {
+					System.out.println(motocicloItem.toString());
+				}
+				break;
+				
+			case ELENCA_TUTTI_I_MOTOCICLI_EAGER:
+				System.out.println("Elenco i motocicli:");
+				for (Motociclo motocicloItem : motocicloService.listAllMotocicliEager()) {
 					System.out.println(motocicloItem.toStringEager());
 				}
 				break;
 
+			case CARICA_MOTOCICLO_LAZY:
+				System.out.println("Carico il motociclo :");
+				System.out.println(motocicloService.caricaSingoloMotociclo(5L).toString());
+				break;
+				
+			case CARICA_MOTOCICLO_EAGER:
+				System.out.println("Carico il motociclo con il suo concessionario:");
+				System.out.println(motocicloService.caricaSingoloMotocicloEager(5L).toStringEager());
+				break;
+				
 			case CUSTOM:
 				Motociclo motoCustom = new Motociclo("MOTOCUSTOM", "veloce", 250, 2015);
 				Concessionario concCustom = new Concessionario("CONCUSTOM", "NAPOLI", "429021491");
@@ -138,7 +158,7 @@ public class BatteriaDiTestService {
 				break;
 
 			case RIMUOVI_MOTOCICLO:
-				Motociclo motoRim = motocicloService.caricaSingoloMotociclo(13L);
+				Motociclo motoRim = motocicloService.caricaSingoloMotociclo(4L);
 				motocicloService.rimuovi(motoRim);
 				break;
 

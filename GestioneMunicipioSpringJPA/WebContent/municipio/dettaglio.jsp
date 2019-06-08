@@ -20,31 +20,26 @@
 			<h3>Pagina di Dettaglio del <%=municipioInPagina.getDescrizione()%></h3>
 		</div>
 		
-<!-- 		<table class="table table-striped"> -->
-<!-- 		<thead> -->
-<!-- 		<th> -->
-<div class="col-sm-3">
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
 				<dd class="col-sm-9"><%=municipioInPagina.getId()%></dd>
 			</dl>
 			<dl class="row">
-				<dt class="col-sm-3 text-right">Nome</dt>
+				<dt class="col-sm-3 text-right">Descrizione</dt>
 				<dd class="col-sm-9"><%=municipioInPagina.getDescrizione()%></dd>
 			</dl>
 			<dl class="row">
-				<dt class="col-sm-3 text-right">Uva</dt>
+				<dt class="col-sm-3 text-right">Codice</dt>
 				<dd class="col-sm-9"><%=municipioInPagina.getCodice()%></dd>
 			</dl>
 			<dl class="row">
-				<dt class="col-sm-3 text-right">Annata</dt>
+				<dt class="col-sm-3 text-right">Ubicazione</dt>
 				<dd class="col-sm-9"><%=municipioInPagina.getUbicazione()%></dd>
 			</dl>
 		</div>
 		</div>
-		<a href="<%= request.getContextPath()%>/home.jsp" class="btn btn-primary btn-md">Nuova ricerca</a>
-</div>
+		<a href="<%= request.getContextPath()%>/home.jsp" class="btn btn-primary btn-md" >Nuova ricerca</a>
 
 </body>
 </html>

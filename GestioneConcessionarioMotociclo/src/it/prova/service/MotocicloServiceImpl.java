@@ -19,11 +19,27 @@ public class MotocicloServiceImpl implements MotocicloService {
 	public List<Motociclo> listAllMotocicli() {
 		return motocicloDAO.list();
 	}
-
+	
+	@Transactional(readOnly = true)
+	public List<Motociclo> listAllMotocicliEager() {
+		return motocicloDAO.listEager();
+	}
+	
 	@Transactional(readOnly = true)
 	public Motociclo caricaSingoloMotociclo(Long id) {
 		return motocicloDAO.get(id);
 	}
+	
+	@Transactional(readOnly = true)
+	public Motociclo caricaSingoloMotocicloEager(Long id) {
+		return motocicloDAO.getEager(id);
+	}
+	
+//	@Transactional(readOnly = true)
+//	public Motociclo caricaSingoloMotocicloEager(Motociclo moto) {
+//		return motocicloDAO.getE(moto);
+//	}
+	
 	@Transactional
 	public void aggiorna(Motociclo motocicloInstance){
 		motocicloDAO.update(motocicloInstance);

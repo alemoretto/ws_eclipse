@@ -37,6 +37,12 @@ public class PreparaModificaAbitanteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("userInfo") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
 		Long idAbitanteDaPagina = Long.parseLong(request.getParameter("idAbitante"));
 		request.setAttribute("abitanteDaModificareAttributeName",abitanteService.caricaSingoloAbitante(idAbitanteDaPagina));		
 		request.setAttribute("listaMunicipiAttributeName", municipioService.listAllMunicipi());

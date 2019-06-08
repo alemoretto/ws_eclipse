@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.gestionemunicipiospringjpa.model.Abitante;
-import it.prova.gestionemunicipiospringjpa.model.Municipio;
 import it.prova.gestionemunicipiospringjpa.service.abitante.AbitanteService;
-import it.prova.gestionemunicipiospringjpa.service.municipio.MunicipioService;
 
 @WebServlet("/ExecuteEliminaAbitanteServlet")
 public class ExecuteEliminaAbitanteServlet extends HttpServlet {
@@ -25,9 +22,6 @@ public class ExecuteEliminaAbitanteServlet extends HttpServlet {
 	@Autowired
 	private AbitanteService abitanteService;
 
-//	@Autowired
-//	private MunicipioService municipioService;
-	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -39,11 +33,13 @@ public class ExecuteEliminaAbitanteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("userInfo") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
 		String idAbitanteDaPagina = request.getParameter("idAbitante");
-		Abitante abitanteDaEliminare = abitanteService.caricaSingoloAbitante(Long.parseLong(idAbitanteDaPagina));
-//		abitanteDaEliminare.setMunicipio(new Municipio());
-//		abitanteService.aggiorna(abitanteDaEliminare);
-		abitanteService.rimuovi(abitanteDaEliminare);
+		abitanteService.rimuovi(abitanteService.caricaSingoloAbitante(Long.parseLong(idAbitanteDaPagina)));
 
 		request.setAttribute("listaAbitantiAttributeName", abitanteService.listAllAbitanti());
 		RequestDispatcher rd = request.getRequestDispatcher("/abitante/result.jsp");

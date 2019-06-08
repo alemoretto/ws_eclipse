@@ -45,6 +45,12 @@ public class ExecuteModificaAbitanteServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("userInfo") == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+		
 		String paginaDestinazione = "/abitante/result.jsp";
 
 		if (!Utility.checkInputAbitante(request).getEsito()) {

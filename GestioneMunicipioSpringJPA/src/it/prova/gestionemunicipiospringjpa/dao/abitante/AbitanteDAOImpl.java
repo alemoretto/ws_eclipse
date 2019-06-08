@@ -37,7 +37,7 @@ public class AbitanteDAOImpl implements AbitanteDAO {
 
 	@Override
 	public Abitante getEager(long id) {
-		Query q = entityManager.createQuery("SELECT a from Abitante a JOIN FETCH a.Municipio m WHERE a.id= :id");
+		Query q = entityManager.createQuery("SELECT a from Abitante a JOIN FETCH a.municipio WHERE a.id= :id");
 		q.setParameter("id", id);
 		return (Abitante) q.getSingleResult();
 	}
