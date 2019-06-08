@@ -19,8 +19,8 @@ public class Contribuente {
 	private long id;
 	private String nome;
 	private String cognome;
-	private String codicefiscale;
-	private String Indirizzo;
+	private String codiceFiscale;
+	private String indirizzo;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cartellaEsattoriale", orphanRemoval = true)
 	private Set<CartellaEsattoriale> cartelleEsattoriali = new HashSet<>();
 
@@ -28,41 +28,39 @@ public class Contribuente {
 
 	}
 
-	public Contribuente(Long id, String nome, String cognome, String codicefiscale, String indirizzo,
+	public Contribuente(long id, String nome, String cognome, String codiceFiscale, String indirizzo,
 			Set<CartellaEsattoriale> cartelleEsattoriali) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.codicefiscale = codicefiscale;
-		Indirizzo = indirizzo;
+		this.codiceFiscale = codiceFiscale;
+		this.indirizzo = indirizzo;
 		this.cartelleEsattoriali = cartelleEsattoriali;
 	}
 
-	public Contribuente(String nome, String cognome, String codicefiscale, String indirizzo,
-			Set<CartellaEsattoriale> cartelleEsattoriali) {
+	public Contribuente(long id, String nome, String cognome, String codiceFiscale, String indirizzo) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.indirizzo = indirizzo;
+	}
+
+	public Contribuente(String nome, String cognome, String codiceFiscale, String indirizzo) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.codicefiscale = codicefiscale;
-		Indirizzo = indirizzo;
-		this.cartelleEsattoriali = cartelleEsattoriali;
+		this.codiceFiscale = codiceFiscale;
+		this.indirizzo = indirizzo;
 	}
 
-	
-	public Contribuente(String nome, String cognome, String codicefiscale, String indirizzo) {
-		super();
-		this.nome = nome;
-		this.cognome = cognome;
-		this.codicefiscale = codicefiscale;
-		Indirizzo = indirizzo;
-	}
-
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -82,20 +80,20 @@ public class Contribuente {
 		this.cognome = cognome;
 	}
 
-	public String getCodicefiscale() {
-		return codicefiscale;
+	public String getCodiceFiscale() {
+		return codiceFiscale;
 	}
 
-	public void setCodicefiscale(String codicefiscale) {
-		this.codicefiscale = codicefiscale;
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
 	}
 
 	public String getIndirizzo() {
-		return Indirizzo;
+		return indirizzo;
 	}
 
 	public void setIndirizzo(String indirizzo) {
-		Indirizzo = indirizzo;
+		this.indirizzo = indirizzo;
 	}
 
 	public Set<CartellaEsattoriale> getCartelleEsattoriali() {
@@ -106,4 +104,5 @@ public class Contribuente {
 		this.cartelleEsattoriali = cartelleEsattoriali;
 	}
 
+	
 }
