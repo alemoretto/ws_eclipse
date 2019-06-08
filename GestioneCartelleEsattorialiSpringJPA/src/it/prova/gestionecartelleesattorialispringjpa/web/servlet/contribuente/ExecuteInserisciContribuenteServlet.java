@@ -15,9 +15,10 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
+import it.prova.gestionecartelleesattorialispringjpa.utility.Utility;
 
-@WebServlet("/ExecuteSearchContribuenteServlet")
-public class ExecuteSearchContribuenteServlet extends HttpServlet {
+@WebServlet("/ExecuteInserisciContribuenteServlet")
+public class ExecuteInserisciContribuenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -29,7 +30,7 @@ public class ExecuteSearchContribuenteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	public ExecuteSearchContribuenteServlet() {
+	public ExecuteInserisciContribuenteServlet() {
 		super();
 	}
 
@@ -44,16 +45,26 @@ public class ExecuteSearchContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		String nomeInput = request.getParameter("nomeInput");
-		String cognomeInput = request.getParameter("cognomeInput");
-		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-		String indirizzoInput = request.getParameter("indirizzoInput");
+		String paginaDestinazione = "/contribuente/result.jsp";
 
-		Contribuente example = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput, indirizzoInput);
+		if (!Utility.checkInputContribuente(request).getEsito()) {
+			request.setAttribute("messaggioDiErrore", Utility.checkInputContribuente(request).getMessaggio());
 
-		request.setAttribute("listaContribuentiAttributeName", contribuenteService.findByExample(example));
+			paginaDestinazione = "/contribuente/insert.jsp";
+		} else {
+			String nomeInput = request.getParameter("nomeInput");
+			String cognomeInput = request.getParameter("cognomeInput");
+			String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
+			String indirizzoInput = request.getParameter("indirizzoInput");
 
-		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/result.jsp");
+			Contribuente contribuenteDaInserire = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput,
+					indirizzoInput);
+			contribuenteService.inserisci(contribuenteDaInserire);
+
+			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
+		}
+
+		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
 		rd.forward(request, response);
 	}
 

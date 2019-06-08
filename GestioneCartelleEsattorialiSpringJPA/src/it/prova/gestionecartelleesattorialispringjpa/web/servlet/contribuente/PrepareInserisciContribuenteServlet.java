@@ -9,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/PrepareSearchContribuenteServlet")
-public class PrepareSearchContribuenteServlet extends HttpServlet {
+@WebServlet("/PrepareInserisciContribuenteServlet")
+public class PrepareInserisciContribuenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PrepareSearchContribuenteServlet() {
+    public PrepareInserisciContribuenteServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,7 +23,7 @@ public class PrepareSearchContribuenteServlet extends HttpServlet {
 			return;
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/search.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/insert.jsp");
 		rd.forward(request, response);
 	}
 

@@ -25,18 +25,25 @@ public class Utility {
 		return parsed;
 	}
 
-	public static Validazione checkInputMunicipio(HttpServletRequest request) {
+	public static Validazione checkInputContribuente(HttpServletRequest request) {
 
 		Validazione validazione = new Validazione(true, "");
 
-		if (request.getParameter("descrizioneInput").equals("") || 
-			request.getParameter("codiceInput").equals("")  || 
-			request.getParameter("ubicazioneInput").equals("") ) {
+		if (request.getParameter("nomeInput").equals("") || 
+			request.getParameter("cognomeInput").equals("")  ||
+			request.getParameter("codiceFiscaleInput").equals("") || 
+			request.getParameter("indirizzoInput").equals("")  ) {
 			validazione.setEsito(false);
 			validazione.setMessaggio("Attenzione! Bisogna valorizzare tutti i campi");
 			return validazione;
-		}
+		} 
 
+		if (request.getParameter("codiceFiscaleInput").length() != 16 ) {
+			validazione.setEsito(false);
+			validazione.setMessaggio("Attenzione! Il campo Codice Fiscale richiede 16 caratteri");
+			return validazione;
+		}
+		
 		return validazione;
 	}
 	

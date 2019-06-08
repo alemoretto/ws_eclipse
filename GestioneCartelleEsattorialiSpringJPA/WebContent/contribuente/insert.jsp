@@ -7,16 +7,24 @@
 <title>Ricerca Municipio</title>
 </head>
 <body>
-
+<%
+	if(request.getAttribute("messaggioDiErrore") != null){
+%>
+	<h3 style="color: red"><%=request.getAttribute("messaggioDiErrore")%>
+	</h3>
+	<br>
+	<%
+		}
+	%>
 <div class="container">
 
    <%@ include file="../header.jsp" %>
       
     <div class="page-header">
-	  <h3>Ricerca Contribuente</h3>
+	  <h3>Inserisci nuovo Contribuente</h3>
 	</div>
 
-      	<form class="form-horizontal" action="ExecuteRicercaContribuenteServlet" method="post">
+      	<form class="form-horizontal" action="ExecuteInserisciContribuenteServlet" method="post">
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 	    		<div class="col-sm-4">
@@ -43,8 +51,7 @@
   			</div>
   			<div class="form-group">        
 		      <div class="col-sm-offset-2 col-sm-10">
-		        <button type="submit" class="btn btn-primary btn-md">Effettua Ricerca</button>
-		        <a href="PrepareInserisciContribuenteServlet" class="btn btn-primary btn-md">Inserisci Nuovo Contribuente</a>
+		        <button type="submit" class="btn btn-primary btn-md">Inserisci</button>
 		      </div>
 		    </div>
 		</form>

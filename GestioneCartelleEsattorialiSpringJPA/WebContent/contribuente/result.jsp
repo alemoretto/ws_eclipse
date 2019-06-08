@@ -34,8 +34,8 @@
 				<td><%=contribuenteItem.getCognome() %></td>
 				<td>
 					<a href="VisualizzaDettaglioContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-info">Dettaglio</a>
-					<a href="PreparaModificaContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-info">Modifica</a>
-					<a href="PreparaEliminaContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-info">Elimina</a>
+					<a href="PrepareModificaContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-info">Modifica</a>
+					<a href="PrepareEliminaContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-info">Elimina</a>
 				</td>
 			</tr>
 				
