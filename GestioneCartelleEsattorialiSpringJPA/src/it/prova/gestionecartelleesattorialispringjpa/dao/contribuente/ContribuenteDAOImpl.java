@@ -34,6 +34,14 @@ public class ContribuenteDAOImpl implements ContribuenteDAO {
 	}
 
 	@Override
+	public Contribuente getEager(Long id) {
+		Query q = entityManager
+				.createQuery("SELECT c from Contribuente c JOIN FETCH c.cartellaEsattoriale WHERE c.id= :id");
+		q.setParameter("id", id);
+		return (Contribuente) q.getSingleResult();
+	}
+
+	@Override
 	public void update(Contribuente o) {
 		entityManager.merge(o);
 	}

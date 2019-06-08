@@ -7,5 +7,7 @@ import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
 
 public interface ContribuenteDAO extends IBaseDAO<Contribuente> {
 
+	public Contribuente getEager(Long id);
+
 	public List<Contribuente> findAllByDescrizioneILike(String term);
 }

@@ -36,7 +36,7 @@ public class CartellaEsattorialeDAOImpl implements CartellaEsattorialeDAO {
 	@Override
 	public CartellaEsattoriale getEager(Long id) {
 		Query q = entityManager
-				.createQuery("SELECT c from CartellaEsattoriale c JOIN FETCH a.contribuente WHERE c.id= :id");
+				.createQuery("SELECT c from CartellaEsattoriale c JOIN FETCH c.contribuente WHERE c.id= :id");
 		q.setParameter("id", id);
 		return (CartellaEsattoriale) q.getSingleResult();
 	}
