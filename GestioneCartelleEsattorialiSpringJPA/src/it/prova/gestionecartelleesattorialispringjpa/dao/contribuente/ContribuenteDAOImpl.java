@@ -13,10 +13,11 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.type.Type;
+import org.springframework.stereotype.Component;
 
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
 
-@SuppressWarnings("unused")
+@Component
 public class ContribuenteDAOImpl implements ContribuenteDAO {
 
 	@PersistenceContext

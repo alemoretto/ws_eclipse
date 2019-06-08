@@ -3,11 +3,13 @@ package it.prova.gestionecartelleesattorialispringjpa.service.contribuente;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.gestionecartelleesattorialispringjpa.dao.contribuente.ContribuenteDAO;
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
 
+@Component
 public class ContribuenteServiceImpl implements ContribuenteService {
 
 	@Autowired
