@@ -1,4 +1,4 @@
-package it.prova.gestionemunicipiospringjpa.dao.utente;
+package it.prova.gestionecartelleesattorialispringjpa.dao.utente;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.hibernate.criterion.Example.PropertySelector;
 import org.hibernate.type.Type;
 import org.springframework.stereotype.Component;
 
-import it.prova.gestionemunicipiospringjpa.model.Utente;
+import it.prova.gestionecartelleesattorialispringjpa.model.Utente;
 
 @Component
 public class UtenteDAOImpl implements UtenteDAO {
@@ -29,7 +29,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 	}
 
 	@Override
-	public Utente get(long id) {
+	public Utente get(Long id) {
 		Utente result = (Utente) entityManager.find(Utente.class, id);
 		return result;
 	}

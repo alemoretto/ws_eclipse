@@ -1,4 +1,5 @@
 package it.prova.gestionecartelleesattorialispringjpa.model;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Utente {
 	private String password;
 	@Temporal(TemporalType.DATE)
 	private Date dataRegistrazione;
-	
+
 	public Utente() {
 	}
 

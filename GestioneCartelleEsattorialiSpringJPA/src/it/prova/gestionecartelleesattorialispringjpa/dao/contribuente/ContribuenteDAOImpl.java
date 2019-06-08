@@ -1,4 +1,4 @@
-package it.prova.gestionemunicipiospringjpa.dao.utente;
+package it.prova.gestionecartelleesattorialispringjpa.dao.contribuente;
 
 import java.util.List;
 
@@ -11,47 +11,46 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Example.PropertySelector;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.type.Type;
-import org.springframework.stereotype.Component;
 
-import it.prova.gestionemunicipiospringjpa.model.Utente;
+import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
 
-@Component
-public class UtenteDAOImpl implements UtenteDAO {
+@SuppressWarnings("unused")
+public class ContribuenteDAOImpl implements ContribuenteDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Utente> list() {
-		return entityManager.createQuery("from Utente").getResultList();
+	public List<Contribuente> list() {
+		return entityManager.createQuery("from Contribuente").getResultList();
 	}
 
 	@Override
-	public Utente get(long id) {
-		Utente result = (Utente) entityManager.find(Utente.class, id);
-		return result;
+	public Contribuente get(Long id) {
+		return (Contribuente) entityManager.find(Contribuente.class, id);
 	}
 
 	@Override
-	public void update(Utente o) {
+	public void update(Contribuente o) {
 		entityManager.merge(o);
 	}
 
 	@Override
-	public void insert(Utente o) {
+	public void insert(Contribuente o) {
 		entityManager.persist(o);
 	}
 
 	@Override
-	public void delete(Utente o) {
+	public void delete(Contribuente o) {
 		entityManager.remove(entityManager.merge(o));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Utente> findByExample(Utente o) {
+	public List<Contribuente> findByExample(Contribuente o) {
 		Session session = (Session) entityManager.getDelegate();
 
 		@SuppressWarnings("serial")
@@ -70,20 +69,19 @@ public class UtenteDAOImpl implements UtenteDAO {
 			}
 		};
 
-		Example utenteExample = Example.create(o).setPropertySelector(ps);
-		Criteria criteria = session.createCriteria(Utente.class).add(utenteExample);
+		Example example = Example.create(o).setPropertySelector(ps).enableLike(MatchMode.START);
+		Criteria criteria = session.createCriteria(Contribuente.class).add(example);
 		return criteria.list();
-
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Utente executeLogin(String username, String password) {
-		Query query = entityManager
-				.createQuery("select u FROM Utente u where u.username = :usernameParam and u.password= :passwordParam");
-		query.setParameter("usernameParam", username);
-		query.setParameter("passwordParam", password);
+	public List<Contribuente> findAllByDescrizioneILike(String term) {
+		term = term != null ? term.toLowerCase() : "";
+		Query query = entityManager.createQuery("select c FROM Contribuente c where lower(c.cognome) like :termInput ");
+		query.setParameter("termInput", '%' + term + '%');
 
-		return query.getResultList().isEmpty() ? null : (Utente) query.getSingleResult();
+		return query.getResultList();
 	}
 
 }
