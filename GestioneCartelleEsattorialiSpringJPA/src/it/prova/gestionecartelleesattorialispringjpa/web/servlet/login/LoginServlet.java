@@ -40,26 +40,26 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		response.getWriter().append("asacdasfafasfa at: ").append(request.getContextPath());
-
+		
 		String usernameInput = request.getParameter("inputUsername");
 		String passwordInput = request.getParameter("inputPassword");
-
+		
 		Utente utenteCheAccede = utenteService.eseguiAccesso(usernameInput, passwordInput);
-
-		// se non trovo nulla non deve essere possibile accedere
-		if (utenteCheAccede == null) {
+		
+		//se non trovo nulla non deve essere possibile accedere
+		if(utenteCheAccede == null) {
 			request.setAttribute("messaggioErrore", "Utente non abilitato");
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 			return;
 		}
-
-		// metto utente in sessione
-		HttpSession session = request.getSession();
+		
+		//metto utente in sessione
+		HttpSession session =  request.getSession();
 		session.setAttribute("userInfo", utenteCheAccede);
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 		rd.forward(request, response);
 	}
+
 }

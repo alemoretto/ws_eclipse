@@ -16,12 +16,12 @@ public class Contribuente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	private String nome;
 	private String cognome;
 	private String codicefiscale;
 	private String Indirizzo;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "municipio", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cartellaEsattoriale", orphanRemoval = true)
 	private Set<CartellaEsattoriale> cartelleEsattoriali = new HashSet<>();
 
 	public Contribuente() {
@@ -47,6 +47,15 @@ public class Contribuente {
 		this.codicefiscale = codicefiscale;
 		Indirizzo = indirizzo;
 		this.cartelleEsattoriali = cartelleEsattoriali;
+	}
+
+	
+	public Contribuente(String nome, String cognome, String codicefiscale, String indirizzo) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codicefiscale = codicefiscale;
+		Indirizzo = indirizzo;
 	}
 
 	public Long getId() {

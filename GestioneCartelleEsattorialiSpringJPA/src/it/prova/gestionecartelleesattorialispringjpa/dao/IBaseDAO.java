@@ -15,5 +15,5 @@ public interface IBaseDAO<T> {
 	public void delete(T o);
 
 	public List<T> findByExample(T o);
-
+	
 }

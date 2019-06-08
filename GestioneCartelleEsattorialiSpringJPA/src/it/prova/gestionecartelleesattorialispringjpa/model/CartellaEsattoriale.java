@@ -13,12 +13,12 @@ public class CartellaEsattoriale {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	private String denominazione;
 	private String descrizione;
 	private int importo;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "contriubuente_id", nullable = false)
+	@JoinColumn(name = "contribuente_id", nullable = false)
 	private CartellaEsattoriale cartellaEsattoriale;
 
 	public CartellaEsattoriale() {

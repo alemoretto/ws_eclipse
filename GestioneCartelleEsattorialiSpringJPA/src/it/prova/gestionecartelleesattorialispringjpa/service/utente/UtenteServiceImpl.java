@@ -11,41 +11,41 @@ import it.prova.gestionecartelleesattorialispringjpa.model.Utente;
 
 @Component
 public class UtenteServiceImpl implements UtenteService {
-
+	
 	@Autowired
 	private UtenteDAO utenteDAO;
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly=true)
 	public List<Utente> listAll() {
 		return utenteDAO.list();
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly=true)
 	public Utente carica(Long id) {
 		return utenteDAO.get(id);
+		}
+
+	@Transactional
+	public void aggiorna(Utente utenteInstance) {
+		utenteDAO.update(utenteInstance);
 	}
 
 	@Transactional
-	public void aggiorna(Utente o) {
-		utenteDAO.update(o);
+	public void inserisci(Utente utenteInstance) {
+		utenteDAO.insert(utenteInstance);
 	}
 
 	@Transactional
-	public void inserisci(Utente o) {
-		utenteDAO.insert(o);
+	public void rimuovi(Utente utenteInstance) {
+		utenteDAO.delete(utenteInstance);
 	}
 
-	@Transactional
-	public void rimuovi(Utente o) {
-		utenteDAO.delete(o);
-	}
-
-	@Transactional(readOnly = true)
+	@Transactional(readOnly=true)
 	public List<Utente> findByExample(Utente example) {
 		return utenteDAO.findByExample(example);
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly=true)
 	public Utente eseguiAccesso(String username, String password) {
 		return utenteDAO.executeLogin(username, password);
 	}
