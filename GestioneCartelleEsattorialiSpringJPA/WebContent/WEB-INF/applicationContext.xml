@@ -14,7 +14,7 @@
 		">
 	
 	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans -->
-	<context:component-scan base-package="it.prova.gestionemunicipiospringjpa" />
+	<context:component-scan base-package="it.prova.gestionecartelleesattorialispringjpa" />
 	<!-- Activates various annotations to be detected in bean classes e.g: @Autowired -->
 	<context:annotation-config />
 	
@@ -30,7 +30,7 @@
 	</bean>
 	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-			p:packagesToScan="it.prova.gestionemunicipiospringjpa.model"
+			p:packagesToScan="it.prova.gestionecartelleesattorialispringjpa.model"
             p:dataSource-ref="dataSource"
 			>
 		<property name="jpaVendorAdapter">
