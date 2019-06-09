@@ -32,18 +32,18 @@ public class CartellaEsattorialeServiceImpl implements CartellaEsattorialeServic
 	}
 
 	@Transactional
-	public void aggiorna(CartellaEsattoriale abitanteInstance) {
-		cartellaEsattorialeDAO.update(abitanteInstance);
+	public void aggiorna(CartellaEsattoriale o) {
+		cartellaEsattorialeDAO.update(o);
 	}
 
 	@Transactional
-	public void inserisci(CartellaEsattoriale abitanteInstance) {
-		cartellaEsattorialeDAO.insert(abitanteInstance);
+	public void inserisci(CartellaEsattoriale o) {
+		cartellaEsattorialeDAO.insert(o);
 	}
 
 	@Transactional
-	public void rimuovi(CartellaEsattoriale abitanteInstance) {
-		cartellaEsattorialeDAO.delete(abitanteInstance);
+	public void rimuovi(CartellaEsattoriale o) {
+		cartellaEsattorialeDAO.delete(o);
 	}
 
 	@Transactional(readOnly = true)

@@ -44,25 +44,25 @@ public class Utility {
 		return validazione;
 	}
 	
-	public static Validazione inputAbitante(HttpServletRequest request) {
+	public static Validazione inputCartellaEsattoriale(HttpServletRequest request) {
 
 		Validazione validazione = new Validazione(true, "");
 
-		if (request.getParameter("nomeInput").equals("") || 
-			request.getParameter("cognomeInput").equals("")  || 
-			request.getParameter("residenzaInput").equals("") ||
-			request.getParameter("etaInput").equals("")) {
-			return validazione;
+		if (request.getParameter("denominazioneInput").equals("") || 
+			request.getParameter("descrizioneInput").equals("")  || 
+			request.getParameter("importoInput").equals("") ) {
+			return new Validazione(false,"Attenzione! Bisogna valorizzare tutti i campi");
 		}
 		
-		if (integerParsed(request.getParameter("etaInput")) == null
-				|| integerParsed(request.getParameter("etaInput")) <= 0) {
-			return validazione;
+		if (integerParsed(request.getParameter("importoInput")) == null
+				|| integerParsed(request.getParameter("importoInput")) < 0) {
+			return new Validazione(false,"Attenzione! L'importo dev'essere un numero positivo");
 		}
 		
-		if (longParsed(request.getParameter("municipioInput")) == -1L) {
-			return validazione;
+		if (longParsed(request.getParameter("contribuenteInput")) == -1L) {
+			return new Validazione(false,"Attenzione! Bisogna selezionare un contribuente");
 		}
+		
 		return validazione;
 	}
 }

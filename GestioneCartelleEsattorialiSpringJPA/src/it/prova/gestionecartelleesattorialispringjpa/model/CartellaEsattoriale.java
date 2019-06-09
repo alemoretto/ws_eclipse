@@ -42,6 +42,12 @@ public class CartellaEsattoriale {
 		this.contribuente = contribuente;
 	}
 
+	public CartellaEsattoriale(String denominazione, String descrizione) {
+		super();
+		this.denominazione = denominazione;
+		this.descrizione = descrizione;
+	}
+	
 	public CartellaEsattoriale(String denominazione, String descrizione, int importo) {
 		super();
 		this.denominazione = denominazione;

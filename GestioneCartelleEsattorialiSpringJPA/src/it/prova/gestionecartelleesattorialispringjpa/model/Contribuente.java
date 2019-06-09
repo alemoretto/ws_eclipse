@@ -56,6 +56,12 @@ public class Contribuente {
 		this.indirizzo = indirizzo;
 	}
 
+	
+	public Contribuente(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
