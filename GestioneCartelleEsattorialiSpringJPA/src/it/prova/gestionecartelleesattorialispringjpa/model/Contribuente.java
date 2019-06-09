@@ -110,5 +110,8 @@ public class Contribuente {
 		this.cartelleEsattoriali = cartelleEsattoriali;
 	}
 
+	public String toString() {
+		return nome + " " + cognome;
+	}
 	
 }

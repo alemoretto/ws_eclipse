@@ -17,7 +17,7 @@
 		<%@ include file="../header.jsp"%>
 
 		<div class="page-header">
-			<h3>Pagina di Dettaglio di <%=contribuenteInPagina.getNome()%> <%=contribuenteInPagina.getCognome()%></h3>
+			<h3>Pagina di Dettaglio di:  <%=contribuenteInPagina.toString()%> </h3>
 		</div>
 		
 		<div class="container-fluid">

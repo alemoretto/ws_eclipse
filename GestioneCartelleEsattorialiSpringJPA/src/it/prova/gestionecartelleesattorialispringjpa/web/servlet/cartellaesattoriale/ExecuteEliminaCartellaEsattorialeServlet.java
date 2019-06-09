@@ -2,7 +2,6 @@ package it.prova.gestionecartelleesattorialispringjpa.web.servlet.cartellaesatto
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.gestionecartelleesattorialispringjpa.model.CartellaEsattoriale;
 import it.prova.gestionecartelleesattorialispringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 
-@WebServlet("/ExecuteRicercaCartellaEsattorialeServlet")
-public class ExecuteRicercaCartellaEsattorialeServlet extends HttpServlet {
+@WebServlet("/ExecuteEliminaCartellaEsattorialeServlet")
+public class ExecuteEliminaCartellaEsattorialeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -28,29 +26,29 @@ public class ExecuteRicercaCartellaEsattorialeServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-	public ExecuteRicercaCartellaEsattorialeServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteEliminaCartellaEsattorialeServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getSession().getAttribute("userInfo") == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
 
-		String denominazioneInput = request.getParameter("denominazioneInput");
-		String descrizioneInput = request.getParameter("descrizioneInput");
+		String idCartellaEsattorialeDaPagina = request.getParameter("idCartellaEsattoriale");
 
-		CartellaEsattoriale example = new CartellaEsattoriale(denominazioneInput, descrizioneInput);
+		cartellaEsattorialeService
+				.rimuovi(cartellaEsattorialeService.carica(Long.parseLong(idCartellaEsattorialeDaPagina)));
 
-		request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService.findByExample(example));
+		response.sendRedirect("SendRedirectCartellaEsattorialeServlet");
 
-		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/result.jsp");
-		rd.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

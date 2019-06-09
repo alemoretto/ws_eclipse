@@ -69,7 +69,7 @@
 						%>
 						<option value="<%=contribuenteItem.getId()%>"
 						<% if(contribuenteItem.getId() == cartellaEsattorialeInPagina.getContribuente().getId()){%> selected<%} %> >
-							<%=contribuenteItem.getNome()%>	<%=contribuenteItem.getCognome()%> - <%=contribuenteItem.getCodiceFiscale()%></option>
+							<%=contribuenteItem.toString()%> - <%=contribuenteItem.getCodiceFiscale()%></option>
 						<%
 							}
 						%>
