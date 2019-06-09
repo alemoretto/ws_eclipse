@@ -25,6 +25,7 @@
 	</div>
 
       	<form class="form-horizontal" action="ExecuteInserisciContribuenteServlet" method="post">
+<!--       	<form class="form-horizontal" action="ExecuteInserisciContribuenteServlet" method="post"> -->
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 	    		<div class="col-sm-4">

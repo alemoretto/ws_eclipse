@@ -61,10 +61,10 @@ public class ExecuteInserisciContribuenteServlet extends HttpServlet {
 					indirizzoInput);
 			contribuenteService.inserisci(contribuenteDaInserire);
 
-			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
+//			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
+		RequestDispatcher rd = request.getRequestDispatcher("/SendRedirectContribuenteServlet");
 		rd.forward(request, response);
 	}
 
