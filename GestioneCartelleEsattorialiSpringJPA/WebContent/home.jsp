@@ -16,7 +16,7 @@
 				<h1 class="display-4">Gestione Contribuente</h1>
 				<p>
 					<a class="btn btn-primary btn-lg"
-						href="<%=request.getContextPath() + "/PrepareSearchContribuenteServlet"%>"
+						href="<%=request.getContextPath() + "/PrepareRicercaContribuenteServlet"%>"
 						role="button">Vai alla Gestione &raquo;</a>
 				</p>
 			</div>
@@ -27,7 +27,7 @@
 				<h1 class="display-4">Gestione Cartella Esattoriale</h1>
 				<p>
 					<a class="btn btn-primary btn-lg"
-						href="<%=request.getContextPath() + "/PrepareSearchCartellaEsattorialeServlet"%>"
+						href="<%=request.getContextPath() + "/PrepareRicercaCartellaEsattorialeServlet"%>"
 						role="button">Vai alla Gestione &raquo;</a>
 				</p>
 			</div>

@@ -39,7 +39,7 @@
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
 				
 				<!--  impostare a false dopo creazione tabelle in seguito a primo run -->
-				<property name="generateDdl" value="true" />
+				<property name="generateDdl" value="false" />
 			</bean>
 		</property>
 	</bean>

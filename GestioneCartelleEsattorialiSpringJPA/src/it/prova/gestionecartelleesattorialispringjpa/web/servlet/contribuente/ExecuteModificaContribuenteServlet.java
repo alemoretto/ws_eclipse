@@ -45,28 +45,30 @@ public class ExecuteModificaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		String paginaDestinazione = "/contribuente/result.jsp";
+		if (Utility.inputContribuente(request).isNotValid()) {
+			request.setAttribute("messaggioDiErrore", Utility.inputContribuente(request).getMessaggio());
 
-		if (!Utility.checkInputContribuente(request).getEsito()) {
-			request.setAttribute("messaggioDiErrore", Utility.checkInputContribuente(request).getMessaggio());
-
-			paginaDestinazione = "/contribuente/insert.jsp";
-		} else {
 			Long idInput = Long.parseLong(request.getParameter("idInput"));
-			String nomeInput = request.getParameter("nomeInput");
-			String cognomeInput = request.getParameter("cognomeInput");
-			String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-			String indirizzoInput = request.getParameter("indirizzoInput");
+			request.setAttribute("contribuenteDaModificareAttributeName", contribuenteService.carica(idInput));
 
-			Contribuente contribuenteDaAggiornare = new Contribuente(idInput, nomeInput, cognomeInput,
-					codiceFiscaleInput, indirizzoInput);
-			contribuenteService.aggiorna(contribuenteDaAggiornare);
+			RequestDispatcher rd = request.getRequestDispatcher("/contribuente/modifica.jsp");
+			rd.forward(request, response);
 
-			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
+			return;
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher(paginaDestinazione);
-		rd.forward(request, response);
+		Long idInput = Long.parseLong(request.getParameter("idInput"));
+		String nomeInput = request.getParameter("nomeInput");
+		String cognomeInput = request.getParameter("cognomeInput");
+		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
+		String indirizzoInput = request.getParameter("indirizzoInput");
+
+		Contribuente contribuenteDaAggiornare = new Contribuente(idInput, nomeInput, cognomeInput, codiceFiscaleInput,
+				indirizzoInput);
+		contribuenteService.aggiorna(contribuenteDaAggiornare);
+
+		response.sendRedirect("SendRedirectContribuenteServlet");
+
 	}
 
 }

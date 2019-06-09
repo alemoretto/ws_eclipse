@@ -13,34 +13,33 @@ public class CartellaEsattoriale {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String denominazione;
 	private String descrizione;
 	private int importo;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contribuente_id", nullable = false)
-	private CartellaEsattoriale cartellaEsattoriale;
+	private Contribuente contribuente;
 
 	public CartellaEsattoriale() {
 	}
 
 	public CartellaEsattoriale(Long id, String denominazione, String descrizione, int importo,
-			CartellaEsattoriale cartellaEsattoriale) {
+			Contribuente contribuente) {
 		super();
 		this.id = id;
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
 		this.importo = importo;
-		this.cartellaEsattoriale = cartellaEsattoriale;
+		this.contribuente = contribuente;
 	}
 
-	public CartellaEsattoriale(String denominazione, String descrizione, int importo,
-			CartellaEsattoriale cartellaEsattoriale) {
+	public CartellaEsattoriale(String denominazione, String descrizione, int importo, Contribuente contribuente) {
 		super();
 		this.denominazione = denominazione;
 		this.descrizione = descrizione;
 		this.importo = importo;
-		this.cartellaEsattoriale = cartellaEsattoriale;
+		this.contribuente = contribuente;
 	}
 
 	public CartellaEsattoriale(String denominazione, String descrizione, int importo) {
@@ -82,12 +81,12 @@ public class CartellaEsattoriale {
 		this.importo = importo;
 	}
 
-	public CartellaEsattoriale getCartellaEsattoriale() {
-		return cartellaEsattoriale;
+	public Contribuente getContribuente() {
+		return contribuente;
 	}
 
-	public void setCartellaEsattoriale(CartellaEsattoriale cartellaEsattoriale) {
-		this.cartellaEsattoriale = cartellaEsattoriale;
+	public void setContribuente(Contribuente contribuente) {
+		this.contribuente = contribuente;
 	}
 
 }

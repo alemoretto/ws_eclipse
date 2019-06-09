@@ -2,7 +2,6 @@ package it.prova.gestionecartelleesattorialispringjpa.web.servlet.contribuente;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.Contri
 @WebServlet("/ExecuteEliminaContribuenteServlet")
 public class ExecuteEliminaContribuenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Autowired
 	private ContribuenteService contribuenteService;
 
@@ -27,28 +26,28 @@ public class ExecuteEliminaContribuenteServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-    public ExecuteEliminaContribuenteServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteEliminaContribuenteServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getSession().getAttribute("userInfo") == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
 
 		String idContribuenteDaPagina = request.getParameter("idContribuente");
-		
+
 		contribuenteService.rimuovi(contribuenteService.carica(Long.parseLong(idContribuenteDaPagina)));
-		
-		request.setAttribute("listaContribuentiAttributeName",
-				contribuenteService.listAll());
-		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/result.jsp");
-		rd.forward(request, response);
+
+		response.sendRedirect("SendRedirectContribuenteServlet");
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

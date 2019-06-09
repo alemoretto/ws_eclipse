@@ -2,6 +2,7 @@ package it.prova.gestionecartelleesattorialispringjpa.web.servlet.contribuente;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.Contri
 @WebServlet("/SendRedirectContribuenteServlet")
 public class SendRedirectContribuenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Autowired
 	private ContribuenteService contribuenteService;
 
@@ -26,24 +27,27 @@ public class SendRedirectContribuenteServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-    public SendRedirectContribuenteServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public SendRedirectContribuenteServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getSession().getAttribute("userInfo") == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
-		
+
 		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
-		response.sendRedirect(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/result.jsp");
+
+		rd.forward(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

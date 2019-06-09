@@ -25,7 +25,7 @@ public class Utility {
 		return parsed;
 	}
 
-	public static Validazione checkInputContribuente(HttpServletRequest request) {
+	public static Validazione inputContribuente(HttpServletRequest request) {
 
 		Validazione validazione = new Validazione(true, "");
 
@@ -33,21 +33,18 @@ public class Utility {
 			request.getParameter("cognomeInput").equals("")  ||
 			request.getParameter("codiceFiscaleInput").equals("") || 
 			request.getParameter("indirizzoInput").equals("")  ) {
-			validazione.setEsito(false);
-			validazione.setMessaggio("Attenzione! Bisogna valorizzare tutti i campi");
-			return validazione;
+
+			return new Validazione(false,"Attenzione! Bisogna valorizzare tutti i campi");
 		} 
 
 		if (request.getParameter("codiceFiscaleInput").length() != 16 ) {
-			validazione.setEsito(false);
-			validazione.setMessaggio("Attenzione! Il campo Codice Fiscale richiede 16 caratteri");
-			return validazione;
+			return new Validazione(false,"Attenzione! Il campo Codice Fiscale richiede 16 caratteri");
 		}
 		
 		return validazione;
 	}
 	
-	public static Validazione checkInputAbitante(HttpServletRequest request) {
+	public static Validazione inputAbitante(HttpServletRequest request) {
 
 		Validazione validazione = new Validazione(true, "");
 
@@ -55,21 +52,15 @@ public class Utility {
 			request.getParameter("cognomeInput").equals("")  || 
 			request.getParameter("residenzaInput").equals("") ||
 			request.getParameter("etaInput").equals("")) {
-			validazione.setEsito(false);
-			validazione.setMessaggio("Attenzione! Bisogna valorizzare tutti i campi");
 			return validazione;
 		}
 		
 		if (integerParsed(request.getParameter("etaInput")) == null
 				|| integerParsed(request.getParameter("etaInput")) <= 0) {
-			validazione.setEsito(false);
-			validazione.setMessaggio("Attenzione! Il valore inserito nel campo età non è valido");
 			return validazione;
 		}
 		
 		if (longParsed(request.getParameter("municipioInput")) == -1L) {
-			validazione.setEsito(false);
-			validazione.setMessaggio("Attenzione! Non hai selezionato nessun Municipio");
 			return validazione;
 		}
 		return validazione;

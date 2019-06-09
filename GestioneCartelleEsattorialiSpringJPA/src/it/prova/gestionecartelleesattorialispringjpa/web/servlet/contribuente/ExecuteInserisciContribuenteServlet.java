@@ -45,13 +45,15 @@ public class ExecuteInserisciContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		String paginaDestinazione = "/contribuente/result.jsp";
+		if (Utility.inputContribuente(request).isNotValid()) {
+			request.setAttribute("messaggioDiErrore", Utility.inputContribuente(request).getMessaggio());
 
-		if (!Utility.checkInputContribuente(request).getEsito()) {
-			request.setAttribute("messaggioDiErrore", Utility.checkInputContribuente(request).getMessaggio());
-
-			paginaDestinazione = "/contribuente/insert.jsp";
-		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/contribuente/insert.jsp");
+			rd.forward(request, response);
+			
+			return;
+		} 
+		
 			String nomeInput = request.getParameter("nomeInput");
 			String cognomeInput = request.getParameter("cognomeInput");
 			String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
@@ -61,11 +63,9 @@ public class ExecuteInserisciContribuenteServlet extends HttpServlet {
 					indirizzoInput);
 			contribuenteService.inserisci(contribuenteDaInserire);
 
-//			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
+			response.sendRedirect("SendRedirectContribuenteServlet");
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("/SendRedirectContribuenteServlet");
-		rd.forward(request, response);
-	}
+		
+	
 
 }
