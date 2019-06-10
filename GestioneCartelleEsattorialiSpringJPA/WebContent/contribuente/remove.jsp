@@ -9,41 +9,37 @@
 </head>
 <body>
 
-	<%
-		Contribuente contribuenteInPagina = (Contribuente) request.getAttribute("contribuenteDaEliminareAttributeName");
-	%>
-
 	<div class="container">
 		<%@ include file="../header.jsp"%>
 
 		<div class="page-header">
-			<h3>Pagina di Dettaglio di <%=contribuenteInPagina.getNome()%> <%=contribuenteInPagina.getCognome()%></h3>
+			<h3>Pagina di Dettaglio di: ${contribuenteDTOAttribute.toString()} </h3>
 		</div>
 		
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getId()%></dd>
+				<dd class="col-sm-9">${contribuenteDTOAttribute.id}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Nome</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getNome()%></dd>
+				<dd class="col-sm-9">${contribuenteDTOAttribute.nome}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Cognome</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getCognome()%></dd>
+				<dd class="col-sm-9">${contribuenteDTOAttribute.cognome}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Codice Fiscale</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getCodiceFiscale()%></dd>
+				<dd class="col-sm-9">${contribuenteDTOAttribute.codiceFiscale}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Indirizzo</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getIndirizzo()%></dd>
+				<dd class="col-sm-9">${contribuenteDTOAttribute.indirizzo}</dd>
 			</dl>
 		</div>
 		</div>
-		<a href="ExecuteEliminaContribuenteServlet?idContribuente=<%=contribuenteInPagina.getId()%>" class="btn btn-primary btn-md" >Rimuovi</a>
+		<a href="ExecuteEliminaContribuenteServlet?idContribuente=${contribuenteDTOAttribute.id}" class="btn btn-primary btn-md" >Rimuovi</a>
 
 </body>
 </html>

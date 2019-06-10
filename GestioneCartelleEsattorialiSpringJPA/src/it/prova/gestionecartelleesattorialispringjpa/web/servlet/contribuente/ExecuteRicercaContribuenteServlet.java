@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
 
 @WebServlet("/ExecuteRicercaContribuenteServlet")
@@ -44,14 +44,19 @@ public class ExecuteRicercaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		String nomeInput = request.getParameter("nomeInput");
-		String cognomeInput = request.getParameter("cognomeInput");
-		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-		String indirizzoInput = request.getParameter("indirizzoInput");
+//		String nomeInput = request.getParameter("nomeInput");
+//		String cognomeInput = request.getParameter("cognomeInput");
+//		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
+//		String indirizzoInput = request.getParameter("indirizzoInput");
 
-		Contribuente example = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput, indirizzoInput);
+//		Contribuente example = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput, indirizzoInput);
 
-		request.setAttribute("listaContribuentiAttributeName", contribuenteService.findByExample(example));
+		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(request.getParameter("nomeInput"),
+				request.getParameter("cognomeInput"), request.getParameter("codiceFiscaleInput"),
+				request.getParameter("indirizzoInput"));
+
+		request.setAttribute("listaContribuentiAttributeName",
+				contribuenteService.findByExample(ContribuenteDTO.buildContribuenteInstance(contribuenteDTO)));
 
 		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/result.jsp");
 		rd.forward(request, response);

@@ -13,9 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
-import it.prova.gestionecartelleesattorialispringjpa.utility.Utility;
 
 @WebServlet("/ExecuteModificaContribuenteServlet")
 public class ExecuteModificaContribuenteServlet extends HttpServlet {
@@ -45,27 +44,48 @@ public class ExecuteModificaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		if (Utility.inputContribuente(request).isNotValid()) {
-			request.setAttribute("messaggioDiErrore", Utility.inputContribuente(request).getMessaggio());
+		/*
+		 * Questa versione commentata è la prima implementata, senza DTO e senza JSTL
+		 * ...........................................................................
+		 * 
+		 * if (Utility.inputContribuente(request).isNotValid()) {
+		 * request.setAttribute("messaggioDiErrore",
+		 * Utility.inputContribuente(request).getMessaggio());
+		 * 
+		 * Long idInput = Long.parseLong(request.getParameter("idInput"));
+		 * request.setAttribute("contribuenteDaModificareAttributeName",
+		 * contribuenteService.carica(idInput));
+		 * 
+		 * RequestDispatcher rd =
+		 * request.getRequestDispatcher("/contribuente/modifica.jsp");
+		 * rd.forward(request, response);
+		 * 
+		 * return; }
+		 * 
+		 * Long idInput = Long.parseLong(request.getParameter("idInput")); String
+		 * nomeInput = request.getParameter("nomeInput"); String cognomeInput =
+		 * request.getParameter("cognomeInput"); String codiceFiscaleInput =
+		 * request.getParameter("codiceFiscaleInput"); String indirizzoInput =
+		 * request.getParameter("indirizzoInput");
+		 * 
+		 * Contribuente contribuenteDaAggiornare = new Contribuente(idInput, nomeInput,
+		 * cognomeInput, codiceFiscaleInput, indirizzoInput);
+		 */
 
-			Long idInput = Long.parseLong(request.getParameter("idInput"));
-			request.setAttribute("contribuenteDaModificareAttributeName", contribuenteService.carica(idInput));
+		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(request.getParameter("idInput"),
+				request.getParameter("nomeInput"), request.getParameter("cognomeInput"),
+				request.getParameter("codiceFiscaleInput"), request.getParameter("indirizzoInput"));
 
+		if (!contribuenteDTO.validate().isEmpty()) {
+			request.setAttribute("contribuenteDTOAttribute", contribuenteDTO);
+			request.setAttribute("messaggiDiErrore", contribuenteDTO.validate());
 			RequestDispatcher rd = request.getRequestDispatcher("/contribuente/modifica.jsp");
 			rd.forward(request, response);
 
 			return;
 		}
 
-		Long idInput = Long.parseLong(request.getParameter("idInput"));
-		String nomeInput = request.getParameter("nomeInput");
-		String cognomeInput = request.getParameter("cognomeInput");
-		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-		String indirizzoInput = request.getParameter("indirizzoInput");
-
-		Contribuente contribuenteDaAggiornare = new Contribuente(idInput, nomeInput, cognomeInput, codiceFiscaleInput,
-				indirizzoInput);
-		contribuenteService.aggiorna(contribuenteDaAggiornare);
+		contribuenteService.aggiorna(ContribuenteDTO.buildContribuenteInstance(contribuenteDTO));
 
 		response.sendRedirect("SendRedirectContribuenteServlet");
 

@@ -38,9 +38,8 @@ public class ExecuteEliminaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		String idContribuenteDaPagina = request.getParameter("idContribuente");
-
-		contribuenteService.rimuovi(contribuenteService.carica(Long.parseLong(idContribuenteDaPagina)));
+		Long idContribuenteDaPagina = Long.parseLong(request.getParameter("idContribuente"));
+		contribuenteService.rimuovi(contribuenteService.carica(idContribuenteDaPagina));
 
 		response.sendRedirect("SendRedirectContribuenteServlet");
 

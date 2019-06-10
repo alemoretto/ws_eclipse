@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
 
 @WebServlet("/VisualizzaDettaglioContribuenteServlet")
@@ -38,10 +39,11 @@ public class VisualizzaDettaglioContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		String idContribuenteDaPagina = request.getParameter("idContribuente");
-
-		request.setAttribute("contribuenteAttributeName",
-				contribuenteService.carica(Long.parseLong(idContribuenteDaPagina)));
+		Long idContribuenteDaPagina = Long.parseLong(request.getParameter("idContribuente"));
+		request.setAttribute("contribuenteDTOAttribute",
+				ContribuenteDTO.buildContribuenteDTOInstance(contribuenteService.carica(idContribuenteDaPagina)));
+//		request.setAttribute("contribuenteAttributeName",
+//				contribuenteService.carica(idContribuenteDaPagina));
 		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/dettaglio.jsp");
 		rd.forward(request, response);
 	}
