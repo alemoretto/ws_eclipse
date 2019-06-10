@@ -14,7 +14,7 @@
 		<%@ include file="../header.jsp"%>
 
 		<div class="page-header">
-			<h3>Pagina di Dettaglio della Cartella:  ${cartellaEsattorialeDTOAttribute.denominazione}</h3>
+			<h3>Pagina di Dettaglio della Cartella:  ${cartellaEsattorialeDTOAttribute.denominazione}></h3>
 		</div>
 		
 		<div class="container-fluid">
