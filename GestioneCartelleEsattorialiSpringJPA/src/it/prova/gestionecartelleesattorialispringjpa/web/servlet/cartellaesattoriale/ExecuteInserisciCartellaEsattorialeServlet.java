@@ -50,26 +50,6 @@ public class ExecuteInserisciCartellaEsattorialeServlet extends HttpServlet {
 			return;
 		}
 
-/*		if (Utility.inputCartellaEsattoriale(request).isNotValid()) {
-			request.setAttribute("messaggioDiErrore", Utility.inputCartellaEsattoriale(request).getMessaggio());
-			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
-			RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/insert.jsp");
-			rd.forward(request, response);
-
-			return;
-		}
-
-		String denominazioneInput = request.getParameter("denominazioneInput");
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		int importoInput = Integer.parseInt(request.getParameter("importoInput"));
-		Contribuente contribuenteInput = new Contribuente(Long.parseLong(request.getParameter("contribuenteInput")));
-
-		CartellaEsattoriale cartellaEsattorialeDaInserire = new CartellaEsattoriale(denominazioneInput,
-				descrizioneInput, importoInput, contribuenteInput);
-
-		cartellaEsattorialeService.inserisci(cartellaEsattorialeDaInserire);
-		*/
-
 		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(request.getParameter("denominazioneInput"),
 				request.getParameter("descrizioneInput"), request.getParameter("importoInput"),
 				request.getParameter("contribuenteInput"));

@@ -46,7 +46,6 @@ public class PrepareModificaCartellaEsattorialeServlet extends HttpServlet {
 		Long idCartellaEsattorialeDaPagina = Long.parseLong(request.getParameter("idCartellaEsattoriale"));
 		CartellaEsattorialeDTO cartellaEsattorialeDTO = CartellaEsattorialeDTO.buildCartellaEsattorialeDTOInstance(cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));
 		request.setAttribute("cartellaEsattorialeDTOAttribute",cartellaEsattorialeDTO);
-//		request.setAttribute("cartellaEsattorialeDaModificareAttributeName",cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));	
 		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/modifica.jsp");
 		rd.forward(request, response);

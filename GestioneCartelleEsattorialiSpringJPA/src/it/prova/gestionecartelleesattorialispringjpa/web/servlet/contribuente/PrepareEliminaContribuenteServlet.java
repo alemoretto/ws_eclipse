@@ -40,10 +40,6 @@ public class PrepareEliminaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-//		String idContribuenteDaPagina = request.getParameter("idContribuente");
-//
-//		request.setAttribute("contribuenteDaEliminareAttributeName",
-//				contribuenteService.carica(Long.parseLong(idContribuenteDaPagina)));
 		Long idContribuenteDaPagina = Long.parseLong(request.getParameter("idContribuente"));
 		request.setAttribute("contribuenteDTOAttribute",
 				ContribuenteDTO.buildContribuenteDTOInstance(contribuenteService.carica(idContribuenteDaPagina)));

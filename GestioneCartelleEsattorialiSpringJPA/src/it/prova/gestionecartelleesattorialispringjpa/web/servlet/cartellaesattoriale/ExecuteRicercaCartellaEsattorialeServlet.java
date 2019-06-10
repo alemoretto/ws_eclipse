@@ -44,11 +44,6 @@ public class ExecuteRicercaCartellaEsattorialeServlet extends HttpServlet {
 			return;
 		}
 
-//		String denominazioneInput = request.getParameter("denominazioneInput");
-//		String descrizioneInput = request.getParameter("descrizioneInput");
-//
-//		CartellaEsattoriale example = new CartellaEsattoriale(denominazioneInput, descrizioneInput);
-
 		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(
 				request.getParameter("denominazioneInput"), request.getParameter("descrizioneInput"),
 				request.getParameter("importoInput"));

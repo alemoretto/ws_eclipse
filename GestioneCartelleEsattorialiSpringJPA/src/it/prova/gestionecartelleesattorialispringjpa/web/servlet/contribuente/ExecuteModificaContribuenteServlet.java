@@ -44,34 +44,6 @@ public class ExecuteModificaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		/*
-		 * Questa versione commentata è la prima implementata, senza DTO e senza JSTL
-		 * ...........................................................................
-		 * 
-		 * if (Utility.inputContribuente(request).isNotValid()) {
-		 * request.setAttribute("messaggioDiErrore",
-		 * Utility.inputContribuente(request).getMessaggio());
-		 * 
-		 * Long idInput = Long.parseLong(request.getParameter("idInput"));
-		 * request.setAttribute("contribuenteDaModificareAttributeName",
-		 * contribuenteService.carica(idInput));
-		 * 
-		 * RequestDispatcher rd =
-		 * request.getRequestDispatcher("/contribuente/modifica.jsp");
-		 * rd.forward(request, response);
-		 * 
-		 * return; }
-		 * 
-		 * Long idInput = Long.parseLong(request.getParameter("idInput")); String
-		 * nomeInput = request.getParameter("nomeInput"); String cognomeInput =
-		 * request.getParameter("cognomeInput"); String codiceFiscaleInput =
-		 * request.getParameter("codiceFiscaleInput"); String indirizzoInput =
-		 * request.getParameter("indirizzoInput");
-		 * 
-		 * Contribuente contribuenteDaAggiornare = new Contribuente(idInput, nomeInput,
-		 * cognomeInput, codiceFiscaleInput, indirizzoInput);
-		 */
-
 		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(Long.parseLong(request.getParameter("idInput")),
 				request.getParameter("nomeInput"), request.getParameter("cognomeInput"),
 				request.getParameter("codiceFiscaleInput"), request.getParameter("indirizzoInput"));

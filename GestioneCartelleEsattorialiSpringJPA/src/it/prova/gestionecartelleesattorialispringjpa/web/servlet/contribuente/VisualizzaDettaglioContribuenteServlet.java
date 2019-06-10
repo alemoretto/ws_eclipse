@@ -40,8 +40,6 @@ public class VisualizzaDettaglioContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-//		request.setAttribute("contribuenteAttributeName",
-//		contribuenteService.carica(idContribuenteDaPagina));
 		Long idContribuenteDaPagina = Long.parseLong(request.getParameter("idContribuente"));
 		request.setAttribute("contribuenteDTOAttribute",
 				ContribuenteDTO.buildContribuenteDTOInstance(contribuenteService.carica(idContribuenteDaPagina)));

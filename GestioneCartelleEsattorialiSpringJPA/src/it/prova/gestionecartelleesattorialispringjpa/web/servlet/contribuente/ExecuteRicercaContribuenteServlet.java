@@ -44,13 +44,6 @@ public class ExecuteRicercaContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-//		String nomeInput = request.getParameter("nomeInput");
-//		String cognomeInput = request.getParameter("cognomeInput");
-//		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-//		String indirizzoInput = request.getParameter("indirizzoInput");
-
-//		Contribuente example = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput, indirizzoInput);
-
 		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(request.getParameter("nomeInput"),
 				request.getParameter("cognomeInput"), request.getParameter("codiceFiscaleInput"),
 				request.getParameter("indirizzoInput"));

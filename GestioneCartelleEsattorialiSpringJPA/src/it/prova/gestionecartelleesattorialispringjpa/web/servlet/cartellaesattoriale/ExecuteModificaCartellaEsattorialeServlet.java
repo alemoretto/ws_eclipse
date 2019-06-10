@@ -50,26 +50,6 @@ public class ExecuteModificaCartellaEsattorialeServlet extends HttpServlet {
 			return;
 		}
 
-//		if (Utility.inputCartellaEsattoriale(request).isNotValid()) {
-//			request.setAttribute("messaggioDiErrore", Utility.inputCartellaEsattoriale(request).getMessaggio());
-//			Long idCartellaEsattorialeDaPagina = Long.parseLong(request.getParameter("idCartellaEsattoriale"));
-//			request.setAttribute("cartellaEsattorialeDaModificareAttributeName",
-//					cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));
-//			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
-//			RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/modifica.jsp");
-//			rd.forward(request, response);
-//			return;
-//		}
-//
-//		Long idInput = Long.parseLong(request.getParameter("idInput"));
-//		String denominazioneInput = request.getParameter("denominazioneInput");
-//		String descrizioneInput = request.getParameter("descrizioneInput");
-//		int importoInput = Integer.parseInt(request.getParameter("importoInput"));
-//		Contribuente contribuenteInput = new Contribuente(Long.parseLong(request.getParameter("contribuenteInput")));
-//
-//		CartellaEsattoriale cartellaEsattorialeDaModificare = new CartellaEsattoriale(idInput, denominazioneInput,
-//				descrizioneInput, importoInput, contribuenteInput);
-
 		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(
 				Long.parseLong(request.getParameter("idInput")), request.getParameter("denominazioneInput"),
 				request.getParameter("descrizioneInput"), request.getParameter("importoInput"),
