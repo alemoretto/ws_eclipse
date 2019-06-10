@@ -65,7 +65,7 @@
 						id="contribuenteInputId">
 						<option value="-1">Seleziona un Contribuente</option>
 						<c:forEach items="${listaContribuentiAttributeName}" var="contribuenteItem">
-						<option value="${contribuenteItem.id}" <c:if test='${contribuenteItem.id != null}'> selected</c:if> >
+						<option value="${contribuenteItem.id}" <c:if test='${cartellaEsattorialeDTOAttribute.contribuente == contribuenteItem.id}'> selected</c:if> >
 							${contribuenteItem.toString() } - ${contribuenteItem.codiceFiscale}
 							</option>
 						</c:forEach>
