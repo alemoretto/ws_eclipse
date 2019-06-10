@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.gestionecartelleesattorialispringjpa.model.CartellaEsattoriale;
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 
 @WebServlet("/ExecuteRicercaCartellaEsattorialeServlet")
@@ -28,26 +28,33 @@ public class ExecuteRicercaCartellaEsattorialeServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-	public ExecuteRicercaCartellaEsattorialeServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ExecuteRicercaCartellaEsattorialeServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getSession().getAttribute("userInfo") == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
 
-		String denominazioneInput = request.getParameter("denominazioneInput");
-		String descrizioneInput = request.getParameter("descrizioneInput");
+//		String denominazioneInput = request.getParameter("denominazioneInput");
+//		String descrizioneInput = request.getParameter("descrizioneInput");
+//
+//		CartellaEsattoriale example = new CartellaEsattoriale(denominazioneInput, descrizioneInput);
 
-		CartellaEsattoriale example = new CartellaEsattoriale(denominazioneInput, descrizioneInput);
+		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(
+				request.getParameter("denominazioneInput"), request.getParameter("descrizioneInput"),
+				request.getParameter("importoInput"));
 
-		request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService.findByExample(example));
+		request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService
+				.findByExample(CartellaEsattorialeDTO.buildCartellaEsattorialeInstance(cartellaEsattorialeDTO)));
 
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/result.jsp");
 		rd.forward(request, response);

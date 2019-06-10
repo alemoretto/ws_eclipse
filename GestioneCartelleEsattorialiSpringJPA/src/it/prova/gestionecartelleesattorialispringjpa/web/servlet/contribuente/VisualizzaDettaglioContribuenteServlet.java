@@ -19,7 +19,7 @@ import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.Contri
 @WebServlet("/VisualizzaDettaglioContribuenteServlet")
 public class VisualizzaDettaglioContribuenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Autowired
 	private ContribuenteService contribuenteService;
 
@@ -28,27 +28,30 @@ public class VisualizzaDettaglioContribuenteServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-    public VisualizzaDettaglioContribuenteServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public VisualizzaDettaglioContribuenteServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getSession().getAttribute("userInfo") == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
 
+//		request.setAttribute("contribuenteAttributeName",
+//		contribuenteService.carica(idContribuenteDaPagina));
 		Long idContribuenteDaPagina = Long.parseLong(request.getParameter("idContribuente"));
 		request.setAttribute("contribuenteDTOAttribute",
 				ContribuenteDTO.buildContribuenteDTOInstance(contribuenteService.carica(idContribuenteDaPagina)));
-//		request.setAttribute("contribuenteAttributeName",
-//				contribuenteService.carica(idContribuenteDaPagina));
+
 		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/dettaglio.jsp");
 		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

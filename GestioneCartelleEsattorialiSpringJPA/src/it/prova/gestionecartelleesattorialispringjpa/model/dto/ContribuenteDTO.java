@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
 
 public class ContribuenteDTO {
-	private String id;
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String codiceFiscale;
@@ -17,7 +17,7 @@ public class ContribuenteDTO {
 	public ContribuenteDTO() {
 	}
 
-	public ContribuenteDTO(String id, String nome, String cognome, String codiceFiscale, String indirizzo) {
+	public ContribuenteDTO(Long id, String nome, String cognome, String codiceFiscale, String indirizzo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -60,20 +60,20 @@ public class ContribuenteDTO {
 	}
 
 	public static Contribuente buildContribuenteInstance(ContribuenteDTO contribuenteDTO) {
-		return new Contribuente(Long.parseLong(contribuenteDTO.getId()), contribuenteDTO.getNome(),
+		return new Contribuente(contribuenteDTO.getId(), contribuenteDTO.getNome(),
 				contribuenteDTO.getCognome(), contribuenteDTO.getCodiceFiscale(), contribuenteDTO.getIndirizzo());
 	}
 
 	public static ContribuenteDTO buildContribuenteDTOInstance(Contribuente contribuente) {
-		return new ContribuenteDTO(contribuente.getId().toString(), contribuente.getNome(), contribuente.getCognome(),
+		return new ContribuenteDTO(contribuente.getId(), contribuente.getNome(), contribuente.getCognome(),
 				contribuente.getCodiceFiscale(), contribuente.getIndirizzo());
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

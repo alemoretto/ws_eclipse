@@ -72,7 +72,7 @@ public class ExecuteModificaContribuenteServlet extends HttpServlet {
 		 * cognomeInput, codiceFiscaleInput, indirizzoInput);
 		 */
 
-		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(request.getParameter("idInput"),
+		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(Long.parseLong(request.getParameter("idInput")),
 				request.getParameter("nomeInput"), request.getParameter("cognomeInput"),
 				request.getParameter("codiceFiscaleInput"), request.getParameter("indirizzoInput"));
 

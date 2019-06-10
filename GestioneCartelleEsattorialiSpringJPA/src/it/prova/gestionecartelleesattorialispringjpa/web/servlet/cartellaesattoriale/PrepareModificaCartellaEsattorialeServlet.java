@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
 
@@ -43,7 +44,9 @@ public class PrepareModificaCartellaEsattorialeServlet extends HttpServlet {
 		}
 
 		Long idCartellaEsattorialeDaPagina = Long.parseLong(request.getParameter("idCartellaEsattoriale"));
-		request.setAttribute("cartellaEsattorialeDaModificareAttributeName",cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));	
+		CartellaEsattorialeDTO cartellaEsattorialeDTO = CartellaEsattorialeDTO.buildCartellaEsattorialeDTOInstance(cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));
+		request.setAttribute("cartellaEsattorialeDTOAttribute",cartellaEsattorialeDTO);
+//		request.setAttribute("cartellaEsattorialeDaModificareAttributeName",cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));	
 		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/modifica.jsp");
 		rd.forward(request, response);

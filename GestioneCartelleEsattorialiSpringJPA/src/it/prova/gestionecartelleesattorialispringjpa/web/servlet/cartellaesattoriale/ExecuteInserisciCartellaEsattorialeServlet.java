@@ -15,9 +15,9 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecartelleesattorialispringjpa.model.CartellaEsattoriale;
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
-import it.prova.gestionecartelleesattorialispringjpa.utility.Utility;
 
 @WebServlet("/ExecuteInserisciCartellaEsattorialeServlet")
 public class ExecuteInserisciCartellaEsattorialeServlet extends HttpServlet {
@@ -50,7 +50,7 @@ public class ExecuteInserisciCartellaEsattorialeServlet extends HttpServlet {
 			return;
 		}
 
-		if (Utility.inputCartellaEsattoriale(request).isNotValid()) {
+/*		if (Utility.inputCartellaEsattoriale(request).isNotValid()) {
 			request.setAttribute("messaggioDiErrore", Utility.inputCartellaEsattoriale(request).getMessaggio());
 			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
 			RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/insert.jsp");
@@ -67,6 +67,24 @@ public class ExecuteInserisciCartellaEsattorialeServlet extends HttpServlet {
 		CartellaEsattoriale cartellaEsattorialeDaInserire = new CartellaEsattoriale(denominazioneInput,
 				descrizioneInput, importoInput, contribuenteInput);
 
+		cartellaEsattorialeService.inserisci(cartellaEsattorialeDaInserire);
+		*/
+
+		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(request.getParameter("denominazioneInput"),
+				request.getParameter("descrizioneInput"), request.getParameter("importoInput"),
+				request.getParameter("contribuenteInput"));
+		
+		if (!cartellaEsattorialeDTO.validate().isEmpty()) {
+			request.setAttribute("cartellaEsattorialeDTOAttribute", cartellaEsattorialeDTO);
+			request.setAttribute("messaggiDiErrore", cartellaEsattorialeDTO.validate());
+			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());;
+			RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/insert.jsp");
+			rd.forward(request, response);
+
+			return;
+		}
+		CartellaEsattoriale cartellaEsattorialeDaInserire = CartellaEsattorialeDTO.buildCartellaEsattorialeInstance(cartellaEsattorialeDTO);
+		cartellaEsattorialeDaInserire.setContribuente(new Contribuente(Long.parseLong(request.getParameter("contribuenteInput"))));
 		cartellaEsattorialeService.inserisci(cartellaEsattorialeDaInserire);
 
 		response.sendRedirect("SendRedirectCartellaEsattorialeServlet");

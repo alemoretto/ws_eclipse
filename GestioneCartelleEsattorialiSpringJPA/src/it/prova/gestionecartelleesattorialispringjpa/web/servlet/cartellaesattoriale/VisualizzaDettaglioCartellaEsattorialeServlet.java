@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 
 @WebServlet("/VisualizzaDettaglioCartellaEsattorialeServlet")
 public class VisualizzaDettaglioCartellaEsattorialeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Autowired
 	private CartellaEsattorialeService cartellaEsattorialeService;
 
@@ -27,12 +28,13 @@ public class VisualizzaDettaglioCartellaEsattorialeServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-	
-    public VisualizzaDettaglioCartellaEsattorialeServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public VisualizzaDettaglioCartellaEsattorialeServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getSession().getAttribute("userInfo") == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
@@ -40,14 +42,16 @@ public class VisualizzaDettaglioCartellaEsattorialeServlet extends HttpServlet {
 
 		String idCartellaEsattorialeDaPagina = request.getParameter("idCartellaEsattoriale");
 
-		request.setAttribute("cartellaEsattorialeAttributeName",
-				cartellaEsattorialeService.caricaEager(Long.parseLong(idCartellaEsattorialeDaPagina)));
+		request.setAttribute("cartellaEsattorialeDTOAttribute",
+				CartellaEsattorialeDTO.buildCartellaEsattorialeDTOInstance(
+						cartellaEsattorialeService.caricaEager(Long.parseLong(idCartellaEsattorialeDaPagina))));
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/dettaglio.jsp");
 		rd.forward(request, response);
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }

@@ -15,9 +15,9 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecartelleesattorialispringjpa.model.CartellaEsattoriale;
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
-import it.prova.gestionecartelleesattorialispringjpa.utility.Utility;
 
 @WebServlet("/ExecuteModificaCartellaEsattorialeServlet")
 public class ExecuteModificaCartellaEsattorialeServlet extends HttpServlet {
@@ -50,25 +50,46 @@ public class ExecuteModificaCartellaEsattorialeServlet extends HttpServlet {
 			return;
 		}
 
-		if (Utility.inputCartellaEsattoriale(request).isNotValid()) {
-			request.setAttribute("messaggioDiErrore", Utility.inputCartellaEsattoriale(request).getMessaggio());
-			Long idCartellaEsattorialeDaPagina = Long.parseLong(request.getParameter("idCartellaEsattoriale"));
-			request.setAttribute("cartellaEsattorialeDaModificareAttributeName",
-					cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));
+//		if (Utility.inputCartellaEsattoriale(request).isNotValid()) {
+//			request.setAttribute("messaggioDiErrore", Utility.inputCartellaEsattoriale(request).getMessaggio());
+//			Long idCartellaEsattorialeDaPagina = Long.parseLong(request.getParameter("idCartellaEsattoriale"));
+//			request.setAttribute("cartellaEsattorialeDaModificareAttributeName",
+//					cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));
+//			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
+//			RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/modifica.jsp");
+//			rd.forward(request, response);
+//			return;
+//		}
+//
+//		Long idInput = Long.parseLong(request.getParameter("idInput"));
+//		String denominazioneInput = request.getParameter("denominazioneInput");
+//		String descrizioneInput = request.getParameter("descrizioneInput");
+//		int importoInput = Integer.parseInt(request.getParameter("importoInput"));
+//		Contribuente contribuenteInput = new Contribuente(Long.parseLong(request.getParameter("contribuenteInput")));
+//
+//		CartellaEsattoriale cartellaEsattorialeDaModificare = new CartellaEsattoriale(idInput, denominazioneInput,
+//				descrizioneInput, importoInput, contribuenteInput);
+
+		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(
+				Long.parseLong(request.getParameter("idInput")), request.getParameter("denominazioneInput"),
+				request.getParameter("descrizioneInput"), request.getParameter("importoInput"),
+				request.getParameter("contribuenteInput"));
+
+		if (!cartellaEsattorialeDTO.validate().isEmpty()) {
+			request.setAttribute("cartellaEsattorialeDTOAttribute", cartellaEsattorialeDTO);
+			request.setAttribute("messaggiDiErrore", cartellaEsattorialeDTO.validate());
 			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
+			;
 			RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/modifica.jsp");
 			rd.forward(request, response);
+
 			return;
 		}
 
-		Long idInput = Long.parseLong(request.getParameter("idInput"));
-		String denominazioneInput = request.getParameter("denominazioneInput");
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		int importoInput = Integer.parseInt(request.getParameter("importoInput"));
-		Contribuente contribuenteInput = new Contribuente(Long.parseLong(request.getParameter("contribuenteInput")));
-
-		CartellaEsattoriale cartellaEsattorialeDaModificare = new CartellaEsattoriale(idInput, denominazioneInput,
-				descrizioneInput, importoInput, contribuenteInput);
+		CartellaEsattoriale cartellaEsattorialeDaModificare = CartellaEsattorialeDTO
+				.buildCartellaEsattorialeInstance(cartellaEsattorialeDTO);
+		cartellaEsattorialeDaModificare
+				.setContribuente(new Contribuente(Long.parseLong(request.getParameter("contribuenteInput"))));
 
 		cartellaEsattorialeService.aggiorna(cartellaEsattorialeDaModificare);
 
