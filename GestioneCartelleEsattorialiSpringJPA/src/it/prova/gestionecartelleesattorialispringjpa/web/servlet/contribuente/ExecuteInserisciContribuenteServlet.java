@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecartelleesattorialispringjpa.model.Contribuente;
+import it.prova.gestionecartelleesattorialispringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecartelleesattorialispringjpa.service.contribuente.ContribuenteService;
-import it.prova.gestionecartelleesattorialispringjpa.utility.Utility;
 
 @WebServlet("/ExecuteInserisciContribuenteServlet")
 public class ExecuteInserisciContribuenteServlet extends HttpServlet {
@@ -45,27 +45,36 @@ public class ExecuteInserisciContribuenteServlet extends HttpServlet {
 			return;
 		}
 
-		if (Utility.inputContribuente(request).isNotValid()) {
-			request.setAttribute("messaggioDiErrore", Utility.inputContribuente(request).getMessaggio());
+//		if (Utility.inputContribuente(request).isNotValid()) {
+//			request.setAttribute("messaggioDiErrore", Utility.inputContribuente(request).getMessaggio());
+//
+//			RequestDispatcher rd = request.getRequestDispatcher("/contribuente/insert.jsp");
+//			rd.forward(request, response);
+//			
+//			return;
+//		} 
 
+//			String nomeInput = request.getParameter("nomeInput");
+//			String cognomeInput = request.getParameter("cognomeInput");
+//			String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
+//			String indirizzoInput = request.getParameter("indirizzoInput");
+//
+//			Contribuente contribuenteDaInserire = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput,
+//					indirizzoInput);
+		ContribuenteDTO contribuenteDTO = new ContribuenteDTO(request.getParameter("nomeInput"),
+				request.getParameter("cognomeInput"), request.getParameter("codiceFiscaleInput"),
+				request.getParameter("indirizzoInput"));
+		if (!contribuenteDTO.validate().isEmpty()) {
+			request.setAttribute("messaggiDiErrore", contribuenteDTO.validate());
 			RequestDispatcher rd = request.getRequestDispatcher("/contribuente/insert.jsp");
 			rd.forward(request, response);
-			
+
 			return;
-		} 
-		
-			String nomeInput = request.getParameter("nomeInput");
-			String cognomeInput = request.getParameter("cognomeInput");
-			String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-			String indirizzoInput = request.getParameter("indirizzoInput");
-
-			Contribuente contribuenteDaInserire = new Contribuente(nomeInput, cognomeInput, codiceFiscaleInput,
-					indirizzoInput);
-			contribuenteService.inserisci(contribuenteDaInserire);
-
-			response.sendRedirect("SendRedirectContribuenteServlet");
 		}
-		
-	
+		Contribuente contribuenteDaInserire = ContribuenteDTO.buildContribuenteInstance(contribuenteDTO);
+		contribuenteService.inserisci(contribuenteDaInserire);
+
+		response.sendRedirect("SendRedirectContribuenteServlet");
+	}
 
 }
