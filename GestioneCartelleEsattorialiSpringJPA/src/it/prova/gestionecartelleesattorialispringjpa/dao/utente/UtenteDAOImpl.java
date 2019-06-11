@@ -35,6 +35,14 @@ public class UtenteDAOImpl implements UtenteDAO {
 	}
 
 	@Override
+	public Utente getEager(Long id) {
+		Query query = entityManager
+				.createQuery("select u FROM Utente u LEFT JOIN FETCH u.ruoli where u.id = :id");
+		query.setParameter("id", id);
+		return (Utente) query.getSingleResult();
+	}
+	
+	@Override
 	public void update(Utente o) {
 		entityManager.merge(o);
 	}
@@ -86,4 +94,14 @@ public class UtenteDAOImpl implements UtenteDAO {
 		return query.getResultList().isEmpty() ? null : (Utente) query.getSingleResult();
 	}
 
+	@Override
+	public Utente executeLoginEager(String username, String password) {
+		Query query = entityManager
+				.createQuery("select u FROM Utente u LEFT JOIN FETCH u.ruoli where u.username = :usernameParam and u.password= :passwordParam");
+		query.setParameter("usernameParam", username);
+		query.setParameter("passwordParam", password);
+
+		return query.getResultList().isEmpty() ? null : (Utente) query.getSingleResult();
+	}
+	
 }

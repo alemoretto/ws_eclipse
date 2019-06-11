@@ -1,6 +1,8 @@
 package it.prova.gestionecartelleesattorialispringjpa.web.servlet.cartellaesattoriale;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -35,16 +37,15 @@ public class VisualizzaDettaglioCartellaEsattorialeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
 
 		String idCartellaEsattorialeDaPagina = request.getParameter("idCartellaEsattoriale");
 
 		request.setAttribute("cartellaEsattorialeDTOAttribute",
 				CartellaEsattorialeDTO.buildCartellaEsattorialeDTOInstance(
 						cartellaEsattorialeService.caricaEager(Long.parseLong(idCartellaEsattorialeDaPagina))));
+		Map<String,String> listaCampi = new HashMap<String,String>();
+		
+		request.setAttribute("listaCampi",listaCampi);
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/dettaglio.jsp");
 		rd.forward(request, response);
 

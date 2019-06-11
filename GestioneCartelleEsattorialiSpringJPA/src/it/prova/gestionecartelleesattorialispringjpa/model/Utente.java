@@ -1,13 +1,20 @@
 package it.prova.gestionecartelleesattorialispringjpa.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import it.prova.gestionecartelleesattorialispringjpa.model.Ruolo;
 
 @Entity
 public class Utente {
@@ -21,6 +28,9 @@ public class Utente {
 	private String password;
 	@Temporal(TemporalType.DATE)
 	private Date dataRegistrazione;
+	@ManyToMany
+	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "id"))
+	private Set<Ruolo> ruoli = new HashSet<>(0);
 	
 	public Utente() {
 	}
@@ -34,6 +44,14 @@ public class Utente {
 		this.dataRegistrazione = dataRegistrazione;
 	}
 
+	public Utente(String nome, String cognome, String username, String password) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.password = password;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -82,4 +100,19 @@ public class Utente {
 		this.dataRegistrazione = dataRegistrazione;
 	}
 
+	public Set<Ruolo> getRuoli() {
+		return ruoli;
+	}
+
+	public void setRuoli(Set<Ruolo> ruoli) {
+		this.ruoli = ruoli;
+	}
+
+	public boolean isAdmin() {
+		for (Ruolo ruoloItem : ruoli) {
+			if(ruoloItem.getCodice().equals(Ruolo.ADMIN_ROLE))
+				return true;
+		}
+		return false;
+	}
 }

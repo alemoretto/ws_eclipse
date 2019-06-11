@@ -14,11 +14,23 @@
 		<%@ include file="../header.jsp"%>
 
 		<div class="page-header">
-			<h3>Pagina di Dettaglio della Cartella:  ${cartellaEsattorialeDTOAttribute.denominazione}></h3>
+			<h3>Pagina di Dettaglio della Cartella:  ${cartellaEsattorialeDTOAttribute.denominazione}</h3>
 		</div>
 		
-		<div class="container-fluid">
+		<div class="container-fluid" id="idContainer">
+		
+		<!-- 
+		<c:forEach items="${cartellaEsattorialeDTOAttribute.fields()}" var="field">
 			<dl class="row">
+				<dt class="col-sm-3 text-right">${field.key }</dt>
+				<dd class="col-sm-9"> ${field.value}</dd>
+			</dl>
+		</c:forEach>
+ 		-->
+
+
+	
+			<!-- <dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
 				<dd class="col-sm-9"> ${cartellaEsattorialeDTOAttribute.id}</dd>
 			</dl>
@@ -37,9 +49,12 @@
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Contribuente</dt>
 				<dd class="col-sm-9"> ${cartellaEsattorialeDTOAttribute.contribuenteDettaglio}</dd>
-			</dl>
+			</dl> 
+			-->
+			
 		</div>
 		</div>
+
 
 </body>
 </html>

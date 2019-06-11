@@ -10,6 +10,8 @@ public interface UtenteService {
 
 	public Utente carica(Long id);
 
+	public Utente caricaEager(Long id);
+	
 	public void aggiorna(Utente utenteInstance);
 
 	public void inserisci(Utente utenteInstance);
@@ -20,4 +22,5 @@ public interface UtenteService {
 	
 	public Utente eseguiAccesso(String username, String password);
 
+	public Utente eseguiAccessoEager(String username, String password);
 }

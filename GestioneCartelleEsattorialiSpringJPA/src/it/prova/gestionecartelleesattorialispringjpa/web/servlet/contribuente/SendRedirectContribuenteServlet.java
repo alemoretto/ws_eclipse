@@ -34,10 +34,6 @@ public class SendRedirectContribuenteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
 
 		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAll());
 		RequestDispatcher rd = request.getRequestDispatcher("/contribuente/result.jsp");

@@ -38,10 +38,6 @@ public class PrepareModificaCartellaEsattorialeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
 
 		Long idCartellaEsattorialeDaPagina = Long.parseLong(request.getParameter("idCartellaEsattoriale"));
 		CartellaEsattorialeDTO cartellaEsattorialeDTO = CartellaEsattorialeDTO.buildCartellaEsattorialeDTOInstance(cartellaEsattorialeService.caricaEager(idCartellaEsattorialeDaPagina));

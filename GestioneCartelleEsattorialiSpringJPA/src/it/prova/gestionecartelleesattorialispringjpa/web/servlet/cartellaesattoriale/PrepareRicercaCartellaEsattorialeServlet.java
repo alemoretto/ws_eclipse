@@ -18,11 +18,6 @@ public class PrepareRicercaCartellaEsattorialeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaesattoriale/search.jsp");
 		rd.forward(request, response);
 	}

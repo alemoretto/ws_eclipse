@@ -39,10 +39,6 @@ public class ExecuteRicercaCartellaEsattorialeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
 
 		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO(
 				request.getParameter("denominazioneInput"), request.getParameter("descrizioneInput"),

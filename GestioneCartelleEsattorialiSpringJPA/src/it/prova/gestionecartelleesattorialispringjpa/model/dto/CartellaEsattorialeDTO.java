@@ -1,6 +1,7 @@
 package it.prova.gestionecartelleesattorialispringjpa.model.dto;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +17,16 @@ public class CartellaEsattorialeDTO {
 	private String contribuente;
 	private String contribuenteDettaglio;
 
+//	private static final 
+	public Map<String,String> fields(){
+		Map<String,String> listaCampi = new LinkedHashMap<String,String>();
+		listaCampi.put("Id",id.toString());
+		listaCampi.put("Denominazione",denominazione);
+		listaCampi.put("Descrizione",descrizione);
+		listaCampi.put("Importo",importo);
+		return listaCampi;
+	}
+	
 	public CartellaEsattorialeDTO(Long id, String denominazione, String descrizione, String importo,
 			String contribuente) {
 		super();
