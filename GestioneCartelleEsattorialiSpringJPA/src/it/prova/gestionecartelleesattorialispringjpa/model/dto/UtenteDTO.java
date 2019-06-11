@@ -13,6 +13,7 @@ import it.prova.gestionecartelleesattorialispringjpa.model.Utente;
 
 public class UtenteDTO {
 
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String username;
@@ -20,6 +21,16 @@ public class UtenteDTO {
 	private List<String> iDruoli = new ArrayList<>();
 	private Map<String, String> fieldsValues = new LinkedHashMap<String, String>();
 
+	public UtenteDTO(Long id, String nome, String cognome, String username, String password) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.password = password;
+		fillFieldsValues();
+	}
+	
 	public UtenteDTO(String nome, String cognome, String username, String password) {
 		super();
 		this.nome = nome;
@@ -29,6 +40,14 @@ public class UtenteDTO {
 		fillFieldsValues();
 	}
 
+	private void fillFieldsValues() {
+		fieldsValues.put("Nome", this.nome);
+		fieldsValues.put("Cognome", this.cognome);
+		fieldsValues.put("Username", this.username);
+		fieldsValues.put("Password", this.password);
+		return;
+	}
+	
 	public Map<String, String> fieldsNames() {
 		Map<String, String> listaCampi = new LinkedHashMap<String, String>();
 		listaCampi.put("Nome", "nomeInput");
@@ -39,25 +58,32 @@ public class UtenteDTO {
 	}
 
 	public static Utente buildUtenteInstance(UtenteDTO utenteDTO) {
-		return new Utente(utenteDTO.getNome(), utenteDTO.getCognome(), utenteDTO.getUsername(),
+		Utente utente = new Utente(utenteDTO.getNome(), utenteDTO.getCognome(), utenteDTO.getUsername(),
 				utenteDTO.getPassword());
+		try {
+			utente.setId(utenteDTO.getId());
+		} catch (Exception e) {
+		}
+		return utente;
 	}
 
 	public static UtenteDTO buildUtenteDTOInstance(Utente utente) {
 		UtenteDTO utenteDTO = new UtenteDTO(utente.getNome(), utente.getCognome(), utente.getUsername(),
 				utente.getPassword());
+
+		try {
+			utenteDTO.setId(utente.getId());
+		} catch (Exception e) {
+		}
 		
 		if (utente.getRuoli().size() > 0) {
-			int i = -1;
 			List<String> iDruoli = new ArrayList<>();
-//			String[] iDruoli = new String[utente.getRuoli().size()];
 			for (Ruolo ruolo : utente.getRuoli()) {
-//				i++;
 				iDruoli.add(Long.toString(ruolo.getId()));
 			}
 			utenteDTO.setiDruoli(iDruoli);
 		}
-		
+
 		return utenteDTO;
 	}
 
@@ -92,12 +118,12 @@ public class UtenteDTO {
 		return validazione;
 	}
 
-	private void fillFieldsValues() {
-		fieldsValues.put("Nome", this.nome);
-		fieldsValues.put("Cognome", this.cognome);
-		fieldsValues.put("Username", this.username);
-		fieldsValues.put("Password", this.password);
-		return;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -148,6 +174,4 @@ public class UtenteDTO {
 		this.iDruoli = iDruoli;
 	}
 
-	
-	
 }

@@ -35,6 +35,11 @@ public class Utente {
 	public Utente() {
 	}
 
+	public Utente(Long id) {
+		super();
+		this.id = id;
+	}
+	
 	public Utente(String nome, String cognome, String username, String password, Date dataRegistrazione) {
 		super();
 		this.nome = nome;
@@ -44,6 +49,15 @@ public class Utente {
 		this.dataRegistrazione = dataRegistrazione;
 	}
 
+	public Utente(Long id, String nome, String cognome, String username, String password) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.password = password;
+	}
+	
 	public Utente(String nome, String cognome, String username, String password) {
 		super();
 		this.nome = nome;

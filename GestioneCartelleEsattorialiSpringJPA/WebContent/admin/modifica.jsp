@@ -21,6 +21,7 @@
 	
 	
 <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ExecuteModificaUtenteServlet" method="post">
+		<input type="hidden" name="idInput" value="${utenteDTOAttribute.id}">
 		<c:forEach items="${utenteDTOAttribute.fieldsNames()}" var="field" varStatus="loop" >
 			<div class="form-group">
       			<label class="control-label col-sm-2" for="${field.value}Id">${field.key}:</label>
