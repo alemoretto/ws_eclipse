@@ -1,7 +1,9 @@
 package it.prova.gestionecartelleesattorialispringjpa.web.servlet.utente;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -58,7 +60,15 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 
 			return;
 		}
-
+		if(utenteService.findByUsername(request.getParameter("usernameInput")) != null) {
+			request.setAttribute("utenteDTOAttribute", utenteDTO);
+			request.setAttribute("listRuoliAttribute", ruoloService.listAll());
+			Map<String, String> validazione = new HashMap<String, String>();
+			validazione.put("usernameInput", "Attenzione! Lo username \"" + request.getParameter("usernameInput") + "\" è già stato preso" );
+			request.setAttribute("messaggiDiErrore", validazione);
+			RequestDispatcher rd = request.getRequestDispatcher("/admin/insert.jsp");
+			rd.forward(request, response);
+		}
 		Utente utenteDaAggiornare = UtenteDTO.buildUtenteInstance(utenteDTO);
 		String[] ruoli = request.getParameterValues("ruoloItem");
 		if(ruoli != null && ruoli.length> 0) {

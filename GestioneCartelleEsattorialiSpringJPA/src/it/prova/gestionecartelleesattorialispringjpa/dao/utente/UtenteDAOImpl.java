@@ -42,6 +42,13 @@ public class UtenteDAOImpl implements UtenteDAO {
 		return (Utente) query.getSingleResult();
 	}
 	
+	public Utente findByUsername(String username) {
+		Query query = entityManager
+				.createQuery("select u FROM Utente u where u.username = :username");
+		query.setParameter("username", username);
+		return (Utente) query.getSingleResult();
+	}
+	
 	@Override
 	public void update(Utente o) {
 		entityManager.merge(o);

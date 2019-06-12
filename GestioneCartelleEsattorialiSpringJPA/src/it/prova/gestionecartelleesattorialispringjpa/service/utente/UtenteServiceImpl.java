@@ -30,6 +30,11 @@ public class UtenteServiceImpl implements UtenteService {
 		return utenteDAO.getEager(id);
 	}
 
+	@Transactional(readOnly = true)
+	public Utente findByUsername(String username) {
+		return utenteDAO.findByUsername(username);
+	}
+
 	@Transactional
 	public void aggiorna(Utente utenteInstance) {
 		utenteDAO.update(utenteInstance);

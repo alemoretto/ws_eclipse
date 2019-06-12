@@ -11,4 +11,6 @@ public interface UtenteDAO extends IBaseDAO<Utente> {
 	
 	public Utente executeLoginEager(String username,String password);
 	
+	public Utente findByUsername(String username);
+	
 }

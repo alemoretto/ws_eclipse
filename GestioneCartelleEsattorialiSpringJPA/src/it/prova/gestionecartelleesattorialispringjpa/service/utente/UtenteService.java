@@ -12,6 +12,8 @@ public interface UtenteService {
 
 	public Utente caricaEager(Long id);
 	
+	public Utente findByUsername(String username);
+	
 	public void aggiorna(Utente utenteInstance);
 
 	public void inserisci(Utente utenteInstance);
