@@ -45,6 +45,21 @@ public class Annuncio {
 		this.aperto = aperto;
 	}
 
+	public Annuncio(String testoAnnuncio, double prezzo, boolean aperto) {
+		super();
+		this.testoAnnuncio = testoAnnuncio;
+		this.prezzo = prezzo;
+		this.aperto = aperto;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getTestoAnnuncio() {
 		return testoAnnuncio;
 	}
@@ -75,6 +90,15 @@ public class Annuncio {
 
 	public void setDataPubblicazione(Date dataPubblicazione) {
 		this.dataPubblicazione = dataPubblicazione;
+	}
+
+	
+	public Set<Categoria> getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Set<Categoria> categorie) {
+		this.categorie = categorie;
 	}
 
 	public boolean isAperto() {

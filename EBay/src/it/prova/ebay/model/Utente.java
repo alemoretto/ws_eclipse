@@ -57,6 +57,14 @@ public class Utente {
 		this.annunci = annunci;
 	}
 
+	public Utente(String nome, String cognome, String username, String password) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.password = password;
+	}
+	 
 	public boolean isAdmin() {
 		for (Ruolo ruoloItem : ruoli) {
 			if(ruoloItem.getCodice().equals(Ruolo.ADMIN_ROLE))
@@ -64,7 +72,7 @@ public class Utente {
 		}
 		return false;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
