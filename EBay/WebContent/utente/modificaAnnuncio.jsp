@@ -54,9 +54,14 @@
 				<div class="alert alert-danger">
 					${messaggiDiErrore.categoriaInput}</div>
 			</c:if>
-			<c:forEach items="${listaCategorieAttribute}" var="categoriaItem">
+			<c:forEach items="${listaCategorieAttribute}" var="categoriaItem" >
 				<div class="custom-control custom-checkbox">
-					<input id="${categoriaItem.id}" type="checkbox" name="categoriaInput" value="${categoriaItem.id}" class="custom-control-input"> 
+					<input id="${categoriaItem.id}" type="checkbox" name="categoriaInput" value="${categoriaItem.id}" class="custom-control-input"
+					<c:forEach items="${annuncioDTOAttribute.categorie}" var="categ">
+				   		<c:if test="${categ.id == categoriaItem.id}">checked="checked"</c:if>
+					</c:forEach>> 
+					
+<%-- 					<c:if test="${annuncioDTOAttribute.categSelected[loop.index] == 1 }">checked="checked"</c:if> --%>
 					<label class="custom-control-label" for="${categoriaItem.id}">${categoriaItem.descrizione}</label><br>
 				</div>
 			</c:forEach>

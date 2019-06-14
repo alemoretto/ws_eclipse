@@ -91,7 +91,11 @@
 				${messaggiDiErrore.ruoloInput}</div>
 		</c:if>
 			<c:forEach items="${listRuoliAttribute}" var="ruoloItemLista">
-				<input type="checkbox" name="ruoloInput" value="${ruoloItemLista.id}"> ${ruoloItemLista.descrizione}<br>
+				<input type="checkbox" name="ruoloInput" value="${ruoloItemLista.id}"
+				<c:forEach items="${utenteDTOAttribute.ruoli}" var="ruolo">
+				   		<c:if test="${ruolo.id == ruoloItemLista.id}">checked="checked"</c:if>
+					</c:forEach>> 
+					${ruoloItemLista.descrizione}<br>
 			</c:forEach>
 <br>
 			<div class="form-group">
