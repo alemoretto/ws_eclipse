@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.prova.ebay.model.Ruolo;
 import it.prova.ebay.model.Utente;
 import it.prova.ebay.model.dto.UtenteDTO;
 import it.prova.ebay.service.ruolo.RuoloService;
@@ -51,7 +52,8 @@ public class SignUpServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String[] ruoloUtenteClassico = {"2"};
+		Ruolo classicUser = ruoloService.findByExample(new Ruolo(Ruolo.CLASSIC_USER_ROLE)).get(0); 
+		String[] ruoloUtenteClassico = {Long.toString(classicUser.getId())};
 		String creditoIniziale = "0";
 		UtenteDTO utenteDTO = new UtenteDTO(request.getParameter("nomeInput"), request.getParameter("cognomeInput"),
 				request.getParameter("usernameInput"), request.getParameter("passwordInput"),
