@@ -58,7 +58,8 @@ public class AnnuncioDTO {
 				}
 			}
 		} else {
-			this.categorie = new LinkedHashSet<>(listAll);
+//			this.categorie = new LinkedHashSet<>(listAll);
+			this.categorie = new LinkedHashSet<>(0);
 			this.categId = new String[] { "" };
 			this.categSelected = new String[] { "" };
 		}

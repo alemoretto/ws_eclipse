@@ -1,6 +1,7 @@
 package it.prova.ebay.web.servlet.annuncio;
 
 import java.io.IOException;
+import java.util.LinkedHashSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -48,7 +49,9 @@ public class ExecuteRicercaAnnuncioServlet extends HttpServlet {
 		AnnuncioDTO annuncioDTO = new AnnuncioDTO(request.getParameter("testoAnnuncioInput"),
 				request.getParameter("prezzoInput"), request.getParameterValues("categoriaInput"),
 				categoriaService.listAll());
-
+		if(annuncioDTO.getCategorie().size() == 0)
+			annuncioDTO.setCategorie(new LinkedHashSet<>(categoriaService.listAll()));
+		
 		Annuncio annuncio = AnnuncioDTO.buildAnnuncioInstance(annuncioDTO);
 
 		request.setAttribute("listaAnnunciAttribute", annuncioService.findByExampleEager(annuncio));
