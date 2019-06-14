@@ -1,4 +1,4 @@
-package it.prova.ebay.web.servlet.admin;
+package it.prova.ebay.web.servlet.utente;
 
 import java.io.IOException;
 
@@ -12,14 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.prova.ebay.service.annuncio.AnnuncioService;
 import it.prova.ebay.service.utente.UtenteService;
 
-@WebServlet("/admin/ExecuteEliminaUtenteServlet")
-public class ExecuteEliminaUtenteServlet extends HttpServlet {
+@WebServlet("/utente/ExecuteEliminaAnnuncioUtenteServlet")
+public class ExecuteEliminaAnnuncioUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private UtenteService utenteService;
+	private AnnuncioService annuncioService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -27,18 +28,18 @@ public class ExecuteEliminaUtenteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	public ExecuteEliminaUtenteServlet() {
+	public ExecuteEliminaAnnuncioUtenteServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Long idUtenteDaPagina = Long.parseLong(request.getParameter("idUtente"));
+		Long idAnnuncio = Long.parseLong(request.getParameter("idAnnuncio"));
 
-		utenteService.rimuovi(utenteService.caricaEager(idUtenteDaPagina));
+		annuncioService.rimuovi(annuncioService.caricaEager(idAnnuncio));
 
-		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectAdminServlet");
+		response.sendRedirect("/utente/SendRedirectUtenteServlet");
 
 	}
 

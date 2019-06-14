@@ -35,13 +35,7 @@
 				<dt class="col-sm-3 text-right">Pubblicato il</dt>
 				<dd class="col-sm-9">${annuncioAttribute.data}</dd>
 			</dl>
-			<dl class="row">
-				<dt class="col-sm-3 text-right">da</dt>
-				<dd class="col-sm-9">${annuncioAttribute.utente}</dd>
-			</dl>
-<a
-				href="PrepareAcquistoServlet?idAnnuncio=${annuncioAttribute.id}"
-				class="btn btn-primary btn-md">Acquista</a>
+
 		</div>
 	</div>
 

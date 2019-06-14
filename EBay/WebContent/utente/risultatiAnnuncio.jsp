@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Risultati di ricerca</title>
+<title>I tuoi annunci</title>
 </head>
 <body>
 <div class="container">
@@ -15,7 +15,7 @@
 	<%@ include file="../header.jsp" %>
 
   	<div class="page-header">
-	  <h3>La ricerca ha prodotto ${listaAnnunciAttribute.size()} risultati: </h3>
+	  <h3>Hai ${listaAnnunciAttribute.size()} annunci: </h3>
 	</div>
   	
 <table class="table table-striped">
@@ -30,11 +30,16 @@
 			<tr>
 				<td>${annuncioItem.testoAnnuncio}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/VisualizzaDettaglioAnnuncioServlet?idAnnuncio=${annuncioItem.id}" class="btn btn-info">Dettaglio</a>
-					<a href="${pageContext.request.contextPath}/PrepareAcquistoServlet?idAnnuncio=${annuncioItem.id}" class="btn btn-info">Acquista</a>
+					<a href="${pageContext.request.contextPath}/utente/VisualizzaDettaglioAnnuncioUtenteServlet?idAnnuncio=${annuncioItem.id}" class="btn btn-info">Dettaglio</a>
+					<c:if test="${annuncioItem.aperto}">
+					<a href="${pageContext.request.contextPath}/utente/PrepareModificaAnnuncioUtenteServlet?idAnnuncio=${annuncioItem.id}" class="btn btn-info">Modifica</a>
+					<a href="${pageContext.request.contextPath}/utente/PrepareEliminaAnnuncioUtenteServlet?idAnnuncio=${annuncioItem.id}" class="btn btn-info">Rimuovi</a>
+					</c:if>
 				</td>
 			</tr>
 		</c:forEach>
+		
+		<a href="${pageContext.request.contextPath}/utente/PrepareInserisciAnnuncioUtenteServlet" class="btn btn-primary btn-md">Inserisci nuovo Annuncio</a>
 <%-- 		<c:forEach items="${listalista}" var="listaI"> --%>
 <%-- 		<p>${listaI}</p> --%>
 <%-- 				</c:forEach> --%>

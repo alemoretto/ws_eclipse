@@ -2,6 +2,7 @@ package it.prova.ebay.web.servlet.admin;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +15,10 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.ebay.service.utente.UtenteService;
 
-@WebServlet("/admin/ExecuteEliminaUtenteServlet")
-public class ExecuteEliminaUtenteServlet extends HttpServlet {
+@WebServlet("/admin/SendRedirectAdminServlet")
+public class SendRedirectAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	@Autowired
 	private UtenteService utenteService;
 
@@ -26,24 +27,19 @@ public class ExecuteEliminaUtenteServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
+	
+    public SendRedirectAdminServlet() {
+        super();
+    }
 
-	public ExecuteEliminaUtenteServlet() {
-		super();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("listaUtentiAttributeName", utenteService.listAll());
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/risultatiUtente.jsp");
+
+		rd.forward(request, response);
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		Long idUtenteDaPagina = Long.parseLong(request.getParameter("idUtente"));
-
-		utenteService.rimuovi(utenteService.caricaEager(idUtenteDaPagina));
-
-		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectAdminServlet");
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

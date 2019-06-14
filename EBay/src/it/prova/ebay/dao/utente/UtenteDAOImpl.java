@@ -38,7 +38,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 	@Override
 	public Utente getEager(Long id) {
 		Query query = entityManager
-				.createQuery("select u FROM Utente u LEFT JOIN FETCH u.ruoli where u.id = :id");
+				.createQuery("select u FROM Utente u LEFT JOIN FETCH u.ruoli LEFT JOIN FETCH u.acquisti LEFT JOIN FETCH u.annunci where u.id = :id");
 		query.setParameter("id", id);
 		return (Utente) query.getSingleResult();
 	}

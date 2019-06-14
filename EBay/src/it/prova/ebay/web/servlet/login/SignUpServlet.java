@@ -1,11 +1,9 @@
-package it.prova.ebay.web.servlet.admin;
+package it.prova.ebay.web.servlet.login;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -14,18 +12,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.ebay.model.Ruolo;
 import it.prova.ebay.model.Utente;
 import it.prova.ebay.model.dto.UtenteDTO;
 import it.prova.ebay.service.ruolo.RuoloService;
 import it.prova.ebay.service.utente.UtenteService;
 
-@WebServlet("/admin/ExecuteInserisciUtenteServlet")
-public class ExecuteInserisciUtenteServlet extends HttpServlet {
+@WebServlet("/SignUpServlet")
+public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -40,26 +38,30 @@ public class ExecuteInserisciUtenteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	public ExecuteInserisciUtenteServlet() {
+	public SignUpServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		String[] ruoloUtenteClassico = {"2"};
+		String creditoIniziale = "0";
 		UtenteDTO utenteDTO = new UtenteDTO(request.getParameter("nomeInput"), request.getParameter("cognomeInput"),
 				request.getParameter("usernameInput"), request.getParameter("passwordInput"),
-				request.getParameter("creditoInput"), request.getParameterValues("ruoloInput"), ruoloService.listAll());
+				creditoIniziale, ruoloUtenteClassico, ruoloService.listAll());
 
 		if (!utenteDTO.validate().isEmpty()) {
 			request.setAttribute("utenteDTOAttribute", utenteDTO);
 			request.setAttribute("listRuoliAttribute", ruoloService.listAll());
 			request.setAttribute("messaggiDiErrore", utenteDTO.validate());
-			RequestDispatcher rd = request.getRequestDispatcher("/admin/inserisciUtente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/signUp.jsp");
 			rd.forward(request, response);
 
 			return;
@@ -72,7 +74,7 @@ public class ExecuteInserisciUtenteServlet extends HttpServlet {
 			validazione.put("usernameInput",
 					"Attenzione! Lo username \"" + request.getParameter("usernameInput") + "\" è già stato preso");
 			request.setAttribute("messaggiDiErrore", validazione);
-			RequestDispatcher rd = request.getRequestDispatcher("/admin/inserisciUtente.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/signUp.jsp");
 			rd.forward(request, response);
 			
 			return;
@@ -80,6 +82,7 @@ public class ExecuteInserisciUtenteServlet extends HttpServlet {
 		
 		Utente utenteDaInserire = UtenteDTO.buildUtenteInstance(utenteDTO);
 		utenteDaInserire.setDataRegistrazione(new Date());
+//		utenteDaInserire.getRuoli().add(ruoloService.carica(2L));
 //		String[] ruoli = request.getParameterValues("ruoloItem");
 //		if (ruoli != null && ruoli.length > 0) {
 //			Set<Ruolo> ruoliSet = new HashSet<>();
@@ -91,7 +94,7 @@ public class ExecuteInserisciUtenteServlet extends HttpServlet {
 //		utenteDaInserire.setDataRegistrazione(new Date());
 		utenteService.inserisci(utenteDaInserire);
 
-		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectAdminServlet");
+		response.sendRedirect(request.getContextPath() + "/login.jsp");
 
 	}
 

@@ -5,7 +5,7 @@
 
 <!-- Static navbar -->
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd;">
-	<a class="navbar-brand" href="<%= request.getContextPath()%>/">E-Bay</a>
+	<a class="navbar-brand" href="<%= request.getContextPath()%>/home">E-Bay</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -15,35 +15,27 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="<%= request.getContextPath()%>/">Home
-					<span class="sr-only">(current)</span>
-			</a></li>
+<%-- 			<li class="nav-item active"><a class="nav-link" href="<%= request.getContextPath()%>/">Home --%>
+<!-- 					<span class="sr-only">(current)</span> -->
+<!-- 			</a></li> -->
+			<li class="nav-item active">
+			<c:if test="${sessionScope.userInfo != null && sessionScope.userInfo.isClassic()}">
+						<a class="nav-link" href="<%= request.getContextPath()%>/utente/PrepareAreaPrivataServlet">Area Privata</a>
+					</c:if>
+			</li>
 			<li class="nav-item active">
 			<c:if test="${sessionScope.userInfo != null && sessionScope.userInfo.isAdmin()}">
 						<a class="nav-link" href="<%= request.getContextPath()%>/admin/PrepareRicercaUtenteServlet">Gestione Utenti</a>
 					</c:if>
 			</li>
 			
-					
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> Dropdown </a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Area Riservata</a>
-<%-- 					<c:if test="${sessionScope.userInfo != null && sessionScope.userInfo.isAdmin()}"> --%>
-<!-- 					<div class="dropdown-divider"></div> -->
-<%-- 						<a class="dropdown-item" href="<%= request.getContextPath()%>/admin/PrepareRicercaUtenteServlet">Gestione Utenti</a> --%>
-<%-- 					</c:if> --%>
-				</div>
-			</li>
 		</ul>
 		 <ul class="nav navbar-nav navbar-right">
 			<c:if test="${sessionScope.userInfo == null}">
             	<a href="<%= request.getContextPath()%>/login.jsp">Login</a>
             </c:if> 
             <c:if test="${sessionScope.userInfo != null}">
-            	<li><p class="navbar-text">Utente: ${userInfo.username }(${userInfo.nome } ${userInfo.cognome })
+            	<li><p class="navbar-text">Loggato come:  <strong>${userInfo.username }</strong> (${userInfo.nome } ${userInfo.cognome } - Credito = ${userInfo.credito })
             	<a href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></p>
             </c:if>
             

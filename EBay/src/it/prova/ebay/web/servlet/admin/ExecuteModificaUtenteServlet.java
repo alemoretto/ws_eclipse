@@ -66,14 +66,13 @@ public class ExecuteModificaUtenteServlet extends HttpServlet {
 		}
 
 		Utente utenteDaAggiornare = UtenteDTO.buildUtenteInstance(utenteDTO);
-		SimpleDateFormat dataFormat = new SimpleDateFormat("dd-MM-yyyy");  
-		try {
-			utenteDaAggiornare.setDataRegistrazione(dataFormat.parse(utenteDTO.getDataRegistrazione()));
-		} catch (ParseException e) {
-		}  
+		Utente temp = utenteService.caricaEager(utenteDaAggiornare.getId());
+		utenteDaAggiornare.setDataRegistrazione(temp.getDataRegistrazione());
+		utenteDaAggiornare.setAnnunci(temp.getAnnunci());
+		utenteDaAggiornare.setAcquisti(temp.getAcquisti());
 		utenteService.aggiorna(utenteDaAggiornare);
 
-		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectUtenteServlet");
+		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectAdminServlet");
 
 	}
 

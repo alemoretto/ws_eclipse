@@ -4,11 +4,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 import it.prova.ebay.model.Annuncio;
 import it.prova.ebay.model.Categoria;
@@ -27,6 +30,11 @@ public class AnnuncioDTO {
 	public AnnuncioDTO() {
 	}
 
+	public AnnuncioDTO(Long id, String testoAnnuncio, String prezzo, String[] stringsCat, List<Categoria> listAll) {
+		this(testoAnnuncio, prezzo, stringsCat, listAll);
+		this.id = id;
+	}
+	
 	public AnnuncioDTO(String testoAnnuncio, String prezzo, String[] stringsCat, List<Categoria> listAll) {
 		super();
 		this.testoAnnuncio = testoAnnuncio;
@@ -42,6 +50,7 @@ public class AnnuncioDTO {
 			for (String str : stringsCat) {
 				for (Categoria cat : listAll) {
 					if (Long.toString(cat.getId()).equals(str) ) {
+						i++;
 						this.categorie.add(cat);
 						this.categId[i] = Long.toString(cat.getId());
 						this.categSelected[i] = "1";
@@ -83,23 +92,37 @@ public class AnnuncioDTO {
 		return annuncioDTO;
 	}
 
-//	private void buildCategorie(Set<Categoria> setCateg) {
-//		if (setCateg.size() > 0) {
-//			categId = new String[setCateg.size()];
-//			categNome = new String[setCateg.size()];
-//			categSelected = new String[setCateg.size()];
-//			int i = -1;
-//			for (Categoria cat : setCateg) {
-//				i++;
-//				categId[i] = Long.toString(cat.getId());
-//				categNome[i] = cat.getDescrizione();
-//				categSelected[i] = "1";
-//			}
-//		}
-//	}
+	public Map<String, String> validate() {
+
+		Map<String, String> validazione = new HashMap<String, String>();
+
+		if (StringUtils.isEmpty(this.testoAnnuncio)) {
+			validazione.put("testoAnnuncioInput", "Attenzione! Il campo Descrizione è obbligatorio");
+		}
+
+		if (StringUtils.isEmpty(this.prezzo)) {
+			validazione.put("prezzoInput", "Attenzione! Il campo Prezzo è obbligatorio");
+		} else {
+			try {
+				Double.parseDouble(this.prezzo);
+			} catch (Exception e) {
+				validazione.put("prezzoInput", "Attenzione! Il campo Prezzo non è valido");
+			}
+		}
+
+		if ( this.categorie.size() <= 0 ) {
+			validazione.put("categoriaInput", "Attenzione! Selezionare almeno una Categoria");
+		} 
+		
+		return validazione;
+	}
 	
 	public static Annuncio buildAnnuncioInstance(AnnuncioDTO annuncioDTO) {
 		Annuncio annuncio = new Annuncio();
+		try {
+			annuncio.setId(annuncioDTO.getId());	
+		} catch (Exception e) {
+		}
 		annuncio.setAperto(true);
 		annuncio.setTestoAnnuncio(annuncioDTO.getTestoAnnuncio());
 		try {

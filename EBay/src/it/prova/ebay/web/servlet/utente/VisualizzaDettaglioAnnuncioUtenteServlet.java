@@ -1,7 +1,8 @@
-package it.prova.ebay.web.servlet.admin;
+package it.prova.ebay.web.servlet.utente;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import it.prova.ebay.service.utente.UtenteService;
+import it.prova.ebay.model.dto.AnnuncioDTO;
+import it.prova.ebay.service.annuncio.AnnuncioService;
 
-@WebServlet("/admin/ExecuteEliminaUtenteServlet")
-public class ExecuteEliminaUtenteServlet extends HttpServlet {
+@WebServlet("/utente/VisualizzaDettaglioAnnuncioUtenteServlet")
+public class VisualizzaDettaglioAnnuncioUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private UtenteService utenteService;
+	private AnnuncioService annuncioService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -27,19 +29,19 @@ public class ExecuteEliminaUtenteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	public ExecuteEliminaUtenteServlet() {
+	public VisualizzaDettaglioAnnuncioUtenteServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String idAnnuncio = request.getParameter("idAnnuncio");
 
-		Long idUtenteDaPagina = Long.parseLong(request.getParameter("idUtente"));
+		request.setAttribute("annuncioAttribute",
+				AnnuncioDTO.buildAnnuncioDTOInstance(annuncioService.caricaEager(Long.parseLong(idAnnuncio))));
 
-		utenteService.rimuovi(utenteService.caricaEager(idUtenteDaPagina));
-
-		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectAdminServlet");
-
+		RequestDispatcher rd = request.getRequestDispatcher("/utente/dettaglioAnnuncio.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

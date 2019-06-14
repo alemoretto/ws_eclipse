@@ -43,6 +43,21 @@ public class Acquisto {
 		this.categorie = categorie;
 	}
 
+	public Acquisto(String descrizione, double prezzo, int anno, Utente utente) {
+		super();
+		this.descrizione = descrizione;
+		this.prezzo = prezzo;
+		this.anno = anno;
+		this.utente = utente;
+	}
+	
+	public Acquisto(String descrizione, double prezzo, Utente utente) {
+		super();
+		this.descrizione = descrizione;
+		this.prezzo = prezzo;
+		this.utente = utente;
+	}
+	
 	public String getDescrizione() {
 		return descrizione;
 	}

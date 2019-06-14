@@ -19,9 +19,14 @@
       <input type="text" name="inputUsername" id="inputUsername" class="form-control" placeholder="Login" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Accedi</button>
+      <br>
+      <a href="<%= request.getContextPath() %>/signUp.jsp">Registrati</a>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </form>
+<!--       <form class="form-signin" action="SignUpServlet" method="post"> -->
+<!-- 	    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button> -->
+<!-- 	        </form> -->
   </body>
 </html>
 

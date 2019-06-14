@@ -73,6 +73,14 @@ public class Utente {
 		return false;
 	}
 	
+	public boolean isClassic() {
+		for (Ruolo ruoloItem : ruoli) {
+			if(ruoloItem.getCodice().equals(Ruolo.CLASSIC_USER_ROLE))
+				return true;
+		}
+		return false;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -113,11 +121,11 @@ public class Utente {
 		this.password = password;
 	}
 
-	public Double getCredito() {
+	public double getCredito() {
 		return credito;
 	}
 
-	public void setCredito(Double credito) {
+	public void setCredito(double credito) {
 		this.credito = credito;
 	}
 

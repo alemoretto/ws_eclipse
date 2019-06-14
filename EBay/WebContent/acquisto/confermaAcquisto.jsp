@@ -12,6 +12,11 @@
 	<div class="container">
 		<%@ include file="../header.jsp"%>
 
+	<c:if test="${esitoAcquistoBool != null && !esitoAcquistoBool}">
+			<div class="alert alert-danger">
+				${esitoAcquisto}</div>
+	</c:if>
+	
 		<div class="page-header">
 			<h3>Dettagli:</h3>
 		</div>
@@ -40,8 +45,8 @@
 				<dd class="col-sm-9">${annuncioAttribute.utente}</dd>
 			</dl>
 <a
-				href="PrepareAcquistoServlet?idAnnuncio=${annuncioAttribute.id}"
-				class="btn btn-primary btn-md">Acquista</a>
+				href="${pageContext.request.contextPath}/acquisto/ExecuteAcquistoServlet?idAnnuncio=${annuncioAttribute.id}"
+				class="btn btn-primary btn-md">Conferma Acquisto</a>
 		</div>
 	</div>
 

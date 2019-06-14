@@ -39,11 +39,12 @@
 				<dt class="col-sm-3 text-right">da</dt>
 				<dd class="col-sm-9">${annuncioAttribute.utente}</dd>
 			</dl>
-<a
-				href="PrepareAcquistoAnnuncioServlet?idAnnuncio=${annuncioAttribute.id}"
-				class="btn btn-primary btn-md">Compra</a>
 		</div>
 	</div>
+	
+	<div class="page-header">
+			<h3>${esitoAcquistoAttribute }</h3>
+		</div>
 
 
 </body>

@@ -18,4 +18,5 @@ public interface AcquistoService {
 
 	public List<Acquisto> findByExample(Acquisto example);
 
+	public boolean acquista(Long idAnnuncio, Long idUtente);
 }

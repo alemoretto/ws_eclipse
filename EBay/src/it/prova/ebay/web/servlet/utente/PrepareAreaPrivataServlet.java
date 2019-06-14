@@ -1,7 +1,8 @@
-package it.prova.ebay.web.servlet.admin;
+package it.prova.ebay.web.servlet.utente;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import it.prova.ebay.model.Utente;
+import it.prova.ebay.model.dto.UtenteDTO;
 import it.prova.ebay.service.utente.UtenteService;
 
-@WebServlet("/admin/ExecuteEliminaUtenteServlet")
-public class ExecuteEliminaUtenteServlet extends HttpServlet {
+@WebServlet("/utente/PrepareAreaPrivataServlet")
+public class PrepareAreaPrivataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -27,19 +30,21 @@ public class ExecuteEliminaUtenteServlet extends HttpServlet {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
-	public ExecuteEliminaUtenteServlet() {
+	public PrepareAreaPrivataServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		Utente utenteInSession = (Utente)request.getSession().getAttribute("userInfo");
+		Long idUtente = utenteInSession.getId();
+		
+		request.setAttribute("utenteDTOAttribute",
+				UtenteDTO.buildUtenteDTOInstance(utenteService.caricaEager(idUtente)));
 
-		Long idUtenteDaPagina = Long.parseLong(request.getParameter("idUtente"));
-
-		utenteService.rimuovi(utenteService.caricaEager(idUtenteDaPagina));
-
-		response.sendRedirect(request.getContextPath() + "/admin/SendRedirectAdminServlet");
-
+		RequestDispatcher rd = request.getRequestDispatcher("/utente/areaPrivata.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

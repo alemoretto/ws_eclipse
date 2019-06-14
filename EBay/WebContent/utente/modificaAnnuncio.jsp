@@ -1,66 +1,77 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ricerca Articoli</title>
+<title>Modifica Annuncio</title>
 </head>
 <body>
 
 	<div class="container">
 
+
 		<%@ include file="../header.jsp"%>
 
-		<br>
-		<c:if test="${messaggio != null}">
-			<div class="alert alert-danger">${messaggio}</div>
-		</c:if>
+
 		<div class="page-header">
-			<h2>Ricerca</h2>
+			<h3>Modifica Annuncio</h3>
 		</div>
-		
-		<form class="form-horizontal" action="ExecuteRicercaAnnuncioServlet"
+
+		<form class="form-horizontal"
+			action="${pageContext.request.contextPath}/utente/ExecuteModificaAnnuncioUtenteServlet"
 			method="post">
+
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="testoAnnuncioInputId">Titolo:</label>
+				<label class="control-label col-sm-2" for="testoAnnuncioInputId">Descrizione:</label>
+				<c:if test="${messaggiDiErrore.testoAnnuncioInput != null}">
+					<div class="alert alert-danger">
+						${messaggiDiErrore.testoAnnuncioInput}</div>
+				</c:if>
 				<div class="col-sm-8">
+						<input type="hidden" name="idInput" value="${annuncioDTOAttribute.id}">
 					<input class="form-control" type="text" id="testoAnnuncioInputId"
-						name="testoAnnuncioInput">
+						name="testoAnnuncioInput"value="${annuncioDTOAttribute.testoAnnuncio}">
 				</div>
 			</div>
+
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="prezzoInputId">Prezzo:</label>
+				<c:if test="${messaggiDiErrore.prezzoInput != null}">
+					<div class="alert alert-danger">
+						${messaggiDiErrore.prezzoInput}</div>
+				</c:if>
 				<div class="col-sm-2">
 					<input class="form-control" type="text" id="prezzoInputId"
-						name="prezzoInput">
+						name="prezzoInput" value="${annuncioDTOAttribute.prezzo}"> 
 				</div>
 			</div>
-			<br>
-			
+
+
+			<c:if test="${messaggiDiErrore.categoriaInput != null}">
+				<div class="alert alert-danger">
+					${messaggiDiErrore.categoriaInput}</div>
+			</c:if>
 			<c:forEach items="${listaCategorieAttribute}" var="categoriaItem">
 				<div class="custom-control custom-checkbox">
 					<input id="${categoriaItem.id}" type="checkbox" name="categoriaInput" value="${categoriaItem.id}" class="custom-control-input"> 
 					<label class="custom-control-label" for="${categoriaItem.id}">${categoriaItem.descrizione}</label><br>
 				</div>
 			</c:forEach>
-			
-			
 			<br>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary btn-md">Cerca
-						annunci</button>
+					<button type="submit" class="btn btn-primary btn-md">Aggiorna</button>
 				</div>
 			</div>
 		</form>
 
+
+
 	</div>
 	<!-- /.container -->
-
-
 
 </body>
 </html>

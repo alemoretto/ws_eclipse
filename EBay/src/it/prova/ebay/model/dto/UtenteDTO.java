@@ -160,6 +160,7 @@ public class UtenteDTO {
 			validazione.put("passwordInput", "Attenzione! Il campo Password è obbligatorio");
 		}
 
+		
 		if (StringUtils.isEmpty(this.credito)) {
 			validazione.put("creditoInput", "Attenzione! Il campo Credito è obbligatorio");
 		} else {
