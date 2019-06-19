@@ -22,8 +22,8 @@
 			<h2>Ricerca</h2>
 		</div>
 		
-		<form class="form-horizontal" action="ExecuteRicercaAnnuncioServlet"
-			method="post">
+		<form class="form-horizontal" action="ExecuteRicercaAnnuncioServlet" name="formRicerca"
+			method="post" onsubmit="return validateForm()">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="testoAnnuncioInputId">Titolo:</label>
 				<div class="col-sm-8">
@@ -61,6 +61,22 @@
 	<!-- /.container -->
 
 
-
+<script>
+function validateForm() {
+// 	var allInput = document.forms["form_name"].getElementsByTagName("input");
+//   var x = document.forms["formRicerca"]["testoAnnuncioInputId"].value;
+var elements = document.getElementById("formRicerca").elements;
+for (var i = 0, element; element = elements[i++];) {
+    if (element.type === "text" && element.value === "")
+        element.innerHTML = "CAZZO";
+    alert("it's an empty textfield")
+}
+//   if (x == "") {
+//     alert("Name must be filled out");
+//     return false;
+  return  false;
+  
+}
+</script>
 </body>
 </html>

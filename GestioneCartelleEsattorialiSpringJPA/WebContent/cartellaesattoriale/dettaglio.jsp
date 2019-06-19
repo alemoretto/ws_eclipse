@@ -19,14 +19,14 @@
 		
 		<div class="container-fluid" id="idContainer">
 		
-		<!-- 
+		
 		<c:forEach items="${cartellaEsattorialeDTOAttribute.fields()}" var="field">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">${field.key }</dt>
 				<dd class="col-sm-9"> ${field.value}</dd>
 			</dl>
 		</c:forEach>
- 		-->
+ 		
 
 
 	
